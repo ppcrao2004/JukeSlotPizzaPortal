@@ -2,7 +2,7 @@ package com.jukeslot.web.model;
 
 import java.util.List;
 
-public class RestResponse {
+public class TemplateSiteListResponse {
     private String code;
     private List<TemplateResponse> data;
 

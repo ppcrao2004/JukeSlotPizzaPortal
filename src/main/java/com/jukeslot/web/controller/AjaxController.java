@@ -1,18 +1,12 @@
 package com.jukeslot.web.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.xml.ws.ProtocolException;
 
 import com.jukeslot.web.model.*;
+import com.jukeslot.web.model.response.SiteConfigurationRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -42,46 +36,6 @@ public class AjaxController {
 
 		if (isValidSearchCriteria(search)) {
 			List<User> users = findByUserNameOrEmail(search.getUsername(), search.getEmail());
-//			try {
-//
-//				URL url = new URL("http://104.239.141.95:8081/api/template/list/Jukeslot-USA-Northeast-NJ-SITE_1");
-//				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//				conn.setRequestMethod("GET");
-//				conn.setRequestProperty("Accept", "application/json");
-//
-//				if (conn.getResponseCode() != 200) {
-//					throw new RuntimeException("Failed : HTTP error code : "
-//							+ conn.getResponseCode());
-//				}
-//
-//				BufferedReader br = new BufferedReader(new InputStreamReader(
-//						(conn.getInputStream())));
-//
-//				String output;
-//				System.out.println("Output from Server .... \n");
-//				while ((output = br.readLine()) != null) {
-//					System.out.println(output);
-//				}
-//
-//				conn.disconnect();
-//
-//			} catch (MalformedURLException e) {
-//
-//				e.printStackTrace();
-//
-//			} catch (IOException e) {
-//
-//				e.printStackTrace();
-//
-//			} catch (ProtocolException e) {
-//				e.printStackTrace();
-//			}
-
-			RestTemplate restTemplate = new RestTemplate();
-			RestResponse restResponse = restTemplate.getForObject( "http://104.239.141.95:8081/api/template/list/Jukeslot-USA-Northeast-NJ-SITE_1", RestResponse.class);
-			log.info("==== RESTful API Response using Spring RESTTemplate START =======");
-			log.info(restResponse.toString());
-			log.info("==== RESTful API Response using Spring RESTTemplate END =======");
 
 			if (users.size() > 0) {
 				result.setCode("200");
@@ -103,14 +57,24 @@ public class AjaxController {
 	}
 
     @RequestMapping(value = "/template/site", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
-    public RestResponse getSearchResultViaAjax() {
+    public TemplateSiteListResponse getTemplateListSite() {
         RestTemplate restTemplate = new RestTemplate();
-        RestResponse restResponse = restTemplate.getForObject("http://104.239.141.95:8081/api/template/list/Jukeslot-USA-Northeast-NJ-SITE_1", RestResponse.class);
+        TemplateSiteListResponse templateSiteListResponse = restTemplate.getForObject("http://104.239.141.95:8081/api/template/list/Jukeslot-USA-Northeast-NJ-SITE_1", TemplateSiteListResponse.class);
         log.info("==== RESTful API Response using Spring RESTTemplate START =======");
-        log.info(restResponse.toString());
+        log.info(templateSiteListResponse.toString());
         log.info("==== RESTful API Response using Spring RESTTemplate END =======");
-        return restResponse;
+        return templateSiteListResponse;
     }
+
+	@RequestMapping(value = "/template/site/configuration", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+	public SiteConfigResponse getTemplateSiteConfig() {
+		RestTemplate restTemplate = new RestTemplate();
+		SiteConfigResponse siteConfigurationRes = restTemplate.getForObject("http://104.239.141.95:8081/api/template/site_configuration/Jukeslot-USA-Northeast-NJ-SITE_1", SiteConfigResponse.class);
+		log.info("==== RESTful API Response using Spring RESTTemplate START =======");
+		log.info(siteConfigurationRes.toString());
+		log.info("==== RESTful API Response using Spring RESTTemplate END =======");
+		return siteConfigurationRes;
+	}
 	private boolean isValidSearchCriteria(SearchCriteria search) {
 
 		boolean valid = true;

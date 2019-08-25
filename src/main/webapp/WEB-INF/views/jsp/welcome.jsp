@@ -36,18 +36,7 @@
 		<div id="feedback"></div>
 
 		<form class="form-horizontal" id="search-form">
-			<div class="form-group form-group-lg">
-				<label class="col-sm-2 control-label">Username</label>
-				<div class="col-sm-10">
-					<input type=text class="form-control" id="username">
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="email">
-				</div>
-			</div>
+
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
@@ -88,15 +77,12 @@
 
 	function searchViaAjax() {
 
-		var search = {}
-		search["username"] = $("#username").val();
-		search["email"] = $("#email").val();
+
 
 		$.ajax({
-			type : "POST",
+			type : "GET",
 			contentType : "application/json",
-			url : "${home}search/api/getSearchResult",
-			data : JSON.stringify(search),
+			url : "${home}template/site/configuration",
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {

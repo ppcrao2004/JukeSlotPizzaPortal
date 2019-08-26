@@ -1,5 +1,6 @@
-package com.jukeslot.web.model;
-import com.google.gson.annotations.SerializedName;
+package com.jukeslot.web.model.response;
+import com.jukeslot.web.model.DescriptionTextRes;
+import com.jukeslot.web.model.response.TemplateButton;
 
 public class TemplateResponse {
     public String background_color;
@@ -10,10 +11,10 @@ public class TemplateResponse {
     public String sub_code;
     public String site_code;
     public String name;
-    public DescriptionTextRes description_text;
+    public com.jukeslot.web.model.DescriptionTextRes description_text;
     public String frame_color;
     public String id;
-    public DescriptionTextRes price_text;
+    public com.jukeslot.web.model.DescriptionTextRes price_text;
     public String layout;
     public String create_time;
     public String update_time;
@@ -82,11 +83,11 @@ public class TemplateResponse {
         this.name = name;
     }
 
-    public DescriptionTextRes getDescription_text() {
+    public com.jukeslot.web.model.DescriptionTextRes getDescription_text() {
         return description_text;
     }
 
-    public void setDescription_text(DescriptionTextRes description_text) {
+    public void setDescription_text(com.jukeslot.web.model.DescriptionTextRes description_text) {
         this.description_text = description_text;
     }
 
@@ -106,7 +107,7 @@ public class TemplateResponse {
         this.id = id;
     }
 
-    public DescriptionTextRes getPrice_text() {
+    public com.jukeslot.web.model.DescriptionTextRes getPrice_text() {
         return price_text;
     }
 

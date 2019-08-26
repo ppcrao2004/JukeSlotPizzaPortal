@@ -1,4 +1,4 @@
-package com.jukeslot.web.model;
+package com.jukeslot.web.model.response;
 
 public class TemplateButton {
     public String background_color;

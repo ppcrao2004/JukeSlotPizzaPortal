@@ -1,5 +1,7 @@
 package com.jukeslot.web.model;
 
+import com.jukeslot.web.model.response.TemplateResponse;
+
 import java.util.List;
 
 public class TemplateSiteListResponse {

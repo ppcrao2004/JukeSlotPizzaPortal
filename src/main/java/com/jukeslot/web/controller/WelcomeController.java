@@ -13,4 +13,9 @@ public class WelcomeController {
 		return "welcome";
 	}
 
+	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	public String printWelcome1(ModelMap model) {
+		return "checkout";
+	}
+
 }

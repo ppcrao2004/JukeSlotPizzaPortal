@@ -1,6 +1,7 @@
 package com.jukeslot.web.model;
 
 import com.jukeslot.web.model.response.HomePageResponse;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class HomePageResp {
     private String code;
@@ -20,5 +21,9 @@ public class HomePageResp {
 
     public void setData(HomePageResponse data) {
         this.data = data;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

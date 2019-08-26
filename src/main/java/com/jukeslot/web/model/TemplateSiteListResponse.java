@@ -1,6 +1,7 @@
 package com.jukeslot.web.model;
 
 import com.jukeslot.web.model.response.TemplateResponse;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -25,8 +26,7 @@ public class TemplateSiteListResponse {
     }
 
     @Override
-    public final String toString() {
-        com.google.gson.Gson gson = new com.google.gson.GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(this);
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

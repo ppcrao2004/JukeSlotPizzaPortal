@@ -1,6 +1,7 @@
 package com.jukeslot.web.model;
 
 import com.jukeslot.web.model.response.CompanyConfigurationRes;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class CompanyConfigurationResponse {
 
@@ -21,5 +22,10 @@ public class CompanyConfigurationResponse {
 
     public void setData(CompanyConfigurationRes data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

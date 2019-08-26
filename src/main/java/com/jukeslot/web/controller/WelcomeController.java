@@ -13,7 +13,7 @@ public class WelcomeController {
 		return "welcome";
 	}
 
-	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String printWelcome1(ModelMap model) {
 		return "checkout";
 	}

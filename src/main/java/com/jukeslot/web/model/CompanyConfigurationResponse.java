@@ -1,21 +1,12 @@
 package com.jukeslot.web.model;
 
-import com.jukeslot.web.model.response.TemplateResponse;
+import com.jukeslot.web.model.response.CompanyConfigurationRes;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.List;
+public class CompanyConfigurationResponse {
 
-public class TemplateSiteListResponse {
     private String code;
-    private List<TemplateResponse> data;
-
-    public List<TemplateResponse> getData() {
-        return data;
-    }
-
-    public void setData(List<TemplateResponse> data) {
-        this.data = data;
-    }
+    private CompanyConfigurationRes data;
 
     public String getCode() {
         return code;
@@ -23,6 +14,14 @@ public class TemplateSiteListResponse {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public CompanyConfigurationRes getData() {
+        return data;
+    }
+
+    public void setData(CompanyConfigurationRes data) {
+        this.data = data;
     }
 
     @Override

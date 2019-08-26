@@ -34,7 +34,7 @@
 <div class="container" style="min-height: 500px">
 
 	<div class="starter-template">
-		<img id="image">
+		<img id="image" class="responsive-image ">
 		<br>
 
 		<div id="feedback"></div>
@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" id="btn-search"
-						class="btn btn-primary btn-lg" formaction="${home}:q">TAP FOR START </button>
+						class="btn btn-primary btn-lg" formaction="${home}checkout">TAP FOR START </button>
 				</div>
 			</div>
 		</form>
@@ -62,22 +62,18 @@
 <script>
 	jQuery(document).ready(function($) {
 		searchViaAjax();
-
-
-
 	});
 
 	function searchViaAjax() {
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
-			url : "${home}template/site/configuration",
+			url : "${home}template/homepage",
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {
-
-				console.log("SUCCESS: ", data.data.image);
-			 document.getElementById("image").setAttribute("src" ,data.data.image);
+			 console.log("SUCCESS: ", data.data.display_images[0].image);
+			 document.getElementById("image").setAttribute("src" ,data.data.display_images[0].image);
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);

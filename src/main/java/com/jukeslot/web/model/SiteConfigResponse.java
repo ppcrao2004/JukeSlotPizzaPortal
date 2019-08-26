@@ -1,6 +1,7 @@
 package com.jukeslot.web.model;
 
 import com.jukeslot.web.model.response.SiteConfigurationRes;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -23,5 +24,9 @@ public class SiteConfigResponse {
 
     public void setData(SiteConfigurationRes data) {
         this.data = data;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -1,21 +1,11 @@
 package com.jukeslot.web.model;
 
-import com.jukeslot.web.model.response.TemplateResponse;
+import com.jukeslot.web.model.response.HomePageResponse;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.List;
-
-public class TemplateSiteListResponse {
+public class HomePageResp {
     private String code;
-    private List<TemplateResponse> data;
-
-    public List<TemplateResponse> getData() {
-        return data;
-    }
-
-    public void setData(List<TemplateResponse> data) {
-        this.data = data;
-    }
+    private HomePageResponse data;
 
     public String getCode() {
         return code;
@@ -25,6 +15,13 @@ public class TemplateSiteListResponse {
         this.code = code;
     }
 
+    public HomePageResponse getData() {
+        return data;
+    }
+
+    public void setData(HomePageResponse data) {
+        this.data = data;
+    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

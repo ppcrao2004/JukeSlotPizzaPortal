@@ -5,23 +5,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Joes</title>
 
 <c:url var="home" value="/" scope="request" />
-
 <spring:url value="/resources/core/css/hello.css" var="coreCss" />
-	<spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-
+<spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
 <link href="${bootstrapCss}" rel="stylesheet" />
 <link href="${coreCss}" rel="stylesheet" />
-
-    <spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
+<spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
 <script src="${jqueryJs}"></script>
 </head>
-
 <nav class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header" style="background:black; display: flex;">

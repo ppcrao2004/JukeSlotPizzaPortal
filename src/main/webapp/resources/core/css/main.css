@@ -1,10 +1,8 @@
 
-/*.responsive-image {
+.responsive-image {
     height: 75%;
     width: 100%;
 }
-
- */
 .checkout-container{
     background: #e25c5c;
     display: flex;
@@ -13,3 +11,5 @@
 .container{
     min-height: 0;
 }
+
+li {cursor: pointer}

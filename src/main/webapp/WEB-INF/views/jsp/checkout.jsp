@@ -11,8 +11,6 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Happy Joes</title>
-
-
         <spring:url value="${home}resources/core/css/hello.css" var="coreCss" />
         <spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,63 +22,68 @@
                     var="jqueryJs" />
         <script src="${jqueryJs}"></script>
     </head>
-
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header" style="background:black; display: flex;">
-                <div class="navbar-header-image">
-                    <a class="navbar-brand" >
-                        <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
-                </div>
-                <div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
-                    <span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>
-                </div>
+<body bgcolor="#fffff": >
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header" style="background:black; display: flex;">
+            <div class="navbar-header-image">
+                <a class="navbar-brand" >
+                    <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
+            </div>
+            <div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
+                <span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>
             </div>
         </div>
-    </nav>
-    <div class ="checkout-page-conatiner"  style=" background: #d24f4f">
-        <div class="header" style="text-align: center;">
-<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> What is your preference</h1>
-        </div>
+    </div>
+</nav>
+<div class ="checkout-page-conatiner"  style=" background: #d24f4f">
+    <div class="header" style="text-align: center;">
+        <h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> What is your preference</h1>
+    </div>
 
- <div class ="checkout-container" style="
+    <div class ="checkout-container" style="
     display: flex;
     height: 50%;">
-     <div class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
-     <div class="left" style="display: inline-block;
+        <div class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
+            <div class="left" style="display: inline-block;
      height: 87px;
     width: 115px;
     background: #fff;
     margin-right: 100px;
     padding:10px;
     padding-bottom: 40px;">
-         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" onclick="${pageContext.request.contextPath}/menu1">
-         <p style=" color: #d24f4f;">Eat In</p>
-     </div>
-     <div class="right" style="
+                <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" on="${pageContext.request.contextPath}/menu1">
+                <p style=" color: #d24f4f;">Eat In</p>
+            </div>
+            <div class="right" style="
      display: inline-block;
     background: #fff;
     height: 87px;
     width: 115px;
     padding: 10px;
     padding-bottom: 40px;">
-         <img src ="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png">
-         <p style="color: #d24f4f;">Take out</p>
-     </div>
-     </div>
- </div>
-    </div>
+                <a href="${pageContext.request.contextPath}menu1">
+                    <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out" height="128" width="128" />
+                </a>
 
- <div class="footer">
-     <div class="col-sm-offset-2 col-sm-10">
-         <button style=" height: 80px;
+                <p style="color: #d24f4f;">Take out</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button style=" height: 80px;
     width: 100%;
     background: #000000f5;
-    color: #fff;
+    color: #000000;
     bottom: 0;
     position: absolute;"
- type="submit" id="btn-search"
-                 class="btn btn-primary btn-lg" formaction="${home}checkout">TAP IN ONE SERVICE TO CONTINUE</button>
-     </div>
+                type="submit" id="btn-search"
+                class="btn btn-primary btn-lg" formaction="${home}menu1">TAP IN ONE SERVICE TO CONTINUE</button>
     </div>
+</div>
+</body>
+
 </html>

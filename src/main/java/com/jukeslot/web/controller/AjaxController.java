@@ -1,10 +1,5 @@
 package com.jukeslot.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import com.jukeslot.web.model.*;
 import com.jukeslot.web.service.GenericRestClient;
 import com.jukeslot.web.service.RequestDetails;
@@ -23,10 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class AjaxController {
-
-	List<User> users;
 	private static final Logger log = LoggerFactory.getLogger(AjaxController.class);
-
 	@RequestMapping(value = "/template/site", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
     public TemplateSiteListResponse getTemplateListSite() {
         RestTemplate restTemplate = new RestTemplate();

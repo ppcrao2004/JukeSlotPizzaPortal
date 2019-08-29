@@ -54,7 +54,7 @@
     margin-right: 100px;
     padding:10px;
     padding-bottom: 40px;">
-         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" onclick="${pageContext.request.contextPath}/menu1">
+         <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png">
          <p style=" color: #d24f4f;">Eat In</p>
      </div>
      <div class="right" style="

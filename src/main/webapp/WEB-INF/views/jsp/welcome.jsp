@@ -5,43 +5,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Happy Joes</title>
 
 <c:url var="home" value="/" scope="request" />
 
 <spring:url value="/resources/core/css/hello.css" var="coreCss" />
-<spring:url value="/resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
- <spring:url value="/resources/core/css/main.css"	var="coreCss" />
+	<spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
 
 <link href="${bootstrapCss}" rel="stylesheet" />
 <link href="${coreCss}" rel="stylesheet" />
 
-    <spring:url value="/resources/core/js/jquery.1.10.2.min.js"
-	var="jqueryJs" />
+    <spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
 <script src="${jqueryJs}"></script>
 </head>
 
 <nav class="navbar navbar-inverse">
 	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" >
-				<img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
-                <span class="headerTitle">Good times to be together</span>
+		<div class="navbar-header" style="background:black; display: flex;">
+			<div class="navbar-header-image">
+				<a class="navbar-brand" >
+					<img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
+			</div>
+			<div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
+				<span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>
+			</div>
 		</div>
 	</div>
 </nav>
 
-<div class="container" style="min-height: 500px">
+<div class="container">
 
-	<div class="starter-template">
-		<img id="image" class="responsive-image ">
-		<br>
+	<div class="starter-template" style="text-align: center">
+		<img id="image" class="responsive-image " style="height: 461px;width:100%;overflow: scroll">
+		<div class="imageText" style="position: absolute;
+    top: 22%;
+    left: 39%;
+    color: #fff;">
+			<p style="    font-size: 10px;
+    margin: 0;">LUNCH WITH AN ICON</p>
+			<p style="    font-size: 28px;
+    margin: 0;">Try Our Pizzas</p>
+		</div>
 
-		<div id="feedback"></div>
+	</div>
 		<form class="form-horizontal" id="search-form">
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" id="btn-search"
+				<div class="col-sm-offset-2 col-sm-10" style="
+    width: 100%;
+    margin: auto;
+    height: 50px;
+    background: black;">
+					<button style="background: #d24f4f;
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin-top: -7px;" type="submit" id="btn-search"
 						class="btn btn-primary btn-lg" formaction="${home}checkout">TAP FOR START </button>
 				</div>
 			</div>
@@ -51,13 +72,7 @@
 
 </div>
 
-<div class="container">
-	<footer>
-		<p>
-			&copy; <a href="http://www.juke.com">Juke Slot</a> 2019
-		</p>
-	</footer>
-</div>
+
 
 <script>
 	jQuery(document).ready(function($) {

@@ -1,4 +1,15 @@
-.responsive-image {
+
+/*.responsive-image {
     height: 75%;
-    width: 75%;
+    width: 100%;
+}
+
+ */
+.checkout-container{
+    background: #e25c5c;
+    display: flex;
+    height: 50%;
+}
+.container{
+    min-height: 0;
 }

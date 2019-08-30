@@ -62,7 +62,7 @@
     width: 115px;
     padding: 10px;
     padding-bottom: 40px;">
-                <a href="${pageContext.request.contextPath}menu1">
+                <a href="${pageContext.request.contextPath}/menu1">
                     <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out" height="128" width="128" />
                 </a>
 

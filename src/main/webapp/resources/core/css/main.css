@@ -1,7 +1,6 @@
-
-.responsive-image {
-    height: 75%;
-    width: 100%;
+.navbar-header{
+    display: flex;
+    top:0;
 }
 .checkout-container{
     background: #e25c5c;
@@ -12,4 +11,103 @@
     min-height: 0;
 }
 
-li {cursor: pointer}
+@media (min-width: 768px)
+{
+    .container {
+        width: 750px;
+    }
+}
+.navbar-header-text
+{
+    padding: 12px 1px 1px 5px;
+}
+.headerTitle{
+    color:#fff;
+    font-size:24px;
+}
+#image{
+    height: 461px ;
+    width:100%;
+    overflow: scroll;
+}
+.imageText{
+
+    position: absolute;
+    top: 22%;
+    left: 39%;
+    color: #fff;
+}
+.buttonContainer{
+    width: 750px;
+    height: 50px;
+    background: black;
+}
+#btn-search{
+    background: #d24f4f ;
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin-top: -7px;
+}
+.navbar-brand img,
+.container {
+    height: 80px;
+}
+.navbar-brand{
+    padding:0 !important;
+    padding-top:1px !important;
+}
+.form-group{
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+}
+@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {
+    #image{
+        height: 200px;
+        width: 100%;
+        overflow: scroll;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) and (orientation:portrait) {
+
+    #image{
+        height: 461px ;
+        width:100%;
+        overflow-y: scroll;
+    }
+
+}
+
+/* Portrait */
+
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+
+    #image{
+        height: 461px ;
+        width:100%;
+        overflow-y: scroll;
+    }
+
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+
+
+    #image{
+        height: 200px;
+        width: 100%;
+        overflow-y: scroll;
+    }
+}

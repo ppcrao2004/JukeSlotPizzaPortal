@@ -19,13 +19,13 @@
 </head>
 <nav class="navbar navbar-inverse">
 	<div class="container">
-		<div class="navbar-header" style="background:black; display: flex;">
+		<div class="navbar-header">
 			<div class="navbar-header-image">
 				<a class="navbar-brand" >
 					<img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
 			</div>
-			<div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
-				<span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>
+			<div class ="navbar-header-text">
+				<span class="headerTitle">Good times to be together</span>
 			</div>
 		</div>
 	</div>
@@ -34,7 +34,7 @@
 <div class="container">
 
 	<div class="starter-template" style="text-align: center">
-		<img id="image" class="responsive-image " style="height: 461px;width:100%;overflow: scroll">
+		<img id="image" class="responsive-image ">
 		<div class="imageText" style="position: absolute;
     top: 22%;
     left: 39%;
@@ -48,16 +48,8 @@
 	</div>
 		<form class="form-horizontal" id="search-form">
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10" style="
-    width: 100%;
-    margin: auto;
-    height: 50px;
-    background: black;">
-					<button style="background: #d24f4f;
-    width: 100%;
-    height: 30px;
-    border: none;
-    margin-top: -7px;" type="submit" id="btn-search"
+				<div class = "buttonContainer">
+					<button  type="submit" id="btn-search"
 						class="btn btn-primary btn-lg" formaction="${home}checkout">TAP FOR START </button>
 				</div>
 			</div>

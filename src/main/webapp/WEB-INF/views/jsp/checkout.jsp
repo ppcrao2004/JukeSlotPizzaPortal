@@ -25,7 +25,7 @@
 <body bgcolor="#fffff": >
 <nav class="navbar navbar-inverse">
     <div class="container">
-        <div class="navbar-header" style="background:black; display: flex;">
+        <div class="navbar-header">
             <div class="navbar-header-image">
                 <a class="navbar-brand" >
                     <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
@@ -36,9 +36,9 @@
         </div>
     </div>
 </nav>
-<div class ="checkout-page-conatiner"  style=" background: #d24f4f">
+<div class ="checkout-page-conatiner"  style=" background: #C53131">
     <div class="header" style="text-align: center;">
-        <h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> What is your preference</h1>
+        <h1 style="background:#fff ;height: 50px;    color: #C53131;"> What is your preference</h1>
     </div>
 
     <div class ="checkout-container" style="
@@ -52,8 +52,10 @@
     margin-right: 100px;
     padding:10px;
     padding-bottom: 40px;">
-                <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" on="${pageContext.request.contextPath}/menu1">
-                <p style=" color: #d24f4f;">Eat In</p>
+                <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;">
+                <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" alt="Eat In">
+                    <p style="color: #C53131;">Dine In</p>
+                </a>
             </div>
             <div class="right" style="
      display: inline-block;
@@ -62,11 +64,10 @@
     width: 115px;
     padding: 10px;
     padding-bottom: 40px;">
-                <a href="${pageContext.request.contextPath}/menu1">
-                    <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out" height="128" width="128" />
+                <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;">
+                <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out"  />
+                <p style="color: #C53131;">Carry out</p>
                 </a>
-
-                <p style="color: #d24f4f;">Take out</p>
             </div>
         </div>
     </div>
@@ -77,11 +78,11 @@
         <button style=" height: 80px;
     width: 100%;
     background: #000000f5;
-    color: #000000;
+    color: #fff;
     bottom: 0;
     position: absolute;"
                 type="submit" id="btn-search"
-                class="btn btn-primary btn-lg" formaction="${home}menu1">TAP IN ONE SERVICE TO CONTINUE</button>
+                class="btn btn-primary btn-lg" >TAP IN ONE SERVICE TO CONTINUE</button>
     </div>
 </div>
 </body>

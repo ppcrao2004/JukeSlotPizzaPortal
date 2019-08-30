@@ -40,7 +40,7 @@
     </nav>
     <div class ="checkout-page-conatiner"  style=" background: #d24f4f">
         <div class="header" style="text-align: center;">
-<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> What is your preference</h1>
+<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let's get Started !</h1>
         </div>
 
  <div class ="checkout-container" style="

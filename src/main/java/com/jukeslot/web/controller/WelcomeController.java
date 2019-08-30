@@ -18,9 +18,9 @@ public class WelcomeController {
 		return "checkout";
 	}
 
-	@RequestMapping(value = "/menu1", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainMenu", method = RequestMethod.GET)
 	public String menu1(ModelMap model) {
-		return "menu1";
+		return "mainMenu";
 	}
 
 }

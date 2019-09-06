@@ -69,6 +69,7 @@
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {
+			sessionStorage.setItem('welcomeService',JSON.stringify(data));
 			 console.log("SUCCESS: ", data.data.display_images[0].image);
 			 document.getElementById("image").setAttribute("src" ,data.data.display_images[0].image);
 			},

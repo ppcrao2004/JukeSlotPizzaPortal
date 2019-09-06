@@ -7,9 +7,9 @@
     display: flex;
     height: 50%;
 }
-.container{
-    min-height: 0;
-}
+/*.container{*/
+/*    min-height: 0;*/
+/*}*/
 
 @media (min-width: 768px)
 {
@@ -66,69 +66,184 @@
     margin: 0 !important;
     width: 100%;
 }
-/*@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {*/
-/*    #image{*/
-/*        height: 200px;*/
-/*        width: 100%;*/
-/*        overflow: scroll;*/
-/*    }*/
-/*}*/
+.mainwaves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+}
 
-/*@media screen and (min-width:320px) and (max-width:767px) and (orientation:portrait) {*/
+.mainwaves-effect .mainwaves-ripple {
+    position: absolute;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.7s ease-out;
+    transition: all 0.7s ease-out;
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, -webkit-transform;
+    transition-property: transform, opacity;
+    transition-property: transform, opacity, -webkit-transform;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    pointer-events: none;
+}
 
-/*    #image{*/
-/*        height: 461px ;*/
-/*        width:100%;*/
-/*        overflow-y: scroll;*/
-/*    }*/
+.mainwaves-effect.mainwaves-light .mainwaves-ripple {
+    background-color: rgba(255, 255, 255, 0.45);
+}
 
-/*}*/
+.mainwaves-effect.mainwaves-red .mainwaves-ripple {
+    background-color: rgba(244, 67, 54, 0.7);
+}
 
-/*!* Portrait *!*/
+.mainwaves-effect.mainwaves-yellow .mainwaves-ripple {
+    background-color: rgba(255, 235, 59, 0.7);
+}
 
-/*@media only screen*/
-/*and (min-device-width: 375px)*/
-/*and (max-device-width: 812px)*/
-/*and (-webkit-min-device-pixel-ratio: 3)*/
-/*and (orientation: portrait) {*/
+.mainwaves-effect.mainwaves-orange .mainwaves-ripple {
+    background-color: rgba(255, 152, 0, 0.7);
+}
 
-/*    #image{*/
-/*        height: 461px ;*/
-/*        width:100%;*/
-/*        overflow-y: scroll;*/
-/*    }*/
+.mainwaves-effect.mainwaves-purple .mainwaves-ripple {
+    background-color: rgba(156, 39, 176, 0.7);
+}
 
-/*}*/
+.mainwaves-effect.mainwaves-green .mainwaves-ripple {
+    background-color: rgba(76, 175, 80, 0.7);
+}
 
-/*!* Landscape *!*/
-/*@media only screen*/
-/*and (min-device-width: 375px)*/
-/*and (max-device-width: 812px)*/
-/*and (-webkit-min-device-pixel-ratio: 3)*/
-/*and (orientation: landscape) {*/
+.mainwaves-effect.mainwaves-teal .mainwaves-ripple {
+    background-color: rgba(0, 150, 136, 0.7);
+}
 
+.mainwaves-effect input[type="button"], .mainwaves-effect input[type="reset"], .mainwaves-effect input[type="submit"] {
+    border: 0;
+    font-style: normal;
+    font-size: inherit;
+    text-transform: inherit;
+    background: none;
+}
 
-/*    #image{*/
-/*        height: 200px;*/
-/*        width: 100%;*/
-/*        overflow-y: scroll;*/
-/*    }*/
-/*}*/
-/*.container{*/
-/*    margin:0;*/
-/*    padding:0;*/
-/*    width:100%*/
+.mainwaves-effect img {
+    position: relative;
+    z-index: -1;
+}
 
-/*}*/
+.mainwaves-notransition {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
 
-/*.main{*/
-/*    background: rgb(2,0,36);*/
-/*    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,0.6446953781512605) 35%, rgba(0,212,255,1) 100%);*/
-/*}*/
-/*body{*/
-/*    margin: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    bottom: 0;*/
-/*    background: linear-gradient(0deg, rgba(9,7,9,0.7147233893557423) 0% );*/
-/*}*/
+.mainwaves-circle {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+}
+
+.mainwaves-input-wrapper {
+    border-radius: 0.2em;
+    vertical-align: bottom;
+}
+
+.mainwaves-input-wrapper .mainwaves-button-input {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.mainwaves-circle {
+    text-align: center;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    border-radius: 50%;
+    -webkit-mask-image: none;
+}
+
+.mainwaves-block {
+    display: block;
+}
+
+/* Firefox Bug: link not triggered */
+.mainwaves-effect .mainwaves-ripple {
+    z-index: -1;
+}
+/*Zoom*/
+.zoom {
+    padding: 50px;
+    background-color: green;
+    transition: transform .2s; /* Animation */
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+/*Button ripple*/
+button {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 32px;
+}
+
+button:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    background: #3f51b5;
+    border-radius: 100%;
+    opacity: .6;
+
+    transform: scale(0);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+    }
+    20% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+button:not(:active):after {
+    animation: ripple 1s ease-out;
+}
+
+/* fixes initial animation run, without user input, on page load.
+ */
+button:after {
+    visibility: hidden;
+}
+
+button:focus:after {
+    visibility: visible;
+}

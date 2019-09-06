@@ -1,6 +1,5 @@
 <%@page session="false"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,11 +8,7 @@
 <title>Happy Joes</title>
 
 <c:url var="home" value="/" scope="request" />
-<spring:url value="/resources/core/css/hello.css" var="coreCss" />
-<spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-<link href="${bootstrapCss}" rel="stylesheet" />
-<link href="${coreCss}" rel="stylesheet" />
 <spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
 <script src="${jqueryJs}"></script>
 </head>
@@ -50,7 +45,7 @@
 			<div class="form-group">
 				<div class = "buttonContainer">
 					<button  type="submit" id="btn-search"
-						class="btn btn-primary btn-lg" formaction="${home}checkout">TAP FOR START </button>
+						class="btn btn-primary btn-lg" style="font-size: 40px ; " formaction="${home}checkout">TAP FOR START </button>
 				</div>
 			</div>
 		</form>

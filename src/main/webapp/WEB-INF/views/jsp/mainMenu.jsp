@@ -7,19 +7,12 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
- <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Happy Joes</title>
-
-
-        <spring:url value="${home}resources/core/css/hello.css" var="coreCss" />
-        <spring:url value="${home}resources/core/css/bootstrap.min.css"	var="bootstrapCss" />
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <link href="${bootstrapCss}" rel="stylesheet" />
-        <link href="${coreCss}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery.1.10.2.min.js"></script>
     </head>
 
@@ -28,7 +21,7 @@
             <div class="navbar-header" style="background:black; display: flex;">
                 <div class="navbar-header-image">
                     <a class="navbar-brand" >
-                        <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
+                        <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png" alt="LOGO"></a>
                 </div>
                 <div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
                     <span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>

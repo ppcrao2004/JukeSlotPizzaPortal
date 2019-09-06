@@ -40,7 +40,7 @@
 .buttonContainer{
     width: 100%;
     height: 50px;
-    background: #18181A;
+    background: black;
 }
 #btn-search{
     background: #C53131 ;
@@ -53,7 +53,8 @@
 .container {
     height: 150px;
     width:100%;
-    background: #18181A;
+    background: rgb(0, 0, 0);
+
 }
 .navbar-brand{
     padding:0 !important;
@@ -65,68 +66,69 @@
     margin: 0 !important;
     width: 100%;
 }
-@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {
-    #image{
-        height: 200px;
-        width: 100%;
-        overflow: scroll;
-    }
-}
+/*@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {*/
+/*    #image{*/
+/*        height: 200px;*/
+/*        width: 100%;*/
+/*        overflow: scroll;*/
+/*    }*/
+/*}*/
 
-@media screen and (min-width:320px) and (max-width:767px) and (orientation:portrait) {
+/*@media screen and (min-width:320px) and (max-width:767px) and (orientation:portrait) {*/
 
-    #image{
-        height: 461px ;
-        width:100%;
-        overflow-y: scroll;
-    }
+/*    #image{*/
+/*        height: 461px ;*/
+/*        width:100%;*/
+/*        overflow-y: scroll;*/
+/*    }*/
 
-}
+/*}*/
 
-/* Portrait */
+/*!* Portrait *!*/
 
-@media only screen
-and (min-device-width: 375px)
-and (max-device-width: 812px)
-and (-webkit-min-device-pixel-ratio: 3)
-and (orientation: portrait) {
+/*@media only screen*/
+/*and (min-device-width: 375px)*/
+/*and (max-device-width: 812px)*/
+/*and (-webkit-min-device-pixel-ratio: 3)*/
+/*and (orientation: portrait) {*/
 
-    #image{
-        height: 461px ;
-        width:100%;
-        overflow-y: scroll;
-    }
+/*    #image{*/
+/*        height: 461px ;*/
+/*        width:100%;*/
+/*        overflow-y: scroll;*/
+/*    }*/
 
-}
+/*}*/
 
-/* Landscape */
-@media only screen
-and (min-device-width: 375px)
-and (max-device-width: 812px)
-and (-webkit-min-device-pixel-ratio: 3)
-and (orientation: landscape) {
+/*!* Landscape *!*/
+/*@media only screen*/
+/*and (min-device-width: 375px)*/
+/*and (max-device-width: 812px)*/
+/*and (-webkit-min-device-pixel-ratio: 3)*/
+/*and (orientation: landscape) {*/
 
 
-    #image{
-        height: 200px;
-        width: 100%;
-        overflow-y: scroll;
-    }
-}
-.container{
-    margin:0;
-    padding:0;
-    width:100%
+/*    #image{*/
+/*        height: 200px;*/
+/*        width: 100%;*/
+/*        overflow-y: scroll;*/
+/*    }*/
+/*}*/
+/*.container{*/
+/*    margin:0;*/
+/*    padding:0;*/
+/*    width:100%*/
 
-}
+/*}*/
 
-.main{
-    background: #18181A;
-}
-body{
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    background: #18181A;
-}
+/*.main{*/
+/*    background: rgb(2,0,36);*/
+/*    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,0.6446953781512605) 35%, rgba(0,212,255,1) 100%);*/
+/*}*/
+/*body{*/
+/*    margin: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    bottom: 0;*/
+/*    background: linear-gradient(0deg, rgba(9,7,9,0.7147233893557423) 0% );*/
+/*}*/

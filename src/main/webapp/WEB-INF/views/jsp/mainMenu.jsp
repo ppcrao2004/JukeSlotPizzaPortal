@@ -20,9 +20,7 @@
         <link href="${coreCss}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
 
-        <spring:url value="/resources/core/js/jquery.1.10.2.min.js"
-                    var="jqueryJs" />
-        <script src="${jqueryJs}"></script>
+        <script src="${pageContext.request.contextPath}/resources/core/js/jquery.1.10.2.min.js"></script>
     </head>
 
     <nav class="navbar navbar-inverse">
@@ -38,49 +36,78 @@
             </div>
         </div>
     </nav>
-    <div class ="checkout-page-conatiner"  style=" background: #d24f4f">
+    <div class ="checkout-page-conatiner">
         <div class="header" style="text-align: center;">
-<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let's get Started !</h1>
+<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let 's get started!</h1>
         </div>
 
  <div class ="checkout-container" style="
     display: flex;
-    height: 50%;">
-     <div class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
-     <div class="left" style="display: inline-block;
-     height: 87px;
-    width: 115px;
-    background: #fff;
-    margin-right: 100px;
-    padding:10px;
-    padding-bottom: 40px;">
-         <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png">
-         <p style=" color: #d24f4f;">Eat In</p>
-     </div>
-     <div class="right" style="
-     display: inline-block;
-    background: #fff;
-    height: 87px;
-    width: 115px;
-    padding: 10px;
-    padding-bottom: 40px;">
-         <img src ="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png">
-         <p style="color: #d24f4f;">Take out</p>
-     </div>
+    height: auto;">
+     <div id="checkout-inner"  class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
+
+
      </div>
  </div>
     </div>
 
- <div class="footer">
-     <div class="col-sm-offset-2 col-sm-10">
-         <button style=" height: 80px;
-    width: 100%;
-    background: #000000f5;
-    color: #fff;
-    bottom: 0;
-    position: absolute;"
- type="submit" id="btn-search"
-                 class="btn btn-primary btn-lg" formaction="${home}checkout">TAP IN ONE SERVICE TO CONTINUE</button>
-     </div>
-    </div>
+    <script>
+        jQuery(document).ready(function($) {
+            var tbl=$("<table/>").attr("id","mytable");
+            $("#checkout-inner").append(tbl);
+            searchViaAjax();
+        });
+
+        function searchViaAjax() {
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : "${home}template/menu/list",
+                dataType : 'json',
+                timeout : 100000,
+                success : function(data) {
+
+                   // $.each(data.data, function(i, item) {
+                        for (var i = 0; i < data.data.length; i ++) {
+                            console.log(data.data[i].image);
+                            console.log(data.data);
+                            // $('#checkout-inner').append("<img id='theImg'/>");
+                            // document.getElementById("theImg").setAttribute("src" ,data.data[i].image);
+                            if (i < data.data.length) {
+                                var tr = "<tr>";
+                                var td1 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i].image +'> '+ '<p style="padding: 10px;background: #fff;margin: 0; text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i].title+'</p>'+"</td> ";
+                                var td2 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 1].image +'> ' + '<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+1].title+'</p>'+"</td>";
+                                var td3 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 2].image + '> ' + '<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+2].title+'</p>'+"</td>";
+                                var td4 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 3].image + '> ' +'<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+3].title+'</p>'+ "</td></tr>";
+
+
+                            }
+
+                            $("#mytable").append(tr + td1 + td2+td3+td4);
+                            i=i+4;
+
+
+                            // document.getElementsByClassName("theImg").setAttribute("src" ,data.data[i].image);
+                            // $('<img/>').attr('src' , data.data[i].image).appendTo($('#checkout-inner'));
+
+                            // });
+                          //  console.log("SUCCESS: ", data.data.length);
+                        }
+
+
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+
+
+
+        }
+    </script>
 </html>

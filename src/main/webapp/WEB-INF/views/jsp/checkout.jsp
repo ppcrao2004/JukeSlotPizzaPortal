@@ -21,6 +21,7 @@
         <spring:url value="/resources/core/js/jquery.1.10.2.min.js"
                     var="jqueryJs" />
         <script src="${jqueryJs}"></script>
+
     </head>
 <body bgcolor="#fffff": >
 <nav class="navbar navbar-inverse">
@@ -36,7 +37,7 @@
         </div>
     </div>
 </nav>
-<div class ="checkout-page-conatiner"  style=" background: #C53131">
+<div class ="checkout-page-conatiner" >
     <div class="header" style="text-align: center;">
         <h1 style="background:#fff ;height: 50px;    color: #C53131;"> What is your preference</h1>
     </div>
@@ -52,7 +53,7 @@
     margin-right: 100px;
     padding:10px;
     padding-bottom: 40px;">
-                <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;">
+                <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">
                 <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" alt="Eat In">
                     <p style="color: #C53131;">Dine In</p>
                 </a>
@@ -64,7 +65,7 @@
     width: 115px;
     padding: 10px;
     padding-bottom: 40px;">
-                <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;">
+                <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;" >
                 <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out"  />
                 <p style="color: #C53131;">Carry out</p>
                 </a>

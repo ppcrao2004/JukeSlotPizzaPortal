@@ -1,4 +1,4 @@
-Spring 4 MVC Ajax Example
+Juke Slot Pizza Portal
 ===============================
 Template for Spring 4 MVC + jQuery Ajax + Jackson2, using Maven build tool.
 
@@ -8,13 +8,6 @@ Template for Spring 4 MVC + jQuery Ajax + Jackson2, using Maven build tool.
 * jQuery 1.10.2
 * Boostrap 3
 * Maven 3
-
-###2. To Run this project locally
-```shell
-$ git clone https://github.com/mkyong/spring4-mvc-ajax-example
-$ mvn jetty:run
-```
-Access ```http://localhost:8080/spring4ajax```
 
 ###3. To import this project into Eclipse IDE
 1. ```$ mvn eclipse:eclipse```

@@ -45,7 +45,7 @@
 			<div class="form-group">
 				<div class = "buttonContainer">
 					<button  type="submit" id="btn-search"
-						class="btn btn-primary btn-lg" style="font-size: 40px ; " formaction="${home}checkout">TAP FOR START </button>
+						class="btn btn-primary btn-lg" style="font-size: 30px;" formaction="${home}checkout">TAP FOR START </button>
 				</div>
 			</div>
 		</form>
@@ -58,8 +58,37 @@
 
 <script>
 	jQuery(document).ready(function($) {
+		getCategoryList();
 		searchViaAjax();
 	});
+	function getCategoryList() {
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "${home}template/catetory/list",
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("companySiteIdList: ", data);
+				sessionStorage.setItem('categoryList',JSON.stringify(data));
+				let companySiteIdList ;
+				for(let i=0 ; i<data.data.size ; i++){
+					companySiteIdList.push(data.data.list[0].site_code);
+				}
+				console.log("SUCCESS: ", companySiteIdList);
+
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				display(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+				enableSearchButton(true);
+			}
+		});
+
+	}
 
 	function searchViaAjax() {
 		$.ajax({

@@ -148,11 +148,11 @@
     transition: none !important;
 }
 
-.mainwaves-circle {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
-}
+/*.mainwaves-circle {*/
+/*    -webkit-transform: translateZ(0);*/
+/*    transform: translateZ(0);*/
+/*    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);*/
+/*}*/
 
 .mainwaves-input-wrapper {
     border-radius: 0.2em;
@@ -183,10 +183,17 @@
 .mainwaves-effect .mainwaves-ripple {
     z-index: -1;
 }
+
+/*Table*/
+.table {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    display: block;
+}
 /*Zoom*/
 .zoom {
     padding: 50px;
-    background-color: green;
     transition: transform .2s; /* Animation */
     width: 200px;
     height: 200px;

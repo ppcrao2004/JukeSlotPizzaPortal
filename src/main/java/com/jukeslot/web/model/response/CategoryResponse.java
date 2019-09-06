@@ -1,5 +1,7 @@
 package com.jukeslot.web.model.response;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.List;
 
 public class CategoryResponse {
@@ -182,5 +184,10 @@ public class CategoryResponse {
 
     public void setSub_categories(List<CategoryResponse> sub_categories) {
         this.sub_categories = sub_categories;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

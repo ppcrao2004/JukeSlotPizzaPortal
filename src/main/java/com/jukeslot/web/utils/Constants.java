@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Crazy 08/25/2019
  */
 public class Constants {
-    public final static String SITE_ID = "Jukeslot-USA-Northeast-NJ-SITE_1";
+    public final static String SITE_ID = "SoupDive-0001";
 
     public final static String LOG_TAG = "CustomProject";
 
@@ -18,6 +18,12 @@ public class Constants {
 
     // public final static String WEB_SERVICE_URL = "http://50.56.214.164:8080/";
     public final static String WEB_SERVICE_URL = "http://104.239.141.95:8081/";
+    public final static String TEMPLATE_LIST_URL= "api/template/list/"+SITE_ID;
+    public final static String TEMPLATE_SITE_CONFIGURATION_URL = "api/template/site_configuration/"+SITE_ID;
+    public final static String TEMPLATE_HOMEPAGE_URL ="api/template/home_page/"+SITE_ID;
+    public final static String TEMPLATE_COMPANY_CONFIGURATION="api/template/company_configuration/Jukeslot";
+    public final static String TEMPLATE_MENU_LIST_URL = "api/template/menu/list/"+SITE_ID;
+    public final static String TEMPLATE_CATEGORY_LIST_URL = "api/template/menu/list/"+SITE_ID;
 
 
     public final static String OVERVIEW_URL = "http://devpadshop.luyishifu.com/maininfo";

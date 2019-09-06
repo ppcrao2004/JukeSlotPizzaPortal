@@ -38,10 +38,7 @@
  <div class ="checkout-container" style="
     display: flex;
     height: auto;">
-
      <div id="checkout-inner"  class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
-
-
      </div>
  </div>
     </div>
@@ -67,7 +64,7 @@
                                 var tr1 = "</tr>";
                                for(var j=0 ; j<4 ;j++){
                                    if(i<=data.data.length-1){
-                                       var td1 = "<td>" + '<img class="zoom" style="height:200px; width:200px; padding: 10px;background: #fff;" src = '
+                                       var td1 = "<td class='zoom'>" + '<img class="zoom" style="height:200px; width:200px; padding: 10px;background: #fff;" src = '
                                            + data.data[i].image +'> '+ '<p style="padding: 10px;background: #fff;margin: 0; text-align: center; color: #C53131; ' +
                                            'text-transform: uppercase;font-weight: 800;">'+ data.data[i].title+'</p>'+"</td> ";
                                        tr=tr+td1;

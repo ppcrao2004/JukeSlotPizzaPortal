@@ -14,6 +14,7 @@
         <title>Happy Joes</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery.1.10.2.min.js"></script>
+
     </head>
 
     <nav class="navbar navbar-inverse">
@@ -37,6 +38,7 @@
  <div class ="checkout-container" style="
     display: flex;
     height: auto;">
+
      <div id="checkout-inner"  class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
 
 
@@ -59,35 +61,22 @@
                 dataType : 'json',
                 timeout : 100000,
                 success : function(data) {
-
-                   // $.each(data.data, function(i, item) {
-                        for (var i = 0; i < data.data.length; i ++) {
-                            console.log(data.data[i].image);
-                            console.log(data.data);
-                            // $('#checkout-inner').append("<img id='theImg'/>");
-                            // document.getElementById("theImg").setAttribute("src" ,data.data[i].image);
-                            if (i < data.data.length) {
+                        for (var i = 0; i <= data.data.length-1; ) {
                                 var tr = "<tr>";
-                                var td1 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i].image +'> '+ '<p style="padding: 10px;background: #fff;margin: 0; text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i].title+'</p>'+"</td> ";
-                                var td2 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 1].image +'> ' + '<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+1].title+'</p>'+"</td>";
-                                var td3 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 2].image + '> ' + '<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+2].title+'</p>'+"</td>";
-                                var td4 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = ' + data.data[i + 3].image + '> ' +'<p style="padding: 10px;background: #fff;margin: 0;text-align: center; color: #C53131;; text-transform: uppercase;font-weight: 800;">'+ data.data[i+3].title+'</p>'+ "</td></tr>";
-
-
+                                var tr1 = "</tr>";
+                               for(var j=0 ; j<4 ;j++){
+                                   if(i<=data.data.length-1){
+                                       var td1 = "<td>" + '<img  style="height:200px; width:200px; padding: 10px;background: #fff;" src = '
+                                           + data.data[i].image +'> '+ '<p style="padding: 10px;background: #fff;margin: 0; text-align: center; color: #C53131; ' +
+                                           'text-transform: uppercase;font-weight: 800;">'+ data.data[i].title+'</p>'+"</td> ";
+                                       tr=tr+td1;
+                                   }
+                                   i++;
                             }
+                            $("#mytable").append(tr + tr1);
+                           //i=i+4;
 
-                            $("#mytable").append(tr + td1 + td2+td3+td4);
-                            i=i+4;
-
-
-                            // document.getElementsByClassName("theImg").setAttribute("src" ,data.data[i].image);
-                            // $('<img/>').attr('src' , data.data[i].image).appendTo($('#checkout-inner'));
-
-                            // });
-                          //  console.log("SUCCESS: ", data.data.length);
                         }
-
-
                 },
                 error : function(e) {
                     console.log("ERROR: ", e);

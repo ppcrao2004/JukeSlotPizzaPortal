@@ -7,83 +7,79 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Happy Joes</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-        <script src="${pageContext.request.contextPath}/resources/core/js/jquery.1.10.2.min.js"></script>
-
+        <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
     </head>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header" style="background:black; display: flex;">
-                <div class="navbar-header-image">
-                    <a class="navbar-brand" >
-                        <img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png" alt="LOGO"></a>
-                </div>
-                <div class ="navbar-header-text" style="padding-top: 30px; display: inline-block;">
-                    <span class="headerTitle" style="color:#fff;font-size:24px;">Good times to be together</span>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <%@include file="header.jsp" %>
+    <body style="background: #C53131">
     <div class ="checkout-page-conatiner">
         <div class="header" style="text-align: center;">
-<h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let 's get started!</h1>
+           <h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let 's get started!</h1>
         </div>
 
- <div class ="checkout-container" style="
-    display: flex;
-    height: auto;">
-     <div id="checkout-inner"  class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
-     </div>
- </div>
+         <div class ="checkout-container" style="
+            display: flex;
+            height: auto;
+            width: 100%;
+            overflow-x: scroll;">
+             <div id="checkout-inner"  class="checkout-inner" style="display: flex;text-align: center; margin: auto;">
+             </div>
+         </div>
     </div>
+    </body>
 
     <script>
-        jQuery(document).ready(function($) {
-            var tbl=$("<table/>").attr("id","mytable");
-            $("#checkout-inner").append(tbl);
-            searchViaAjax();
+        $(document).ready(function() {
+           /* var tbl=$("<table/>").attr("id","mytable");
+            $("#checkout-inner").append(tbl);*/
+           var tb1 =$("<div/>").attr("id" ,"row");
+            $("#checkout-inner").append(tb1);
+            mainMenuLoad();
         });
 
-        function searchViaAjax() {
+        function mainMenuLoad() {
             $.ajax({
                 type : "GET",
                 contentType : "application/json",
-                url : "${home}template/menu/list",
+                url : "/template/menu/list/"+sessionStorage.getItem("siteID"),
                 dataType : 'json',
                 timeout : 100000,
                 success : function(data) {
+
                     sessionStorage.setItem('menuList',JSON.stringify(data));
-                        for (var i = 0; i <= data.data.length-1; ) {
-                                var tr = "<tr>";
-                                var tr1 = "</tr>";
-                               for(var j=0 ; j<4 ;j++){
-                                   if(i<=data.data.length-1){
-                                       var td1 = "<td class='zoom'>" + '<img class="zoom" style="height:200px; width:200px; padding: 10px;background: #fff;" src = '
-                                           + data.data[i].image +'> '+ '<p style="padding: 10px;background: #fff;margin: 0; text-align: center; color: #C53131; ' +
-                                           'text-transform: uppercase;font-weight: 800;">'+ data.data[i].title+'</p>'+"</td> ";
-                                       tr=tr+td1;
-                                   }
-                                   i++;
+
+                        for (var i = 0; i <= data.data.length-1;i++) {
+
+                            if(data.data[i].has_category == true||data.data[i].has_item == true) {
+                                sessionStorage.setItem(data.data[i].title,JSON.stringify(data.data[i]));
                             }
-                            $("#mytable").append(tr + tr1);
-                           //i=i+4;
+
+                               var col ="<div class ='column zoom'  onclick='selectMenuItem(this)'>" +
+                            '<img style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                                   '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                                   'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                   ''+ data.data[i].title+'</a>'+
+                                   "</div>";
+
+
+                            $("#row").append(col);
+
 
                         }
                 },
                 error : function(e) {
                     console.log("ERROR: ", e);
                     display(e);
-                },
-                done : function(e) {
-                    console.log("DONE");
-                    enableSearchButton(true);
                 }
+
             });
 
 
@@ -98,6 +94,33 @@
         function normalImg(x) {
             x.style.height = "200px";
             x.style.width = "200px";
+        }
+        function  selectMenuItem(menuItemTitle) {
+
+            var menuitemtitle=  $(menuItemTitle).text();
+            $("#row").css('flex-wrap' ,'nowrap');
+            if(sessionStorage.key(menuitemtitle)!= null ){
+                var catego = JSON.parse(sessionStorage.getItem(menuitemtitle)).categories;
+                console.log(catego);
+                for (var j = 0; j <= catego.length - 1; j++) {
+                    console.log("Categories of item ", catego[j].title);
+                    console.log("Categories of item ", catego[j].image);
+
+
+                    var col = "<div class ='column zoom' style='display: inline-block;' onclick='selectMenuItem(this)'>" +
+                        '<img style="height:200px; width:200px; padding: 10px;background: #fff;" src =' + catego[j].image + '>' +
+                        '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                        'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                        '' + catego[j].title + '</a>' +
+                        "</div>";
+
+                    $("body").append(col);
+                }
+            }else{
+                //TODO error message;
+                console.log("reached else");
+            }
+
         }
 
     </script>

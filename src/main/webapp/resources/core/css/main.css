@@ -1,5 +1,6 @@
 .navbar-header{
     display: flex;
+    background:black;
     top:0;
 }
 .checkout-container{
@@ -7,9 +8,6 @@
     display: flex;
     height: 50%;
 }
-/*.container{*/
-/*    min-height: 0;*/
-/*}*/
 
 @media (min-width: 768px)
 {
@@ -40,19 +38,18 @@
 .buttonContainer{
     width: 100%;
     height: 50px;
-    background: black;
 }
-#btn-search{
-    background: #C53131 ;
+#btn-nav{
+    background-color: #C53131 ;
     width: 100%;
     height: 50px;
     border: none;
     margin-top: -7px;
 }
 .navbar-brand img,
-.container {
+.navbar-container {
     height: 150px;
-    width:100%;
+    /*width:100%;*/
     background: rgb(0, 0, 0);
 
 }
@@ -61,7 +58,7 @@
     padding-top:1px !important;
 }
 .form-group{
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     margin: 0 !important;
     width: 100%;
@@ -147,13 +144,6 @@
     -webkit-transition: none !important;
     transition: none !important;
 }
-
-/*.mainwaves-circle {*/
-/*    -webkit-transform: translateZ(0);*/
-/*    transform: translateZ(0);*/
-/*    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);*/
-/*}*/
-
 .mainwaves-input-wrapper {
     border-radius: 0.2em;
     vertical-align: bottom;
@@ -193,11 +183,8 @@
 }
 /*Zoom*/
 .zoom {
-    padding: 50px;
     transition: transform .2s; /* Animation */
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
+
 }
 
 .zoom:hover {
@@ -253,4 +240,89 @@ button:after {
 
 button:focus:after {
     visibility: visible;
+}
+
+.footer {
+    height: 80px;
+    width: 100%;
+    background: #000000;
+    color: #fff;
+    bottom: 0;
+    text-align: center;
+    font-size: 40px;
+    position: absolute;
+
+}
+.checkout-container {
+    display: flex;
+    height: 50%;
+}
+.left {
+
+    margin-right: 100px;
+}
+.right ,
+.left {
+    display: inline-block;
+    background: #fff;
+    height: 87px;
+    width: 115px;
+    padding: 10px;
+    padding-bottom: 40px;
+}
+
+.checkout-inner{
+    display: flex;
+    text-align: center;
+    margin: auto;
+}
+.footer-main{
+    height: 80px;
+    width: 100%;
+    /* background: #000000; */
+    color: #fff;
+    bottom: 0;
+    /* text-align: center; */
+    font-size: 40px;
+    /*position: absolute*/
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+#row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+.column{
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 24%;
+    padding: 0 4px;
+}
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 48%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
 }

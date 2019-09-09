@@ -7,6 +7,7 @@ import com.jukeslot.web.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,11 +36,11 @@ public class AjaxController {
 		return siteConfigurationRes;
 	}
 
-    @RequestMapping(value = "/template/homepage", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
-    public HomePageResp getTemplateHomepage() throws  Exception{
+    @RequestMapping(value = "/template/homepage/{siteID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+    public HomePageResp getTemplateHomepage(@PathVariable String siteID) throws  Exception{
         log.info("==== RESTful API Response Template Homepage START =======");
         HomePageResp homePageResp= new GenericRestClient<String, HomePageResp>().execute(
-                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_HOMEPAGE_URL, HttpMethod.GET), " ", HomePageResp.class);
+                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_HOMEPAGE_URL+siteID, HttpMethod.GET), " ", HomePageResp.class);
         log.info(homePageResp.toString());
         log.info("==== RESTful API Response Template Homepage END =======");
         return homePageResp;
@@ -56,11 +57,11 @@ public class AjaxController {
     }
 
 
-    @RequestMapping(value = "/template/menu/list", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
-    public MenuResp getMenuList() throws  Exception{
+    @RequestMapping(value = "/template/menu/list/{siteID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+    public MenuResp getMenuList(@PathVariable String siteID) throws  Exception{
         log.info("==== RESTful API Response Template Menu List START =======");
         MenuResp menuResponse= new GenericRestClient<String, MenuResp>().execute(
-                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_MENU_LIST_URL, HttpMethod.GET), " ", MenuResp.class);
+                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_MENU_LIST_URL+siteID, HttpMethod.GET), " ", MenuResp.class);
         log.info(menuResponse.toString());
         log.info("==== RESTful API Response Template Menu List END =======");
         return menuResponse;

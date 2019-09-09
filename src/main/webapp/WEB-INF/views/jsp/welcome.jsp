@@ -1,129 +1,142 @@
-<%@page session="false"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Joes</title>
+    <html lang="en">
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Happy Joes</title>
 
-<c:url var="home" value="/" scope="request" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-<spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
-<script src="${jqueryJs}"></script>
-</head>
-<nav class="navbar navbar-inverse">
-	<div class="container">
-		<div class="navbar-header">
-			<div class="navbar-header-image">
-				<a class="navbar-brand" >
-					<img src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png"></a>
-			</div>
-			<div class ="navbar-header-text">
-				<span class="headerTitle">Good times to be together</span>
-			</div>
-		</div>
-	</div>
-</nav>
+            <c:url var="home" value="/" scope="request"/>
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
+            <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
+           <!--<script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>-->
+        </head>
+        <%@include file="header.jsp" %>
+        <body  class ="starter-template">
+             <div class="maincontainer">
+                <div class="maincontainer-image">
+                    <img id="image" class="responsive">
+                    <div class="imageText">
+                            <p style="    font-size: 28px;
+                    margin: 0;">TRY OUT PIZZAS</p>
+                    </div>
+                </div>
+                 <div class="footer-main" style="height: 50px;">
+               <form class="form-group">
+                   <button  style="position: absolute"  type="submit" id="btn-nav" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
+               </form>
+             </div>
+             </div>
 
-<div class="container">
 
-	<div class="starter-template" style="text-align: center">
-		<img id="image" class="responsive-image ">
-		<div class="imageText" style="position: absolute;
-    top: 22%;
-    left: 39%;
-    color: #fff;">
-			<p style="    font-size: 10px;
-    margin: 0;">LUNCH WITH AN ICON</p>
-			<p style="    font-size: 28px;
-    margin: 0;">Try Our Pizzas</p>
-		</div>
+        </body>
 
-	</div>
-		<form class="form-horizontal" id="search-form">
-			<div class="form-group">
-				<div class = "buttonContainer">
-					<button  type="submit" id="btn-search"
-						class="btn btn-primary btn-lg" style="font-size: 30px;" formaction="${home}checkout">TAP FOR START </button>
-				</div>
-			</div>
-		</form>
+    <script>
+        $(document).ready(function (e) {
+            $('#myModal').css('display' ,'block');
+        });
 
-	</div>
+        function empty()
+        {
+            let siteIDName;
+            siteIDName = document.getElementById("siteID").value;
+            if (siteIDName == null || siteIDName == "") {
+                $('#error').css("display" ,"block");
+            }else{
+                sessionStorage.setItem('siteID',siteIDName);
+                homePageLoad();
+            };
+        }
+
+        function homePageLoad() {
+            $('#myModal').css('display' ,'none');
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/template/homepage/"+sessionStorage.getItem('siteID'),
+                dataType: 'json',
+                timeout: 100000,
+                success: function (data) {
+                    sessionStorage.setItem('welcomeService', JSON.stringify(data));
+                    console.log(data.data);
+                    if (data.data.logo != null) {
+                        document.getElementById("logoimage").src = data.data.logo;
+
+
+                    } else {
+                        document.getElementById("logoimage").src = "/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png";
+                    }
+
+                    if (data.data.back_ground_color != null) {
+                        $('.starter-template').css = ("background-color", "data.data.back_ground_color");
+                    } else {
+                        $('.starter-template').css("background-color", "#000");
+                    }
+
+                    //  let imageHome = document.getElementById("image").setAttribute("src",img_array);
+                    let img_array=[];
+                    for(let i=0 ; i<=data.data.display_images.length-1;i++)
+                    {
+                        img_array.push(data.data.display_images[i].image);
+                    }
+                    let slideImage=0;
+                    function nextSlide() {
+                        document.getElementById("image").setAttribute("src", img_array[slideImage]);
+                        slideImage++;
+                        if(slideImage==img_array.length){
+                            slideImage=0;
+                        }
+                        setTimeout(nextSlide,5000);
+                    }
+                    nextSlide();
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done: function (e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+
+        }
+    </script>
+
+    </html>
+<div id="myModal" class="modal" style="position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    background: #000;">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2px;
+    border: 1px solid #fff;
+    width: 50%;">
+        <span  style="color:#fff; padding-left: 20px;
+    margin-bottom: 20px;
+    display: inline-block;"> Please input site ID</span><br/>
+        <input  id ="siteID" style="display: inline-block; width: 216px;" value ="Jukeslot-USA-Northeast-NJ-SITE_1" name="id" required/><br/>
+        <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
+        <button type="submit"  style=" position: relative;
+    overflow: hidden;
+    padding: 16px 32px;
+    margin: 0 auto;
+    text-align: center;
+    margin: 20px;
+    background: grey;
+    /* outline: none; */
+    border: none;" value="submit"  onclick=" return empty()">COMMIT </button>
+    </div>
 
 </div>
-
-
-
-<script>
-	jQuery(document).ready(function($) {
-		getCategoryList();
-		searchViaAjax();
-	});
-	function getCategoryList() {
-		$.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${home}template/catetory/list",
-			dataType : 'json',
-			timeout : 100000,
-			success : function(data) {
-				console.log("companySiteIdList: ", data);
-				sessionStorage.setItem('categoryList',JSON.stringify(data));
-				let companySiteIdList ;
-				for(let i=0 ; i<data.data.size ; i++){
-					companySiteIdList.push(data.data.list[0].site_code);
-				}
-				console.log("SUCCESS: ", companySiteIdList);
-
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				display(e);
-			},
-			done : function(e) {
-				console.log("DONE");
-				enableSearchButton(true);
-			}
-		});
-
-	}
-
-	function searchViaAjax() {
-		$.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${home}template/homepage",
-			dataType : 'json',
-			timeout : 100000,
-			success : function(data) {
-			sessionStorage.setItem('welcomeService',JSON.stringify(data));
-			 console.log("SUCCESS: ", data.data.display_images[0].image);
-			 document.getElementById("image").setAttribute("src" ,data.data.display_images[0].image);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				display(e);
-			},
-			done : function(e) {
-				console.log("DONE");
-				enableSearchButton(true);
-			}
-		});
-
-	}
-
-	function enableSearchButton(flag) {
-		$("#btn-search").prop("disabled", flag);
-	}
-
-	function display(data) {
-		var json = "<h4>Ajax Response</h4><pre>"
-				+ JSON.stringify(data, null, 4) + "</pre>";
-		$('#feedback').html(json);
-	}
-</script>
-
-</body>
-</html>

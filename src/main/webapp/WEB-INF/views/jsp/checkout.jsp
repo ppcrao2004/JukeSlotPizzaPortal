@@ -28,13 +28,13 @@
 
             <div class ="checkout-container">
                 <div class="checkout-inner">
-                    <div class="left">
+                    <div class="left zoom">
                         <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">
                         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" alt="Eat In">
                             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Dine In</p>
                         </a>
                     </div>
-                    <div class="right">
+                    <div class="right zoom">
                         <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;" >
                         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out"  />
                         <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Carry out</p>

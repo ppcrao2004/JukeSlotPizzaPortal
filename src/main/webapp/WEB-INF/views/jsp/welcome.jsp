@@ -15,9 +15,7 @@
         <%@include file="header.jsp" %>
         <body  class ="starter-template">
              <div class="maincontainer">
-                 <div class="imageText" id ="imageText">
-                     <p style="    font-size: 28px;
-                    margin: 0;"></p>
+                 <div class="imageText" id ="imageText" style="text-align: center">
                  </div>
                 <div class="maincontainer-image">
                     <img id="image" class="responsive">
@@ -63,24 +61,17 @@
                     var bgColor =data.data.back_ground_color;
                     $('.starter-template').css('background-color' , bgColor);
                     $('.navbar-header').css('background-color' ,bgColor);
-                    var imageText ="<p>"  + data.data.slogan +  "</p>";
-                    $('#imageText').append(imageText);
-                    var frameColor = data.data.frame_color;
-                    var fontSize =data.data.font_size;
-                    var fontFamily =data.data.font_family;
-                    var color = data.data.text_color;
-                    $('#imageText').css ('background-color' , frameColor);
-                    $('#imageText').css ('font-size',fontSize);
-                    $('#imageText').css  ('font-family' , fontFamily);
-                    $('#imageText').css  ('color' ,color);
+                    $('#imageText').append(data.data.slogan);
+                    $("#imageText").css({"background-color":data.data.frame_color});
+                    $("#imageText").css({"font-size":data.data.font_size});
+                    $("#imageText").css({"font-family":data.data.font_family});
+                    $("#imageText").css({"color":data.data.text_color});
+                    $("#btn-nav").css({"background-color":data.data.order_now_button});
                     if (data.data.logo != null) {
                         document.getElementById("logoimage").src = data.data.logo;
-
-
                     } else {
                         document.getElementById("logoimage").src = "/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png";
                     }
-
                     if (data.data.back_ground_color != null) {
                         $('.starter-template').css = ("background-color", "data.data.back_ground_color");
                     } else {

@@ -53,15 +53,11 @@
                 dataType : 'json',
                 timeout : 100000,
                 success : function(data) {
-
                     sessionStorage.setItem('menuList',JSON.stringify(data));
-
                         for (var i = 0; i <= data.data.length-1;i++) {
-
                             if(data.data[i].has_category == true||data.data[i].has_item == true) {
                                 sessionStorage.setItem(data.data[i].title,JSON.stringify(data.data[i]));
                             }
-
                                var col ="<div class ='column zoom'  onclick='selectMenuItem(this)'>" +
                             '<img style="height:200px; width:80%; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
@@ -69,10 +65,7 @@
                                    ''+ data.data[i].title+'</a>'+
                                    "</div>";
 
-
                             $("#row").append(col);
-
-
                         }
                 },
                 error : function(e) {
@@ -81,8 +74,6 @@
                 }
 
             });
-
-
 
         }
 
@@ -96,17 +87,11 @@
             x.style.width = "200px";
         }
         function  selectMenuItem(menuItemTitle) {
-
             var menuitemtitle=  $(menuItemTitle).text();
             $("#row").css('flex-wrap' ,'nowrap');
             if(sessionStorage.key(menuitemtitle)!= null ){
                 var catego = JSON.parse(sessionStorage.getItem(menuitemtitle)).categories;
-                console.log(catego);
                 for (var j = 0; j <= catego.length - 1; j++) {
-                    console.log("Categories of item ", catego[j].title);
-                    console.log("Categories of item ", catego[j].image);
-
-
                     var col = "<div class ='column zoom' style='display: inline-block;' onclick='selectMenuItem(this)'>" +
                         '<img style="height:200px; width:200px; padding: 10px;background: #fff;" src =' + catego[j].image + '>' +
                         '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +

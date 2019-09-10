@@ -26,11 +26,9 @@
 #image{
     height: 461px ;
     width:100%;
-    overflow: scroll;
 }
 .imageText{
 
-    position: absolute;
     top: 32%;
     left: 40%;
     color: #fff;
@@ -290,7 +288,6 @@ button:focus:after {
 .responsive {
     width: 100%;
     height: auto;
-    overflow: auto;
 }
 
 #row {
@@ -325,4 +322,23 @@ button:focus:after {
         flex: 100%;
         max-width: 100%;
     }
+    .imageText {
+        height: 60px;
+        text-align: center;
+    }
+}
+.footer-main,
+.form-group {
+    position: absolute;
+}
+@media screen  and(max-width: 1200px) {
+    .footer-main,
+    .form-group {
+        position: absolute;
+    }
+
+}
+body{
+    width:100%;
+    margin:0;
 }

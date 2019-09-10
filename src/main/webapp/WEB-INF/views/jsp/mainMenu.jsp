@@ -63,9 +63,9 @@
                             }
 
                                var col ="<div class ='column zoom'  onclick='selectMenuItem(this)'>" +
-                            '<img style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                            '<img style="height:200px; width:80%; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                                   'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                   'display: inline-block;width: 80%; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                                    ''+ data.data[i].title+'</a>'+
                                    "</div>";
 

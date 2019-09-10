@@ -45,10 +45,21 @@
         </div>
 
         <div class="footer">
-            <div >
-                <a type="submit" id="btn-search"
-                        class="btn btn-primary btn-lg" >TAP IN ONE SERVICE TO CONTINUE</a>
+            <div class="footerContainer" >
+                <button type="submit" id="btn-search" style="    display: inline-block;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    background: #000;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+"
+                        class="btn btn-primary btn-lg" >TAP IN ONE SERVICE TO CONTINUE</button>
             </div>
+
+
         </div>
     </body>
  </html>

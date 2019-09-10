@@ -15,16 +15,17 @@
         <%@include file="header.jsp" %>
         <body  class ="starter-template">
              <div class="maincontainer">
+                 <div class="imageText" id ="imageText">
+                     <p style="    font-size: 28px;
+                    margin: 0;"></p>
+                 </div>
                 <div class="maincontainer-image">
                     <img id="image" class="responsive">
-                    <div class="imageText">
-                            <p style="    font-size: 28px;
-                    margin: 0;">TRY OUT PIZZAS</p>
-                    </div>
+
                 </div>
                  <div class="footer-main" style="height: 50px;">
                <form class="form-group">
-                   <button  style="position: absolute"  type="submit" id="btn-nav" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
+                   <button   type="submit" id="btn-nav" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
                </form>
              </div>
              </div>
@@ -59,7 +60,19 @@
                 timeout: 100000,
                 success: function (data) {
                     sessionStorage.setItem('welcomeService', JSON.stringify(data));
-                    console.log(data.data);
+                    var bgColor =data.data.back_ground_color;
+                    $('.starter-template').css('background-color' , bgColor);
+                    $('.navbar-header').css('background-color' ,bgColor);
+                    var imageText ="<p>"  + data.data.slogan +  "</p>";
+                    $('#imageText').append(imageText);
+                    var frameColor = data.data.frame_color;
+                    var fontSize =data.data.font_size;
+                    var fontFamily =data.data.font_family;
+                    var color = data.data.text_color;
+                    $('#imageText').css ('background-color' , frameColor);
+                    $('#imageText').css ('font-size',fontSize);
+                    $('#imageText').css  ('font-family' , fontFamily);
+                    $('#imageText').css  ('color' ,color);
                     if (data.data.logo != null) {
                         document.getElementById("logoimage").src = data.data.logo;
 
@@ -122,7 +135,7 @@
     transform: translate(-50%, -50%);
     padding: 2px;
     border: 1px solid #fff;
-    width: 50%;">
+    width: 300px;">
         <span  style="color:#fff; padding-left: 20px;
     margin-bottom: 20px;
     display: inline-block;"> Please input site ID</span><br/>

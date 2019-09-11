@@ -17,8 +17,8 @@
              <div class="maincontainer">
                  <div class="imageText" id ="imageText" style="text-align: center">
                  </div>
-                <div class="maincontainer-image">
-                    <img id="image" class="responsive">
+                <div class="maincontainer-image fade">
+                    <img id="image">
 
                 </div>
                  <div class="footer-main" style="height: 50px;">
@@ -86,12 +86,17 @@
                     }
                     let slideImage=0;
                     function nextSlide() {
+
+                        $("#image").fadeOut(100);
                         document.getElementById("image").setAttribute("src", img_array[slideImage]);
+                        $("#image").fadeIn(100);
+                      //  end();
                         slideImage++;
                         if(slideImage==img_array.length){
                             slideImage=0;
                         }
-                        setTimeout(nextSlide,5000);
+                        setTimeout(nextSlide,3000);
+
                     }
                     nextSlide();
                 },

@@ -75,4 +75,13 @@ public class AjaxController {
         log.info("==== RESTful API Response Template Category List END =======");
         return categoryListResp;
     }
+    @RequestMapping(value = "/template/category/list/{menuID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+    public CategoryListMenuIDResp getCategoryListforMenuID(@PathVariable String menuID) throws  Exception{
+        log.info("==== RESTful API Response Template Category List START =======");
+        CategoryListMenuIDResp categoryListMenuIDResp= new GenericRestClient<String, CategoryListMenuIDResp>().execute(
+                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_CATEGORY_LIST_MENUID_URL+menuID, HttpMethod.GET), " ", CategoryListMenuIDResp.class);
+        log.info(categoryListMenuIDResp.toString());
+        log.info("==== RESTful API Response Template Category List END =======");
+        return categoryListMenuIDResp;
+    }
 }

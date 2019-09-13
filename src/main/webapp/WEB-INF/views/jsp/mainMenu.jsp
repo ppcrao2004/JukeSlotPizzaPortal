@@ -63,7 +63,7 @@
                                var col2 = "<div class ='column zoom mainMenuItems '  onclick='selectSubMenuItem(this)'>" +
                             '<img style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                                   'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                   'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                                    ''+ data.data[i].title+'</a>'+
                                    "</div>";
 
@@ -116,9 +116,11 @@
 
         }*/
         function selectSubMenuItem (menuTitle) {
+            $("#subMenuItems").empty();
             var menuItemTitle= $(menuTitle).text();
             $("#row").css('flex-wrap' ,'nowrap');
-            $("#subMenuItems").empty();
+            $(".navbar").append($('#row'));
+            $(".header").find('h1').remove();
             $('.mainMenuItems').css('opacity' ,'0.5');
             $(menuTitle).css('opacity' ,'1');
             console.log("menuItemTitle",menuItemTitle);
@@ -134,10 +136,10 @@
                         console.log("category list menuiD",data);
                         for (var i = 0; i <= data.data.length-1;i++) {
                              if(data.data[i].has_sub_category == true && data.data[i].active_item==true) {
-                                 var col = "<div class ='column zoom'  style='display: inline-block'  onclick='selectSubMenuItem(this)'>" +
+                                 var col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
                                      '<img style="height:200px; width:200px;padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                      '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                                     'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                     'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                                      ''+ data.data[i].title+'</a>'+
                                      "</div>";
 

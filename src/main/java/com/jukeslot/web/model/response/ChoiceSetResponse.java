@@ -33,7 +33,7 @@ public class ChoiceSetResponse {
     public boolean override_choice_pricing;
     public boolean prepend_choice_set_nan;
     public ChoicePriceModifier price_modifier;
-    public boolean selected_rule;
+    public String selected_rule;
 
     public boolean isActive_item() {
         return active_item;
@@ -259,11 +259,11 @@ public class ChoiceSetResponse {
         this.price_modifier = price_modifier;
     }
 
-    public boolean isSelected_rule() {
+    public String getSelected_rule() {
         return selected_rule;
     }
 
-    public void setSelected_rule(boolean selected_rule) {
+    public void setSelected_rule(String selected_rule) {
         this.selected_rule = selected_rule;
     }
 }

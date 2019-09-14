@@ -84,11 +84,17 @@ public class AjaxController {
     }
     @RequestMapping(value = "/template/item/list/{categoryID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
     public ItemListCategoryIDResponse getItemListforCategoryID(@PathVariable String categoryID) throws  Exception{
-        log.info("==== RESTful API Response Template Item List START  getItemListforCategoryID=======");
-        ItemListCategoryIDResponse itemListCategoryIDResponse= new GenericRestClient<String, ItemListCategoryIDResponse>().execute(
-                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_ITEM_LIST_CATEGORY_ID_URL+categoryID, HttpMethod.GET), " ", ItemListCategoryIDResponse.class);
-        log.info(itemListCategoryIDResponse.toString());
-        log.info("==== RESTful API Response Template Item List END getItemListforCategoryID=======");
+        ItemListCategoryIDResponse itemListCategoryIDResponse=null;
+	    try{
+            log.info("==== RESTful API Response Template Item List START  getItemListforCategoryID=======");
+            itemListCategoryIDResponse= new GenericRestClient<String, ItemListCategoryIDResponse>().execute(
+                    new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_ITEM_LIST_CATEGORY_ID_URL+categoryID, HttpMethod.GET), " ", ItemListCategoryIDResponse.class);
+            log.info(itemListCategoryIDResponse.toString());
+            log.info("==== RESTful API Response Template Item List END getItemListforCategoryID=======");
+        }catch(Exception error){
+	        System.out.println("Error message:"+ error.getMessage());
+        }
+
         return itemListCategoryIDResponse;
     }
 

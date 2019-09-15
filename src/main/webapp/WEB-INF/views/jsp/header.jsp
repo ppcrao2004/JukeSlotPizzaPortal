@@ -11,7 +11,7 @@
         <div class="navbar-header">
             <div class="navbar-header-image">
                 <a class="navbar-brand">
-                    <img id="logoimage">
+                    <img id="logoimage" alt="">
                 </a>
             </div>
             <div class="navbar-header-text">

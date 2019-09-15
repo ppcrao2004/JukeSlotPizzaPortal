@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -38,10 +38,8 @@
 
     <script>
         $(document).ready(function() {
-           /* var tbl=$("<table/>").attr("id","mytable");
-            $("#checkout-inner").append(tbl);*/
-           var tb1 =$("<div/>").attr("id" ,"row");
-            var menuItems ="<div id ='subMenuItems'>"+ "</div>";
+            let tb1 =$("<div/>").attr("id" ,"row");
+            let menuItems ="<div id ='subMenuItems'>"+ "</div>";
             $("body").append(menuItems);
             $("#checkout-inner").append(tb1);
             mainMenuLoad();
@@ -56,11 +54,11 @@
                 timeout : 100000,
                 success : function(data) {
                     sessionStorage.setItem('menuList',JSON.stringify(data));
-                        for (var i = 0; i <= data.data.length-1;i++) {
+                        for (let i = 0; i <= data.data.length-1;i++) {
                             if(data.data[i].has_category == true||data.data[i].has_item == true) {
                                 sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
                             }
-                               var col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
+                               let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
                             '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -79,19 +77,9 @@
 
         }
 
-        function bigImg(x) {
-            x.style.height = "250px";
-            x.style.width = "250px";
-        }
-
-        function normalImg(x) {
-            x.style.height = "200px";
-            x.style.width = "200px";
-        }
-
         function categoryList(menuID) {
             $("#subMenuItems").empty();
-            var menuItemId =$(menuID).find('img').attr('id');
+            let menuItemId =$(menuID).find('img').attr('id');
 
 
             $("#row").css('flex-wrap' ,'nowrap');
@@ -111,9 +99,9 @@
                 success : function(data) {
                     console.log("category list menuiD",data);
                     sessionStorage.setItem('categoryListMenuId',JSON.stringify(data));
-                    for (var i = 0; i <= data.data.length-1;i++) {
+                    for (let i = 0; i <= data.data.length-1;i++) {
                             sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
-                            var col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
+                            let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
                                  '<img  id = '+data.data[i].id +' style="height:200px; width:200px;padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                  '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                                  'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -137,7 +125,7 @@
 
         function selectSubMenuItem (categoryID) {
             $("#subMenuItems").empty();
-            var categoryItemID = $(categoryID).find('img').attr('id');
+            let categoryItemID = $(categoryID).find('img').attr('id');
             console.log(categoryItemID);
 
 
@@ -148,15 +136,15 @@
             $(categoryID).css('opacity', '1');
 
             if (sessionStorage.key(categoryItemID) != null) {
-                var categoryItemgetSubCategory = JSON.parse(sessionStorage.getItem(categoryItemID));
+                let categoryItemgetSubCategory = JSON.parse(sessionStorage.getItem(categoryItemID));
                 console.log(categoryItemgetSubCategory);
 
-                for (var i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
+                for (let i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
                     //  console.log(menuCategory.categories[i].id);
                     if (categoryItemgetSubCategory.sub_categories[i] === undefined) {
 
                     } else {
-                        var col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
+                        let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
 
                             '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style="height:200px; width:200px; padding: 10px;background: #fff;" src =' +
                             categoryItemgetSubCategory.sub_categories[i].image + '>' +
@@ -172,7 +160,7 @@
             }
         }
             function selectSubCategoryItem(Item) {
-                var categoryId = $(Item).find('img').attr('id');
+                let categoryId = $(Item).find('img').attr('id');
                 console.log(' category IDS: ', categoryId);
                 $("#subMenuItems").empty();
                 if (sessionStorage.key(categoryId) != null) {
@@ -187,13 +175,12 @@
                             console.log("Item List Cat ID Service Response :", data);
 
 
-                            for (var i = 0; i <= data.data.length - 1; i++) {
+                            for (let i = 0; i <= data.data.length - 1; i++) {
                                 sessionStorage.setItem(data.data[i].id , JSON.stringify(data));
-                                console.log(data.data[i].item_cost);
                                 if (data.data[i].active_item == true) {
-                                    console.log("image:", data.data[i].image);
-                                    var col = "<div class ='column zoom categoryItem'   onclick='' style='display: block'>" +
-                                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $'+data.data[i].item_cost+'</p> ' +
+                                    let item_cost=data.data[i].item_cost.toFixed(2);
+                                    let col = "<div class ='column zoom categoryItem'   onclick='' style='display: block'>" +
+                                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $'+item_cost+'</p> ' +
                                         '<img  id = ' + data.data[i].id + ' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
                                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                                         'display: block;width: 170px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +

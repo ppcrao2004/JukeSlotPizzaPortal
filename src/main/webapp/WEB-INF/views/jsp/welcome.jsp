@@ -18,7 +18,7 @@
                  <div class="imageText" id ="imageText" style="text-align: center">
                  </div>
                 <div class="maincontainer-image fade">
-                    <img id="image">
+                    <img id="image" alt="">
 
                 </div>
                  <div class="footer-main" style="height: 50px;">
@@ -58,7 +58,7 @@
                 timeout: 100000,
                 success: function (data) {
                     sessionStorage.setItem('welcomeService', JSON.stringify(data));
-                    var bgColor =data.data.back_ground_color;
+                    let bgColor =data.data.back_ground_color;
                     $('.starter-template').css('background-color' , bgColor);
                     $('.navbar-header').css('background-color' ,bgColor);
                     $('#imageText').append(data.data.slogan);

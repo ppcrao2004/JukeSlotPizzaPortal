@@ -12,6 +12,7 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <META name="viewport" content="initial-scale=0.66, user-scalable=no">
         <title>Happy Joes</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
@@ -55,7 +56,7 @@
                 success : function(data) {
                     sessionStorage.setItem('menuList',JSON.stringify(data));
                         for (let i = 0; i <= data.data.length-1;i++) {
-                            if(data.data[i].has_category == true||data.data[i].has_item == true) {
+                            if(data.data[i].has_category == true) {
                                 sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
                             }
                                let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
@@ -97,18 +98,30 @@
                 dataType : 'json',
                 timeout : 100000,
                 success : function(data) {
-                    console.log("category list menuiD",data);
                     sessionStorage.setItem('categoryListMenuId',JSON.stringify(data));
                     for (let i = 0; i <= data.data.length-1;i++) {
-                            sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                        if (data.data[i].has_sub_category === true) {
+                            sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
                             let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
-                                 '<img  id = '+data.data[i].id +' style="height:200px; width:200px;padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
-                                 '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                                 ''+ data.data[i].title+'</a>'+
-                                 "</div>";
+                                '<img  id = ' + data.data[i].id + ' style="height:200px; width:200px;padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                                '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                                'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                '' + data.data[i].title + '</a>' +
+                                "</div>";
 
-                             $("#subMenuItems").append(col);
+                            $("#subMenuItems").append(col);
+
+                        } else {
+                            let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
+                                '<img  id = ' + data.data[i].id + ' style="height:200px; width:200px;padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                                '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                                'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                '' + data.data[i].title + '</a>' +
+                                "</div>";
+
+                            $("#subMenuItems").append(col);
+
+                        }
                     }
                 },
                 error : function(e) {
@@ -119,49 +132,32 @@
             });
         }
 
-
-
-
-
         function selectSubMenuItem (categoryID) {
             $("#subMenuItems").empty();
             let categoryItemID = $(categoryID).find('img').attr('id');
-            console.log(categoryItemID);
-
-
             $("#row").css('flex-wrap', 'nowrap');
             $(".navbar").append($('#row'));
             $(".header").find('h1').remove();
-            $('.mainMenuItems').css('opacity', '0.5');
-            $(categoryID).css('opacity', '1');
+           // $('.mainMenuItems').css('opacity', '0.5');
+           // $(categoryID).css('opacity', '1');
 
             if (sessionStorage.key(categoryItemID) != null) {
                 let categoryItemgetSubCategory = JSON.parse(sessionStorage.getItem(categoryItemID));
-                console.log(categoryItemgetSubCategory);
-
                 for (let i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
-                    //  console.log(menuCategory.categories[i].id);
-                    if (categoryItemgetSubCategory.sub_categories[i] === undefined) {
-
-                    } else {
-                        let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
-
-                            '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style="height:200px; width:200px; padding: 10px;background: #fff;" src =' +
-                            categoryItemgetSubCategory.sub_categories[i].image + '>' +
-                            '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                            'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            '' + categoryItemgetSubCategory.sub_categories[i].title + '</a>' +
-                            "</div>";
-                        $("#subMenuItems").append(col);
-                    }
+                    let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
+                        '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style="height:200px; width:200px; padding: 10px;background: #fff;" src =' +
+                        categoryItemgetSubCategory.sub_categories[i].image + '>' +
+                        '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                        'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                        '' + categoryItemgetSubCategory.sub_categories[i].title + '</a>' +
+                        "</div>";
+                    $("#subMenuItems").append(col);
                 }
-
 
             }
         }
             function selectSubCategoryItem(Item) {
                 let categoryId = $(Item).find('img').attr('id');
-                console.log(' category IDS: ', categoryId);
                 $("#subMenuItems").empty();
                 if (sessionStorage.key(categoryId) != null) {
 
@@ -172,15 +168,12 @@
                         dataType: 'json',
                         timeout: 100000,
                         success: function (data) {
-                            console.log("Item List Cat ID Service Response :", data);
-
-
                             for (let i = 0; i <= data.data.length - 1; i++) {
-                                sessionStorage.setItem(data.data[i].id , JSON.stringify(data));
+                                sessionStorage.setItem(data.data[i].id, JSON.stringify(data));
                                 if (data.data[i].active_item == true) {
-                                    let item_cost=data.data[i].item_cost.toFixed(2);
+                                    let item_cost = data.data[i].item_cost.toFixed(2);
                                     let col = "<div class ='column zoom categoryItem'   onclick='' style='display: block'>" +
-                                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $'+item_cost+'</p> ' +
+                                        '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + item_cost + '</p> ' +
                                         '<img  id = ' + data.data[i].id + ' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
                                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                                         'display: block;width: 170px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -198,7 +191,6 @@
                         }
                     });
                 }
-
         }
     </script>
 </html>

@@ -11,6 +11,7 @@
  <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <META name="viewport" content="initial-scale=0.66, user-scalable=no">
         <title>Happy Joes</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>

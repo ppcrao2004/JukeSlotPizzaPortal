@@ -4,7 +4,8 @@
 <!DOCTYPE html>
     <html lang="en">
         <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <META name="viewport" content="width=device-width, initial-scale=1.0">
+            <META name="viewport" content="initial-scale=0.66, user-scalable=no">
             <title>Happy Joes</title>
 
             <c:url var="home" value="/" scope="request"/>

@@ -10,16 +10,17 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
-    <head>
+<header>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <META name="viewport" content="initial-scale=0.66, user-scalable=no">
         <title>Happy Joes</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
-    </head>
-
     <%@include file="header.jsp" %>
+    </header>
+
+
     <body style="background: #C53131">
     <div class ="checkout-page-conatiner">
         <div class="header" style="text-align: center;">
@@ -172,7 +173,7 @@
                                 sessionStorage.setItem(data.data[i].id, JSON.stringify(data));
                                 if (data.data[i].active_item == true) {
                                     let item_cost = data.data[i].item_cost.toFixed(2);
-                                    let col = "<div class ='column zoom categoryItem'   onclick='' style='display: block'>" +
+                                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
                                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + item_cost + '</p> ' +
                                         '<img  id = ' + data.data[i].id + ' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
                                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
@@ -192,9 +193,21 @@
                     });
                 }
         }
+        function customizeItems(item) {
+            $('#modalPopup').css('display' ,'block');
+            var x =$('#subMenuItems');
+            console.log(x);
+            $('#modalPopupInner').append(x);
+            var id=  $('#subMenuItems').find('img').attr('id');
+            $('#row').css('display' ,'none');
+        }
     </script>
 </html>
 
-<div class ="modalPopup">
-
+<div id ="modalPopup" style="display: none ;    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;">
+    <div id = "modalPopupInner"></div>
 </div>

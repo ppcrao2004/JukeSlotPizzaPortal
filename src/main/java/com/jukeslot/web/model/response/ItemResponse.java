@@ -46,6 +46,7 @@ public class ItemResponse {
     public List<String> spicy_levels;
     public String sub_code;
     public float tax_rate;
+    public String id;
 
     public boolean isActive_item() {
         return active_item;
@@ -357,5 +358,13 @@ public class ItemResponse {
 
     public void setTax_rate(float tax_rate) {
         this.tax_rate = tax_rate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

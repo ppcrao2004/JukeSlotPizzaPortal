@@ -1,10 +1,11 @@
 package com.jukeslot.web.model.response;
 
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
-public class Items {
+public class Item {
     public int amount;
     public List<Choices> choices;
     public String create_time;
@@ -15,6 +16,7 @@ public class Items {
     public float price;
     public String update_time;
     public String remark;
+    public String extra;
 
     public int getAmount() {
         return amount;
@@ -94,5 +96,18 @@ public class Items {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

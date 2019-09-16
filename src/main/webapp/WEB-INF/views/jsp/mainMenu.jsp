@@ -57,17 +57,26 @@
                 success : function(data) {
                     sessionStorage.setItem('menuList',JSON.stringify(data));
                         for (let i = 0; i <= data.data.length-1;i++) {
-                            if(data.data[i].has_category == true) {
+                            if(data.data[i].has_category === true) {
                                 sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
-                            }
                                let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
                             '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                                    ''+ data.data[i].title+'</a>'+
                                    "</div>";
+                                $("#row").append(col2);
+                            }else if (data.data[i].has_category === false && data.data[i].has_item === true){
+                                sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                                let col2 = "<div class ='column zoom mainMenuItems '  onclick='itemListMenu(this)'>" +
+                                    '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                    ''+ data.data[i].title+'</a>'+
+                                    "</div>";
+                                $("#row").append(col2);
+                            }
 
-                            $("#row").append(col2);
                         }
                 },
                 error : function(e) {
@@ -82,8 +91,6 @@
         function categoryList(menuID) {
             $("#subMenuItems").empty();
             let menuItemId =$(menuID).find('img').attr('id');
-
-
             $("#row").css('flex-wrap' ,'nowrap');
             $(".navbar").append($('#row'));
             $(".header").find('h1').remove();
@@ -132,6 +139,45 @@
 
             });
         }
+        function itemListMenu(menuID) {
+            $("#subMenuItems").empty();
+            let menuMenuId =$(menuID).find('img').attr('id');
+            console.log("Menu menu ID:", menuMenuId);
+            $("#row").css('flex-wrap' ,'nowrap');
+            $(".navbar").append($('#row'));
+            $(".header").find('h1').remove();
+            $('.mainMenuItems').css('opacity' ,'0.5');
+            $(menuID).css('opacity' ,'1');
+            /* category List AJAX Call */
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : "/template/item/list/menu/"+menuMenuId,
+                dataType : 'json',
+                timeout : 100000,
+                success : function(data) {
+                    sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
+                    for (let i = 0; i <= data.data.length-1;i++) {
+                        sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
+                        let item_cost = data.data[i].price.toFixed(2);
+                        let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
+                            '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + item_cost + '</p> ' +
+                            '<img  id = ' + data.data[i].id + ' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
+                            '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                            'display: block;width: 170px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                            '' + data.data[i].title + '</a>' +
+                            "</div>";
+                        $("#subMenuItems").append(col);
+
+                    }
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                }
+            });
+        }
+
 
         function selectSubMenuItem (categoryID) {
             $("#subMenuItems").empty();
@@ -139,15 +185,14 @@
             $("#row").css('flex-wrap', 'nowrap');
             $(".navbar").append($('#row'));
             $(".header").find('h1').remove();
-           // $('.mainMenuItems').css('opacity', '0.5');
-           // $(categoryID).css('opacity', '1');
-
             if (sessionStorage.key(categoryItemID) != null) {
                 let categoryItemgetSubCategory = JSON.parse(sessionStorage.getItem(categoryItemID));
                 for (let i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
                     let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
+                       //     show_image(categoryItemgetSubCategory.sub_categories[i].image,200,200,10,'#fff',categoryItemgetSubCategory.sub_categories[i].id,'testSelectSubcatImage',)
                         '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style="height:200px; width:200px; padding: 10px;background: #fff;" src =' +
-                        categoryItemgetSubCategory.sub_categories[i].image + '>' +
+                        categoryItemgetSubCategory.sub_categories[i].image + '>'
+                        +
                         '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                         '' + categoryItemgetSubCategory.sub_categories[i].title + '</a>' +
@@ -157,6 +202,7 @@
 
             }
         }
+
             function selectSubCategoryItem(Item) {
                 let categoryId = $(Item).find('img').attr('id');
                 $("#subMenuItems").empty();
@@ -195,10 +241,10 @@
         }
         function customizeItems(item) {
             $('#modalPopup').css('display' ,'block');
-            var x =$('#subMenuItems');
+            let x =$('#subMenuItems');
             console.log(x);
             $('#modalPopupInner').append(x);
-            var id=  $('#subMenuItems').find('img').attr('id');
+            let id=  $('#subMenuItems').find('img').attr('id');
             $('#row').css('display' ,'none');
         }
     </script>

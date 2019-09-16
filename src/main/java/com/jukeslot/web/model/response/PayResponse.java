@@ -1,7 +1,5 @@
 package com.jukeslot.web.model.response;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class PayResponse {
@@ -11,7 +9,7 @@ public class PayResponse {
     public float discount;
     public long id;
     public boolean enable;
-    public List<Items> items;
+    public List<Item> items;
     public String order_type;
     public String payment_type;
     public float price;
@@ -71,11 +69,11 @@ public class PayResponse {
         this.enable = enable;
     }
 
-    public List<Items> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Items> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

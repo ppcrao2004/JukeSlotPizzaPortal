@@ -98,6 +98,22 @@ public class AjaxController {
         return itemListCategoryIDResponse;
     }
 
+    @RequestMapping(value = "/template/item/list/menu/{menuID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+    public ItemListCategoryIDResponse getItemListMenuMenuID(@PathVariable String menuID) throws  Exception{
+        ItemListCategoryIDResponse itemListCategoryIDResponse=null;
+        try{
+            log.info("==== RESTful API Response Template Item List START  getItemListMenuMenuID=======");
+            itemListCategoryIDResponse= new GenericRestClient<String, ItemListCategoryIDResponse>().execute(
+                    new RequestDetails(Constants.WEB_SERVICE_URL + Constants.TEMPLATE_ITEM_LIST_MENU_MENU_ID_URL + menuID, HttpMethod.GET), " ", ItemListCategoryIDResponse.class);
+            log.info(itemListCategoryIDResponse.toString());
+            log.info("==== RESTful API Response Template Item List END getItemListforMenuMenuID=======");
+        }catch(Exception error){
+            System.out.println("Error message:"+ error.getMessage());
+        }
+
+        return itemListCategoryIDResponse;
+    }
+
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = { "application/json" }, consumes = { "application/json" })
     public OrderServiceResponse placeOrder(@RequestBody OrderServiceRequest orderServiceRequest) throws  Exception{
         log.info("==== RESTful API Response Order Service START  placeOrder=======");

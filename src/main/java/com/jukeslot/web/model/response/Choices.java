@@ -1,10 +1,14 @@
 package com.jukeslot.web.model.response;
 
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Choices {
     public int amount;
     public String choice_id;
+    public String choice_set_id;
+    public String choice_set_type;
+    public String extra;
     public String choice_name;
     public String create_time;
     public String update_time;
@@ -74,5 +78,34 @@ public class Choices {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getChoice_set_id() {
+        return choice_set_id;
+    }
+
+    public void setChoice_set_id(String choice_set_id) {
+        this.choice_set_id = choice_set_id;
+    }
+
+    public String getChoice_set_type() {
+        return choice_set_type;
+    }
+
+    public void setChoice_set_type(String choice_set_type) {
+        this.choice_set_type = choice_set_type;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

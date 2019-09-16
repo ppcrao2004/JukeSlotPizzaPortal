@@ -246,6 +246,12 @@
             $('#modalPopupInner').append(x);
             let id=  $('#subMenuItems').find('img').attr('id');
             $('#row').css('display' ,'none');
+            let itemDetail= sessionStorage.getItem(id);
+            console.log("itemDetail:",itemDetail );
+            for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){
+                console.log("Item Detail :",itemDetail.modifiers[j].screen_title)
+                console.log("Item Choice:", itemDetail.choices)
+            }
         }
     </script>
 </html>

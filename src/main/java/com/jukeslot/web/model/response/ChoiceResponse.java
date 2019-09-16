@@ -10,7 +10,7 @@ public class ChoiceResponse {
     public float choice_cost;
     public List<String> choice_set_ids;
     public String choice_sku;
-    public String choiceName;
+    public String choice_name;
     public String create_time;
     public boolean has_sub_choice_set;
     public String id;
@@ -69,12 +69,12 @@ public class ChoiceResponse {
         this.choice_sku = choice_sku;
     }
 
-    public String getChoiceName() {
-        return choiceName;
+    public String getChoice_Name() {
+        return choice_name;
     }
 
-    public void setChoiceName(String choiceName) {
-        this.choiceName = choiceName;
+    public void setChoice_Name(String choice_Name) {
+        this.choice_name = choice_Name;
     }
 
     public String getCreate_time() {

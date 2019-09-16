@@ -57,18 +57,18 @@
                 success : function(data) {
                     sessionStorage.setItem('menuList',JSON.stringify(data));
                         for (let i = 0; i <= data.data.length-1;i++) {
-                            if(data.data[i].has_category === true) {
-                                sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
-                               let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
-                            '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
-                                   '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                                   'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                                   ''+ data.data[i].title+'</a>'+
-                                   "</div>";
-                                $("#row").append(col2);
-                            }else if (data.data[i].has_category === false && data.data[i].has_item === true){
+                            if (data.data[i].has_category === false && data.data[i].has_item === true){
                                 sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
                                 let col2 = "<div class ='column zoom mainMenuItems '  onclick='itemListMenu(this)'>" +
+                                    '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                                    '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                                    ''+ data.data[i].title+'</a>'+
+                                    "</div>";
+                                $("#row").append(col2);
+                            }else{
+                                sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                                let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
                                     '<img  id = '+data.data[i].id +' style="height:200px; width:200px; padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
                                     '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                                     'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +

@@ -241,17 +241,35 @@
         }
         function customizeItems(item) {
             $('#modalPopup').css('display' ,'block');
-            let x =$('#subMenuItems');
-            console.log(x);
-            $('#modalPopupInner').append(x);
-            let id=  $('#subMenuItems').find('img').attr('id');
+            let addonItem=$(item);
+            $('.selectedAddonItem').append(addonItem);
+            var itemPrice = $(addonItem).find('p');
+            var itemName = $(addonItem).find('a');
+            let id=  $(addonItem).find('img').attr('id');
             $('#row').css('display' ,'none');
-            let itemDetail= sessionStorage.getItem(id);
-            console.log("itemDetail:",itemDetail );
-            for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){
-                console.log("Item Detail :",itemDetail.modifiers[j].screen_title)
-                console.log("Item Choice:", itemDetail.choices)
-            }
+            let itemDetail= JSON.parse(sessionStorage.getItem(id));
+            $("#subMenuItems").empty();
+            $('.ItemPrice').append(itemPrice);
+            $('.ItemPrice').append(itemName);
+           let choice = itemDetail.modifiers;
+             for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){
+                 var div = "<div id ='modifiers' style='display: flex; width: 100%;'>"+
+                     ' <p>'+itemDetail.modifiers[j].heading +'</p>'+
+
+                     "</div>";
+                 $('#itemModifierImage').append(div);
+                 for(let k=0 ; k<=itemDetail.modifiers[j].choices.length-1 ; k++){
+                     let col = "<div class ='column zoom ' style='display: inline-block;' >" +
+                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + itemDetail.modifiers[j].choices[k].choice_cost+ '</p> ' +
+                         '<img  style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + itemDetail.modifiers[j].choices[k].image+ '>' +
+                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                         'display: block;width: 170px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                         '' + itemDetail.modifiers[j].choices[k].choice_name + '</a>' +
+                         "</div>";
+                     $('#itemModifierImage').append(col);
+                 }
+
+             }
         }
     </script>
 </html>
@@ -261,5 +279,17 @@
     top: 50%;
     transform: translate(-50%, -50%);
     height: 100%;">
-    <div id = "modalPopupInner"></div>
+    <div id = "modalPopupInner">
+        <div class ="selectedAddonItem">
+        </div>
+        <div class ="itemPriceLabel">
+           <p class ="ItemPrice" style="float: left;">Price from </p>
+        </div>
+        <div class ="itemModifierHeading" >
+            <div id="itemModifierImage">
+        </div>
+        </div>
+
+        </div>
+    </div>
 </div>

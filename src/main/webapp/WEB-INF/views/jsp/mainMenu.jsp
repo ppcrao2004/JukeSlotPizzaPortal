@@ -217,9 +217,10 @@
                         success: function (data) {
                             for (let i = 0; i <= data.data.length - 1; i++) {
                                 sessionStorage.setItem(data.data[i].id, JSON.stringify(data));
+                                console.log("Item List Category: ",data)
                                 if (data.data[i].active_item == true) {
                                     let item_cost = data.data[i].item_cost.toFixed(2);
-                                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
+                                    let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
                                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + item_cost + '</p> ' +
                                         '<img  id = ' + data.data[i].id + ' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
                                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
@@ -239,12 +240,46 @@
                     });
                 }
         }
+
+        function customizeCategory(item) {
+            $('#modalPopup').css('display', 'block');
+            let addonItem = $(item);
+            $('.selectedAddonItem').append(addonItem);
+            let itemPrice = $(addonItem).find('p');
+            let itemName = $(addonItem).find('a');
+            let id = $(addonItem).find('img').attr('id');
+            $('#row').css('display', 'none');
+            let itemDetail = JSON.parse(sessionStorage.getItem(id));
+            $("#subMenuItems").empty();
+            $('.ItemPrice').append(itemPrice);
+            $('.ItemPrice').append(itemName);
+           // let choice = itemDetail.modifiers;
+            for(let p=0 ; p <= itemDetail.data.length-1 ; p++){
+                for (let j = 0; j <= itemDetail.data[p].modifiers.length - 1; j++) {
+                    let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
+                        ' <p>' + itemDetail.data[p].modifiers[j].heading + '</p>' +
+                        "</div>";
+                    $('#itemModifierImage').append(div);
+                    for (let k = 0; k <= itemDetail.data[p].modifiers[j].choices.length - 1; k++) {
+                        let col = "<div class ='column zoom ' style='display: inline-block;' >" +
+                            '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + itemDetail.data[p].modifiers[j].choices[k].choice_cost + '</p> ' +
+                            '<img  style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + itemDetail.data[p].modifiers[j].choices[k].image + '>' +
+                            '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                            'display: block;width: 170px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                            '' + itemDetail.data[p].modifiers[j].choices[k].choice_name + '</a>' +
+                            "</div>";
+                        $('#itemModifierImage').append(col);
+                    }
+
+                }
+            }
+        }
         function customizeItems(item) {
             $('#modalPopup').css('display' ,'block');
             let addonItem=$(item);
             $('.selectedAddonItem').append(addonItem);
-            var itemPrice = $(addonItem).find('p');
-            var itemName = $(addonItem).find('a');
+            let itemPrice = $(addonItem).find('p');
+            let itemName = $(addonItem).find('a');
             let id=  $(addonItem).find('img').attr('id');
             $('#row').css('display' ,'none');
             let itemDetail= JSON.parse(sessionStorage.getItem(id));
@@ -253,7 +288,7 @@
             $('.ItemPrice').append(itemName);
            let choice = itemDetail.modifiers;
              for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){
-                 var div = "<div id ='modifiers' style='display: flex; width: 100%;'>"+
+                 let div = "<div id ='modifiers' style='display: flex; width: 100%;'>"+
                      ' <p>'+itemDetail.modifiers[j].heading +'</p>'+
 
                      "</div>";

@@ -16,8 +16,13 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
+        <!-- Compiled and minified JavaScript -->
+        <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
+        <%@include file="header.jsp" %>
     </head>
-    <%@include file="header.jsp" %>
+
 
     <body >
 

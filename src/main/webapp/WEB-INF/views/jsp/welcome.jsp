@@ -12,6 +12,10 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
             <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
            <!--<script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>-->
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
+            <!-- Compiled and minified JavaScript -->
+            <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
         </head>
         <%@include file="header.jsp" %>
         <body  class ="starter-template">
@@ -22,9 +26,9 @@
                     <img id="image" alt="">
 
                 </div>
-                 <div class="footer-main" style="height: 50px;">
+                 <div class="footer-main" style="height: 80px;">
                <form class="form-group">
-                   <button   type="submit" id="btn-nav" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
+                   <button   type="submit" id="btn-nav"  height="80px;" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
                </form>
              </div>
              </div>
@@ -122,7 +126,8 @@
     background: #fff;
     height: 100%;
     width: 100%;
-    background: #000;">
+    background: #000;
+     max-height: 100%;">
 
     <!-- Modal content -->
     <div class="modal-content" style="text-align: center;
@@ -136,7 +141,7 @@
         <span  style="color:#fff; padding-left: 20px;
     margin-bottom: 20px;
     display: inline-block;"> Please input site ID</span><br/>
-        <input  id ="siteID" style="display: inline-block; width: 216px;" value ="Jukeslot-USA-Northeast-NJ-SITE_1" name="id" required/><br/>
+        <input  id ="siteID" style="display: inline-block; width: 216px; color:#fff;" value ="Rocatone-0001" name="id" required/><br/>
         <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
         <button type="submit"  style=" position: relative;
     overflow: hidden;

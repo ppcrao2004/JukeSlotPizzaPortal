@@ -17,11 +17,16 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
         <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
+       <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
+    <!-- Compiled and minified JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
     <%@include file="header.jsp" %>
     </header>
 
 
-    <body style="background: #C53131">
+    <body style="background: #fff">
     <div class ="checkout-page-conatiner">
         <div class="header" style="text-align: center;">
            <h1 style="background:#fff ;height: 50px;    color: #d24f4f;"> Let 's get started!</h1>
@@ -279,12 +284,14 @@
             let addonItem=$(item);
             $('.selectedAddonItem').append(addonItem);
             let itemPrice = $(addonItem).find('p');
+            console.log(itemPrice);
             let itemName = $(addonItem).find('a');
             let id=  $(addonItem).find('img').attr('id');
             $('#row').css('display' ,'none');
             let itemDetail= JSON.parse(sessionStorage.getItem(id));
             $("#subMenuItems").empty();
             $('.ItemPrice').append(itemPrice);
+            var cartPrice = $(itemPrice).text();
             $('.ItemPrice').append(itemName);
            let choice = itemDetail.modifiers;
              for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){
@@ -294,7 +301,7 @@
                      "</div>";
                  $('#itemModifierImage').append(div);
                  for(let k=0 ; k<=itemDetail.modifiers[j].choices.length-1 ; k++){
-                     let col = "<div class ='column zoom ' style='display: inline-block;' >" +
+                     let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
                          '<p style=" margin: 0; background: #fff; text-align:right ;width: 170px;"> $' + itemDetail.modifiers[j].choices[k].choice_cost+ '</p> ' +
                          '<img  style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + itemDetail.modifiers[j].choices[k].image+ '>' +
                          '<a class ="selectItem" style="background: #fff ; margin :0;' +
@@ -305,7 +312,64 @@
                  }
 
              }
+             let itemCount =1;
+            let button = "<div class='footer1 row'>"+
+                "<div class ='orderButton ' style='position: relative;bottom: 0;'>"+
+                "<button  id ='increaseCount' class='col s1' onclick='decreaseItemCount(this)' style='display: inline'>"+'-'+"</button>"+
+                 "<p id = 'itemCount' class='col s1' style='margin: 0;padding: 0;display: table-row;width: 1%;'>"+itemCount +"</p>"+
+                "<button id = 'decreaseCount' class='col s1' onclick='increaseItemCount(this)' style='display: inline'>"+'+'+"</button>"+
+                "<button id ='checkoutButton' class='col s9' style='background: #C53131;'>"+
+                "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" +'ADD TO CART'+"</p>"+
+                cartPrice+"</button>"+
+                "</div>"+ "</div>";
+            $('#itemModifierImage').append(button);
+
+
         }
+        function addToCart(item) {
+            let itemprice = $(item).find('p').text();
+            itemprice= currency(itemprice).value;
+            let cartPrice =  currency($('#checkoutButton').text()).value;
+            console.log(cartPrice);
+            if($(item).hasClass("selected") ===true)
+            {
+                $(item).removeClass('selected');
+                let cartTotal= currency(cartPrice).subtract(itemprice).value;
+                $('#checkoutButton').html('ADD TO CART $'+currency(cartTotal).value);
+            }
+            else {
+                $(item).addClass('selected');
+                cartPrice= currency(cartPrice).add(itemprice).value;
+                $('#checkoutButton').html('ADD TO CART $'+currency(cartPrice).value);
+            }
+            $(item.active).css('outline-color' , 'red');
+
+        }
+        function increaseItemCount() {
+            let cartPrice =  currency($('.ItemPrice').find('p').text()).value;
+            let cartItemCount =$('#itemCount').text();
+            cartItemCount =parseInt(cartItemCount);
+            cartItemCount =cartItemCount+1;
+            let cartTotal=currency(cartPrice).multiply(cartItemCount).value;
+            let cartPriceValue= currency(cartTotal , { precision: 2 });
+            console.log("cart price value final",cartPriceValue);
+            $('#checkoutButton').html('ADD TO CART'+currency(cartPriceValue, { formatWithSymbol: true }).format());
+            $('#itemCount').html(cartItemCount);
+
+        }
+        function decreaseItemCount(itemCount) {
+            let cartPrice =  currency($('.ItemPrice').find('p').text()).value;
+            let cartItemCount =$('#itemCount').text();
+            cartItemCount =parseInt(cartItemCount);
+            cartItemCount =cartItemCount-1;
+            let cartTotal=currency(cartPrice).multiply(cartItemCount).value;
+            let cartPriceValue= currency(cartTotal , { precision: 2 });
+            console.log("cart price value final",cartPriceValue);
+            $('#checkoutButton').html('ADD TO CART'+currency(cartPriceValue, { formatWithSymbol: true }).format());
+            $('#itemCount').html(cartItemCount);
+
+        }
+
     </script>
 </html>
 
@@ -318,7 +382,11 @@
         <div class ="selectedAddonItem">
         </div>
         <div class ="itemPriceLabel">
-           <p class ="ItemPrice" style="float: left;">Price from </p>
+           <p class ="ItemPrice" style=" margin-top:0;">Price from </p>
+            <div class="itemText">
+               <h1 style="margin-top: 0;">Build  Your Own Pizza</h1>
+               <p>Have it your way</p>
+            </div>
         </div>
         <div class ="itemModifierHeading" >
             <div id="itemModifierImage">
@@ -327,4 +395,5 @@
 
         </div>
     </div>
-</div>
+
+

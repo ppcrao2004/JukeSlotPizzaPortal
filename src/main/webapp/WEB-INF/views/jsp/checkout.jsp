@@ -53,14 +53,16 @@
         <div class="footer">
             <div class="footerContainer" >
                 <button type="submit" id="btn-search" style="    display: inline-block;
-    margin-top: 20px;
+    margin: 0px;
     position: relative;
     overflow: hidden;
     padding: 0;
-    background: #000;
+    background: #C53131;
     border: none;
     color: #fff;
     font-size: 20px;
+    width:100%;
+    height: 80px;
 "
                         class="btn btn-primary btn-lg" >TAP IN ONE SERVICE TO CONTINUE</button>
             </div>

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<nav class="navbar" style="height:unset;">
+<nav class="navbar" style="height:unset;line-height:unset;  ">
     <div class="navbar-container">
         <div class="navbar-header">
             <div class="navbar-header-image">

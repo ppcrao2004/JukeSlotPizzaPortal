@@ -16,19 +16,28 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
             <!-- Compiled and minified JavaScript -->
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
+            <link rel="stylesheet"
+                  href="https://fonts.googleapis.com/css?family=Tangerine">
+            <style>
+                body {
+                    font-family: 'Tangerine', serif;
+                    font-size: 28px;
+                    text-shadow: 4px 4px 4px #aaa;
+                }
+            </style>
         </head>
         <%@include file="header.jsp" %>
         <body  class ="starter-template">
              <div class="maincontainer">
-                 <div class="imageText" id ="imageText" style="text-align: center">
-                 </div>
+                 <!--<div class="imageText" id ="imageText" style="text-align: center">
+                 </div> -->
                 <div class="maincontainer-image fade">
                     <img id="image" alt="">
 
                 </div>
                  <div class="footer-main" style="height: 80px;">
                <form class="form-group">
-                   <button   type="submit" id="btn-nav"  height="80px;" class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
+                   <button   type="submit" id="btn-nav"  height="80px; " class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
                </form>
              </div>
              </div>
@@ -65,12 +74,12 @@
                     sessionStorage.setItem('welcomeService', JSON.stringify(data));
                     let bgColor =data.data.back_ground_color;
                     $('.starter-template').css('background-color' , bgColor);
-                    $('.navbar-header').css('background-color' ,bgColor);
-                    $('#imageText').append(data.data.slogan);
-                    $("#imageText").css({"background-color":data.data.frame_color});
-                    $("#imageText").css({"font-size":data.data.font_size});
-                    $("#imageText").css({"font-family":data.data.font_family});
-                    $("#imageText").css({"color":data.data.text_color});
+                    //$('.navbar-header').css('background-color' ,bgColor);
+                    //$('#imageText').append(data.data.slogan);
+                   // $("#imageText").css({"background-color":data.data.frame_color});
+                   // $("#imageText").css({"font-size":data.data.font_size});
+                   // $("#imageText").css({"font-family":data.data.font_family});
+                   // $("#imageText").css({"color":data.data.text_color});
                     $("#btn-nav").css({"background-color":data.data.order_now_button});
                     if (data.data.logo != null) {
                         document.getElementById("logoimage").src = data.data.logo;

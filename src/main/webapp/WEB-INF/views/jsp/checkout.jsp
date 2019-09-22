@@ -25,25 +25,22 @@
 
 
     <body >
-
-
-        <div class ="maincontainer">
-            <div class="header" style="text-align: center;">
-                <h1 style="background:#fff ;height: 50px;  color: #C53131;"> What is your preference</h1>
+            <div style="text-align: center;width: 100%;background: #ffffff">
+                <span style="background:#fff ;height: 50px; font-size: 8vw; color: #C53131;"> What is your preference ? </span>
             </div>
-
+            <div class ="maincontainer">
             <div class ="checkout-container">
                 <div class="checkout-inner">
                     <div class="left zoom">
                         <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">
                         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/dinne_in.png" alt="Eat In">
-                            <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Dine In</p>
+                            <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">EAT IN</p>
                         </a>
                     </div>
                     <div class="right zoom">
                         <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;" >
                         <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/carry_out.png" alt="Take Out"  />
-                        <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Carry out</p>
+                        <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">TAKE AWAY</p>
                         </a>
                     </div>
                 </div>
@@ -52,7 +49,7 @@
 
         <div class="footer">
             <div class="footerContainer" >
-                <button type="submit" id="btn-search" style="    display: inline-block;
+                <button type="submit" id="btn-search" style=" display: inline-block;
     margin: 0px;
     position: relative;
     overflow: hidden;
@@ -64,7 +61,7 @@
     width:100%;
     height: 80px;
 "
-                        class="btn btn-primary btn-lg" >TAP IN ONE SERVICE TO CONTINUE</button>
+                        class="btn btn-primary btn-lg" >SELECT A SERVICE TO CONTINUE</button>
             </div>
 
 

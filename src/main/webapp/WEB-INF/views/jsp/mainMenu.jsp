@@ -29,11 +29,14 @@
 
 
     <body style="background: #000">
-    <div class ="checkout-page-conatiner">
-        <div class="header" style="text-align: center;">
-           <h1 style="background:#fff ;color: #d24f4f;background: #fff;height: 20px;font-size: 20px;margin: 10px 0;"> Let 's get started!</h1>
-        </div>
 
+    <div style="text-align: center;width: 100%;background: #ffffff">
+        <span style="background:#fff ;height: 50px; font-size: 8vw; color: #C53131;"> Let 's get started! </span>
+    </div>
+       <!-- <div class="header" style="text-align: center;">
+           <h1 style="background:#fff ;color: #d24f4f;background: #fff;height: 20px;font-size: 20px;margin: 10px 0;"> Let 's get started!</h1>
+        </div> -->
+        <div class ="checkout-page-conatiner">
          <div class ="checkout-container" style="
             display: flex;
             height: auto;
@@ -294,6 +297,7 @@
             $("#subMenuItems").css('display' ,'none');
             $('.ItemPrice').append(itemPrice);
             var cartPrice = $(itemPrice).text();
+            console.log("cart ITem test Price",cartPrice);
             $('.ItemPrice').append(itemName);
            let choice = itemDetail.modifiers;
              for(let j=0 ; j <= itemDetail.modifiers.length -1 ; j++){

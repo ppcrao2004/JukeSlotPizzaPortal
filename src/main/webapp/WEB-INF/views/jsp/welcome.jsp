@@ -6,7 +6,7 @@
         <head>
             <META name="viewport" content="width=device-width, initial-scale=1.0">
             <META name="viewport" content="initial-scale=0.66, user-scalable=no">
-            <title>Happy Joes</title>
+            <!--<title>Happy Joes</title> -->
 
             <c:url var="home" value="/" scope="request"/>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
@@ -19,7 +19,7 @@
             <link rel="stylesheet"
                   href="https://fonts.googleapis.com/css?family=Tangerine">
             <style>
-                body {
+                textFont {
                     font-family: 'Tangerine', serif;
                     font-size: 28px;
                     text-shadow: 4px 4px 4px #aaa;
@@ -37,7 +37,7 @@
                 </div>
                  <div class="footer-main" style="height: 80px;">
                <form class="form-group">
-                   <button   type="submit" id="btn-nav"  height="80px; " class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
+                   <button   type="submit" id="btn-nav"  height="80px;  " class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP FOR START</button>
                </form>
              </div>
              </div>

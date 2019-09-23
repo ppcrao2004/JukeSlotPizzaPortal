@@ -36,7 +36,7 @@
        <!-- <div class="header" style="text-align: center;">
            <h1 style="background:#fff ;color: #d24f4f;background: #fff;height: 20px;font-size: 20px;margin: 10px 0;"> Let 's get started!</h1>
         </div> -->
-        <div class ="checkout-page-conatiner">
+        <div class ="checkout-page-conatiner" id ="checkout-page-conatiner">
          <div class ="checkout-container" style="
             display: flex;
             height: auto;
@@ -284,7 +284,7 @@
                 }
             }
         }
-        function customizeItems(item) {
+      /* function customizeItems(item) {
             $('#modalPopup').css('display' ,'block');
             let addonItem=$(item);
             $('.selectedAddonItem').append(addonItem);
@@ -334,6 +334,100 @@
             $('.checkout-container').append(button);
 
 
+        } */
+        function customizeItems(item) {
+            let addonItem=$(item);
+            let itemPrice = $(addonItem).find('p').text();
+            let itemName = $(addonItem).find('a').text();
+            let id=  $(addonItem).find('img').attr('id');
+            let itemDetail= JSON.parse(sessionStorage.getItem(id));
+            let imgsrc = $(item).find('img').attr('src');
+
+            var itemCount =1;
+            if(itemDetail.modifiers == null) {
+                var cartPrice =$(item).find('p').text();
+                let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
+                    "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
+                    "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button  id ='increaseCount' class='col' onclick='decreaseItemCount(this)' style='display: inline;height: 35px; '>" + '-' + "</button>" +
+                    "<p id = 'itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" + itemCount + "</p>" +
+                    "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'>" + '+' + "</button>" +
+                    "</div>" +
+                    "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;'>" +
+                    "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
+                    cartPrice + "</button>" +
+                    "</div>" + "</div>";
+                  let col = "<div class ='column zoom ' style='display: inline-block;' >" +
+                      "<img style ='margin: 0;height: 15px;width: 15px;float: right; margin: 0;" +
+                      "display: flex;border: 1px solid red !important;border-radius: 25px;margin-left:184px;margin-bottom: 0;padding-top: 0; ' src='/resources/core/images/external/red-cross-png.png'>"+"</img>"+
+                    '<p style=" margin: 0; background: #fff ;width: 200px;"> ' +itemPrice+ '</p> ' +
+                    '<img  style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" src =' + imgsrc + '>' +
+                    '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                    '' + itemName + '</a>' +
+                    "</div>";
+
+                if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
+                    console.log("reached if statement");
+                    $('.checkout-container').append(button);
+
+                }
+                //$('.checkout-container').html(col);
+                $('.orderButton').append(col);
+
+            }
+            else {
+
+
+                $('#modalPopup').css('display' ,'block');
+                $('.selectedAddonItem').append(addonItem);
+                itemPrice = $(addonItem).find('p');
+                itemName = $(addonItem).find('a');
+                id=  $(addonItem).find('img').attr('id');
+                $('#row').css('display' ,'none');
+                itemDetail= JSON.parse(sessionStorage.getItem(id));
+                $("#subMenuItems").css('display' ,'none');
+
+                $('.ItemPrice').append(itemPrice);
+                let cartPrice = $(itemPrice).text();
+                $('.ItemPrice').append(itemName);
+
+
+                for (let j = 0; j <= itemDetail.modifiers.length - 1; j++) {
+                    let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
+                        ' <p>' + itemDetail.modifiers[j].heading + '</p>' +
+
+                        "</div>";
+                    $('#itemModifierImage').append(div);
+                    for (let k = 0; k <= itemDetail.modifiers[j].choices.length - 1; k++) {
+                        let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
+                            '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + itemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
+                            '<img  style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + itemDetail.modifiers[j].choices[k].image + '>' +
+                            '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                            'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                            '' + itemDetail.modifiers[j].choices[k].choice_name + '</a>' +
+                            "</div>";
+                        $('#itemModifierImage').append(col);
+                    }
+
+                }
+                let itemCount = 1;
+                let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
+                    "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
+                    "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button  id ='increaseCount' class='col' onclick='decreaseItemCount(this)' style='display: inline;height: 35px; '>" + '-' + "</button>" +
+                    "<p id = 'itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" + itemCount + "</p>" +
+                    "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'>" + '+' + "</button>" +
+                    "</div>" +
+                    "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;'>" +
+                    "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
+                    cartPrice + "</button>" +
+                    "</div>" + "</div>";
+                //$('#itemModifierImage').append(button);
+                $('.checkout-container').append(button);
+            }
+
+
         }
         function addToCart(item) {
             let itemprice = $(item).find('p').text();
@@ -356,6 +450,7 @@
         }
         function increaseItemCount() {
             let cartPrice =  currency($('.ItemPrice').find('p').text()).value;
+            cartPrice = currency($('#checkoutButton').find('p').text()).value;
             let cartItemCount =$('#itemCount').text();
             cartItemCount =parseInt(cartItemCount);
             cartItemCount =cartItemCount+1;

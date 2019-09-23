@@ -74,7 +74,7 @@
                     sessionStorage.setItem('welcomeService', JSON.stringify(data));
                     let bgColor =data.data.back_ground_color;
                     $('.starter-template').css('background-color' , bgColor);
-                    //$('.navbar-header').css('background-color' ,bgColor);
+                    $('.navbar-header').css('background-color' ,bgColor);
                     //$('#imageText').append(data.data.slogan);
                    // $("#imageText").css({"background-color":data.data.frame_color});
                    // $("#imageText").css({"font-size":data.data.font_size});

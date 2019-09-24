@@ -167,7 +167,8 @@
                 timeout : 100000,
                 success : function(data) {
                     sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
-                    sessionStorage.setItem("cartItems",JSON.stringify([]));
+                    let finalCart = {cartTotalPrice: 0 , itemCount: 0 , cartItems: []}
+                    sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
                     for (let i = 0; i <= data.data.length-1;i++) {
                         sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
                         let item_cost = data.data[i].price.toFixed(2);
@@ -287,23 +288,20 @@
         }
 
         function customizeItems(item) {
-
             let selectedCartItem=$(item);
             let selectedCartItemPrice = $(selectedCartItem).find('p').text();
             let selectedCartItemName = $(selectedCartItem).find('a').text();
             let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
             let selectedCartItemImgURL = $(item).find('img').attr('src');
-            let selecteCartItemChoices= [];
-            let cartArrayItem = {id:selectedCartItemId,itemName: selectedCartItemName,price:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:selecteCartItemChoices};
-            let cartItemsList = JSON.parse(sessionStorage.getItem("cartItems"));
-            cartItemsList.push(cartArrayItem);
-            console.log("Card  Item List:",cartItemsList);
-            sessionStorage.setItem("cartItems",JSON.stringify(cartItemsList));
+            let cartArrayItem = {id:selectedCartItemId,itemName: selectedCartItemName,price:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
+            let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+            finalCart.cartItems.push(cartArrayItem);
+            finalCart.itemCount= 1;
+            sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+            getPrice();
             let itemCount =1;
-
             let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
             if(selectedCartItemDetail.modifiers == null) {
-                let cartPrice =$(item).find('p').text();
                 let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                     "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                     "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -328,42 +326,22 @@
                 if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                     console.log("reached if statement");
                     $('.checkout-container').append(button);
-
                 }
                 //$('.checkout-container').html(col);
                 $('.orderButton').append(col);
 
-            }
-            else {
-
+            } else {
                 $('#modalPopup').css('display' ,'block');
-               /* $('.selectedAddonItem').append(addonItem);
-                itemPrice = $(addonItem).find('p');
-                itemName = $(addonItem).find('a');
-                id=  $(addonItem).find('img').attr('id');*/
                 $('#row').css('display' ,'none');
                 let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
                 $("#subMenuItems").css('display' ,'none');
                 $('#itemModifierImage').append($(item));
-
-              /*  $('.ItemPrice').append(itemPrice);
-                let cartPrice = $(itemPrice).text();
-                $('.ItemPrice').append(itemName);*/
-               // let cartPrice = $(item).find('p').text();
-              //  sessionStorage.setItem('cartItems'+id , JSON.stringify(itemDetail));
-
                 for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
                     let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
                         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
-
                         "</div>";
                     $('#itemModifierImage').append(div);
                     for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
-                       /* let itemDiv = document.createElement("div");
-                        itemDiv.setAttribute("class","column zoom");
-                        itemDiv.setAttribute("style","display: inline-block;");
-                        itemDiv.setAttribute("onClick","addToCart(this, ' + selectedCartItemId +')")*/
-                       console.log("selectedCartItemDetail.modifiers[j].choices[k].choice_id:",selectedCartItemDetail.modifiers[j].choices[k].id);
                         let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
                             '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
                             '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
@@ -373,7 +351,6 @@
                             "</div>";
                         $('#itemModifierImage').append(col);
                     }
-
                 }
                 let itemCount = 1;
                 let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
@@ -395,23 +372,26 @@
         }
         function addToCart(item) {
             let selectedCartItemId =$('#itemModifierImage').find('.categoryItem img').attr('id');
-          let cartItemsList= JSON.parse(sessionStorage.getItem("cartItems"));
+            let cartItemsList= JSON.parse(sessionStorage.getItem("cartItems"));
             let itemPrice = $(item).find('p').text();
             let itemID = $(item).find('img').attr('id');
             let itemImageURL = $(item).find('img').attr('src');
             let itemName = $(item).find('a').text();
-            itemPrice= currency(itemPrice).value;
-            let priceOnButton =  currency($('#checkoutButton').text()).value;
-            if($(item).hasClass("selected") ===true)
-            {
+            let quantityCount = $('#itemCount').text();
+            if($(item).hasClass("selected") ===true){
                 $(item).removeClass('selected');
-                let cartTotal= currency(priceOnButton).subtract(itemPrice).value;
-                $('#checkoutButton').html('ADD TO CART $'+currency(cartTotal).value);
-            }
-            else {
+                for(let i=0 ; i < cartItemsList.length ;i++){
+                    if(cartItemsList[i].id == selectedCartItemId){
+                        let cartItemListChoices = cartItemsList[i].choices;
+                        for(let h=0 ;h< cartItemListChoices.length; h++){
+                            if(itemID == cartItemListChoices[h].id){
+                                cartItemListChoices.splice(h,1);
+                            }
+                        }
+                    }
+                }
+            } else {
                 $(item).addClass('selected');
-                priceOnButton= currency(priceOnButton).add(itemPrice).value;
-                $('#checkoutButton').html('ADD TO CART $'+currency(priceOnButton).value);
                 for(let i=0 ; i < cartItemsList.length ;i++){
                     if(cartItemsList[i].id == selectedCartItemId){
                         let choice ={id:itemID,price:itemPrice ,name:itemName,imageURL:itemImageURL }
@@ -420,20 +400,29 @@
                 }
             }
             sessionStorage.setItem("cartItems",JSON.stringify(cartItemsList));
+            $('#checkoutButton').html('ADD TO CART '+ getPrice());
             $(item.active).css('outline-color' , 'red');
-
+        }
+        function getPrice(){
+            let priceOnButton=0;
+            let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+            for(let p=0 ; p< finalCart.cartItems.length ; p++){
+                priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].price).value;
+                console.log("finalCart.cartItems[p].price", finalCart.cartItems[p].price);
+                for(let l =0 ; l<finalCart.cartItems[p].choices.length ; l++){
+                    priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].choices[l].price).value;
+                }
+            }
+            let finalCartTotal = currency(priceOnButton, { precision: 2 }).multiply(finalCart.itemCount).value;
+           finalCart.cartTotalPrice = currency(finalCartTotal, { formatWithSymbol: true }).format();
         }
         function increaseItemCount() {
             let itemPrice =  currency($('#itemModifierImage').find('.categoryItem p').text()).value;
             let addOnItemPrice ;
-            if(addOnItemPrice === undefined)
-            {
+            if(addOnItemPrice === undefined){
                 addOnItemPrice =0;
-
             }
-           // let addOnItemPrice =new Array();
-             addOnItemPrice = addOnItemPrice+ currency($('.selected').find('p').text()).value;
-            console.log(addOnItemPrice);
+            addOnItemPrice = addOnItemPrice+ currency($('.selected').find('p').text()).value;
             let cartItemCount =$('#itemCount').text();
             cartItemCount =parseInt(cartItemCount);
             cartItemCount =cartItemCount+1;

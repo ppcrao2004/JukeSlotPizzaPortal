@@ -47,6 +47,7 @@
 
     <script>
         $(document).ready(function (e) {
+            sessionStorage.clear();
             $('#myModal').css('display' ,'block');
         });
 

@@ -54,6 +54,7 @@
             let menuItems ="<div id ='subMenuItems'>"+ "</div>";
             $("body").append(menuItems);
             $("#checkout-inner").append(tb1);
+            //Initializing  Cart and saving into session , same finalCart should be used all over the flow.
             let finalCart = {cartTotalPrice: 0 , cartItems: []};
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             mainMenuLoad();
@@ -155,7 +156,6 @@
         function itemListMenu(menuID) {
             $("#subMenuItems").empty();
             let menuMenuId =$(menuID).find('img').attr('id');
-            console.log("Menu menu ID:", menuMenuId);
             $("#row").css('flex-wrap' ,'nowrap');
             $(".navbar").append($('#row'));
             $(".header").find('h1').css('display' ,'none');
@@ -231,7 +231,6 @@
                         success: function (data) {
                             for (let i = 0; i <= data.data.length - 1; i++) {
                                 sessionStorage.setItem(data.data[i].id, JSON.stringify(data));
-                                console.log("Item List Category: ",data)
                                 if (data.data[i].active_item == true) {
                                     let item_cost = data.data[i].item_cost.toFixed(2);
                                     let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
@@ -325,7 +324,6 @@
                     "</div>";
 
                 if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
-                    console.log("reached if statement");
                     $('.checkout-container').append(button);
                 }
                 //$('.checkout-container').html(col);
@@ -427,40 +425,30 @@
             cartItemCount =cartItemCount+1;
           // let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
             $.each(finalCart.cartItems, function( index, value ) {
-                console.log(index);
-                console.log(value);
               if(value.id===id){
                   value.count =cartItemCount;
               }
 
            });
             sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-
-            console.log("Final Cart in increment: ",finalCart);
             let itemPrice =getPrice();
-            console.log("itemPrice: ",itemPrice);
             $('#checkoutButton').html('ADD TO CART'+currency(itemPrice, { formatWithSymbol: true }).format());
             $('#itemCount').html(cartItemCount);
 
         }
         function decreaseItemCount() {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
-            console.log("Final Cart in increment at start: ",finalCart);
             let id =$('#itemModifierImage').find('.categoryItem img').attr('id');
             let cartItemCount =$('#itemCount').text();
             cartItemCount =parseInt(cartItemCount);
             cartItemCount =cartItemCount-1;
             $.each(finalCart.cartItems, function( index, value ) {
-                console.log(index);
-                console.log(value);
                 if(value.id===id){
                     value.count =cartItemCount;
                 }
 
             });
             sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-
-            console.log("Final Cart in increment: ",finalCart);
             let itemPrice =getPrice();
 
             if(cartItemCount === 0)

@@ -336,22 +336,39 @@
                 let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
                 $("#subMenuItems").css('display' ,'none');
                 $('#itemModifierImage').append($(item));
-                for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
+                selectedCartItemDetail.modifiers.forEach(cartItemModifiers => {
                     let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
-                        ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
+                        ' <p>' + cartItemModifiers.heading + '</p>' +
                         "</div>";
                     $('#itemModifierImage').append(div);
-                    for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
+                    cartItemModifiers.choices.forEach(cartItemModifiersChoices => {
                         let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
-                            '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
-                            '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
+                            '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + cartItemModifiersChoices.choice_cost + '</p> ' +
+                            '<img  id ='+cartItemModifiersChoices.id +' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + cartItemModifiersChoices.image + '>' +
                             '<a class ="selectItem" style="background: #fff ; margin :0;' +
                             'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
+                            '' + cartItemModifiersChoices.choice_name + '</a>' +
                             "</div>";
                         $('#itemModifierImage').append(col);
-                    }
-                }
+                    });
+                });
+
+                // for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
+                //     let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
+                //         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
+                //         "</div>";
+                //     $('#itemModifierImage').append(div);
+                //     for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
+                //         let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
+                //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
+                //             '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
+                //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                //             'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //             '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
+                //             "</div>";
+                //         $('#itemModifierImage').append(col);
+                //     }
+                // }
                 let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
                     "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                     "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -379,25 +396,43 @@
             let quantityCount = $('#itemCount').text();
             if($(item).hasClass("selected") ===true){
                 $(item).removeClass('selected');
-                for(let i=0 ; i < finalCart.cartItems.length ;i++){
-                    if(finalCart.cartItems[i].id == selectedCartItemId){
-                        let cartItemListChoices = finalCart.cartItems[i].choices;
-                        for(let h=0 ;h< cartItemListChoices.length; h++){
-                            if(itemID == cartItemListChoices[h].id){
-                                cartItemListChoices.splice(h,1);
+                finalCart.cartItems.forEach(cartItemElement => {
+                    if(cartItemElement.id == selectedCartItemId){
+                        let cartItemListChoices = cartItemElement.choices;
+                        cartItemElement.choices.forEach(choices => {
+                            if(itemID == choices.id){
+                                cartItemElement.choices.splice(cartItemElement.choices.indexOf(choices),1);
                             }
-                        }
+                        });
                     }
-                }
+                });
+
+                // for(let i=0 ; i < finalCart.cartItems.length ;i++){
+                //     if(finalCart.cartItems[i].id == selectedCartItemId){
+                //         let cartItemListChoices = finalCart.cartItems[i].choices;
+                //         for(let h=0 ;h< cartItemListChoices.length; h++){
+                //             if(itemID == cartItemListChoices[h].id){
+                //                 cartItemListChoices.splice(h,1);
+                //             }
+                //         }
+                //     }
+                // }
             }
             else {
                 $(item).addClass('selected');
-                for(let i=0 ; i < finalCart.cartItems.length ;i++){
-                    if(finalCart.cartItems[i].id == selectedCartItemId){
+                finalCart.cartItems.forEach(cartItemElement => {
+                    if(cartItemElement.id == selectedCartItemId){
                         let choice ={id:itemID,price:itemPrice ,name:itemName,imageURL:itemImageURL }
-                        finalCart.cartItems[i].choices.push(choice);
+                        cartItemElement.choices.push(choice);
                     }
-                }
+                });
+
+                // for(let i=0 ; i < finalCart.cartItems.length ;i++){
+                //     if(finalCart.cartItems[i].id == selectedCartItemId){
+                //         let choice ={id:itemID,price:itemPrice ,name:itemName,imageURL:itemImageURL }
+                //         finalCart.cartItems[i].choices.push(choice);
+                //     }
+                // }
             }
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             $('#checkoutButton').html('ADD TO CART '+ getPrice());
@@ -406,17 +441,31 @@
         function getPrice(){
             let priceOnButton=0;
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-            for(let p=0 ; p< finalCart.cartItems.length ; p++){
-                priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].price).value;
-                let totalItemcost= currency(finalCart.cartItems[p].price).value;
-                for(let l =0 ; l<finalCart.cartItems[p].choices.length ; l++){
-                    priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].choices[l].price).value;
-                    totalItemcost = currency(totalItemcost).add(finalCart.cartItems[p].choices[l].price).value;
-                }
-                priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(finalCart.cartItems[p].count).value;
-                finalCart.cartItems[p].totalItemcost = currency(currency(totalItemcost, { precision: 2 })
-                    .multiply(finalCart.cartItems[p].count).value, { formatWithSymbol: true }).format();;
-            }
+            //Looping CartItems from FinalCart
+            finalCart.cartItems.forEach(cartItemElement => {
+                priceOnButton= currency(priceOnButton).add(cartItemElement.price).value;
+                let totalItemcost= currency(cartItemElement.price).value;
+                //Looping Choices from CartItem
+                cartItemElement.choices.forEach(choices => {
+                    priceOnButton= currency(priceOnButton).add(choices.price).value;
+                    totalItemcost = currency(totalItemcost).add(choices.price).value;
+                });
+                priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(cartItemElement.count).value;
+                cartItemElement.totalItemcost = currency(currency(totalItemcost, { precision: 2 })
+                    .multiply(cartItemElement.count).value, { formatWithSymbol: true }).format();
+            });
+
+            // for(let p=0 ; p< finalCart.cartItems.length ; p++){
+            //     priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].price).value;
+            //     let totalItemcost= currency(finalCart.cartItems[p].price).value;
+            //     for(let l =0 ; l<finalCart.cartItems[p].choices.length ; l++){
+            //         priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].choices[l].price).value;
+            //         totalItemcost = currency(totalItemcost).add(finalCart.cartItems[p].choices[l].price).value;
+            //     }
+            //     priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(finalCart.cartItems[p].count).value;
+            //     finalCart.cartItems[p].totalItemcost = currency(currency(totalItemcost, { precision: 2 })
+            //         .multiply(finalCart.cartItems[p].count).value, { formatWithSymbol: true }).format();;
+            // }
            finalCart.cartTotalPrice = currency(priceOnButton, { formatWithSymbol: true }).format();
             sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
            return  finalCart.cartTotalPrice;
@@ -507,3 +556,9 @@
     </div>
 
 
+<--! For Each Example
+    arr.forEach(element => {
+            console.log(element);
+    });
+
+-->

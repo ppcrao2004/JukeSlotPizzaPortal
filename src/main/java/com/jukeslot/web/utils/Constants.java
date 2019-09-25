@@ -23,7 +23,7 @@ public class Constants {
     public final static String TEMPLATE_HOMEPAGE_URL ="api/template/home_page/";
     public final static String TEMPLATE_COMPANY_CONFIGURATION="api/template/company_configuration/Jukeslot";
     public final static String TEMPLATE_MENU_LIST_URL = "api/template/menu/list/";
-    public final static String TEMPLATE_CATEGORY_LIST_URL = "api/template/menu/list/"+SITE_ID;
+    public final static String TEMPLATE_CATEGORY_LIST_URL = "api/template/menu/list/";
     public final static String TEMPLATE_CATEGORY_LIST_MENUID_URL = "api/template/catetory/list/";
     public final static String TEMPLATE_ITEM_LIST_CATEGORY_ID_URL = "api/template/item/list/";
     public final static String TEMPLATE_ITEM_LIST_MENU_MENU_ID_URL = "api/template/item/list/menu/";

@@ -48,6 +48,29 @@
     <script>
         $(document).ready(function (e) {
             sessionStorage.clear();
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/template/catetory/list",
+                dataType: 'json',
+                timeout: 100000,
+                success: function (data) {
+                    sessionStorage.setItem('WelcomeCategoryList', JSON.stringify(data));
+                    const catList = data.data.list ;
+                    catList.forEach(element => {
+                        console.log(element.site_code);
+                    });
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done: function (e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+
             $('#myModal').css('display' ,'block');
         });
 
@@ -151,7 +174,20 @@
         <span  style="color:#fff; padding-left: 20px;
     margin-bottom: 20px;
     display: inline-block;"> Please input site ID</span><br/>
-        <input  id ="siteID" style="display: inline-block; width: 216px; color:#fff;" value ="Rocatone-0001" name="id" required/><br/>
+        <select id ="siteID" style="display: inline-block; width: 216px; color:#ff3d00;" name="id" required>
+            <option value="16thstreet-0001">16thstreet</option>
+            <option value="TomCoffee-0001">TomCoffee</option>
+            <option value="BellaNapoli-0001">BellaNapoli</option>
+            <option value="SoupDive-0001">SoupDive</option>
+            <option value="MelbourneSeafood-0001">MelbourneSeafood</option>
+            <option value="Rocatone-0001" selected>Rocatone</option>
+            <option value="Chocolatte-0001">Chocolatte</option>
+            <option value="DBosWings-0001">DBosWings</option>
+            <option value="GenesPoBoys-0001">GenesPoBoys</option>
+            <option value="Jukeslot-USA-Northeast-NJ-SITE_1">Jukeslot</option>
+            <option value="Kingsway-0001">Kingsway</option>
+            <option value="TestC-USA-Northeast-NJ-Africal">TestC</option>
+        </select><br/>
         <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
         <button type="submit"  style=" position: relative;
     overflow: hidden;

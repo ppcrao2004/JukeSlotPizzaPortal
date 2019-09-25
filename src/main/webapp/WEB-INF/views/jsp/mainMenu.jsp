@@ -295,7 +295,7 @@
             let selectedCartItemName = $(selectedCartItem).find('a').text();
             let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
             let selectedCartItemImgURL = $(item).find('img').attr('src');
-            let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
+            let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
             finalCart.cartItems.push(cartArrayItem);
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
@@ -408,10 +408,14 @@
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
             for(let p=0 ; p< finalCart.cartItems.length ; p++){
                 priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].price).value;
+                let totalItemcost= currency(finalCart.cartItems[p].price).value;
                 for(let l =0 ; l<finalCart.cartItems[p].choices.length ; l++){
                     priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].choices[l].price).value;
+                    totalItemcost = currency(totalItemcost).add(finalCart.cartItems[p].choices[l].price).value;
                 }
                 priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(finalCart.cartItems[p].count).value;
+                finalCart.cartItems[p].totalItemcost = currency(currency(totalItemcost, { precision: 2 })
+                    .multiply(finalCart.cartItems[p].count).value, { formatWithSymbol: true }).format();;
             }
            finalCart.cartTotalPrice = currency(priceOnButton, { formatWithSymbol: true }).format();
             sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));

@@ -264,6 +264,8 @@
             $('#row').css('display', 'none');
             let itemDetail = JSON.parse(sessionStorage.getItem(id));
             $("#subMenuItems").empty();
+
+
             $('.ItemPrice').append(itemPrice);
             $('.ItemPrice').append(itemName);
            // let choice = itemDetail.modifiers;
@@ -295,32 +297,29 @@
             let selectedCartItemName = $(selectedCartItem).find('a').text();
             let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
             let selectedCartItemImgURL = $(item).find('img').attr('src');
-            let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
+            let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice
+                ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
             finalCart.cartItems.push(cartArrayItem);
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
-            getPrice();
+
             let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
             if(selectedCartItemDetail.modifiers == null) {
+                let count =1;
                 let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                     "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
-                    "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
-                    "<button  id ='increaseCount' class='col' onclick='decreaseItemCount(this)' style='display: inline;height: 35px; '>" + '-' + "</button>" +
-                    "<p id = 'itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" + cartArrayItem.count + "</p>" +
-                    "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'>" + '+' + "</button>" +
-                    "</div>" +
-                    "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;'>" +
-                    "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
-                    selectedCartItemPrice + "</button>" +
+                    "<div class=' row col s12 ' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button id ='checkoutButton' class=' row col s12 ' style='background: #C53131;margin:0;height: 50px;'>" +
+                    "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'Checkout' + "</p>" + "</button>" +
                     "</div>" + "</div>";
-                  let col = "<div class ='column zoom ' style='display: inline-block;' >" +
+                  let col = "<div class ='column zoom ' style='display: inline-block;'>" +
                       "<img style ='margin: 0;height: 15px;width: 15px;float: right; margin: 0;" +
                       "display: flex;border: 1px solid red !important;border-radius: 25px;margin-left:184px;margin-bottom: 0;padding-top: 0; ' src='/resources/core/images/external/red-cross-png.png'>"+"</img>"+
-                    '<p style=" margin: 0; background: #fff ;width: 200px;"> ' +itemPrice+ '</p> ' +
-                    '<img  style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" src =' + imgsrc + '>' +
+                    '<p style=" margin: 0; background: #fff ;width: 200px;"> ' +selectedCartItemPrice+ '</p> ' +
+                    '<img  style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemImgURL + '>' +
                     '<a class ="selectItem" style="background: #fff ; margin :0;' +
                     'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                    '' + itemName + '</a>' +
+                    '' + selectedCartItemName + '</a>' +
                     "</div>";
 
                 if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
@@ -328,11 +327,21 @@
                 }
                 //$('.checkout-container').html(col);
                 $('.orderButton').append(col);
+                //let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+               // let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
+                //    totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,choices:[]};
+                //finalCart.cartItems.push(cartArrayItem);
+              //  sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
+                let itemPrice =getPrice();
+
+                $('#checkoutButton').html('checkout');
+
 
             }
             else {
                 $('#modalPopup').css('display' ,'block');
                 $('#row').css('display' ,'none');
+                $('.footer1').remove();
                 let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
                 $("#subMenuItems").css('display' ,'none');
                 $('#itemModifierImage').append($(item));
@@ -376,7 +385,7 @@
                     "<p id = 'itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" + cartArrayItem.count + "</p>" +
                     "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'>" + '+' + "</button>" +
                     "</div>" +
-                    "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;'>" +
+                    "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;' onclick='mainmenunavigation()'>" +
                     "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
                     selectedCartItemPrice + "</button>" +
                     "</div>" + "</div>";
@@ -440,6 +449,7 @@
         }
         function getPrice(){
             let priceOnButton=0;
+            let addCartButtonPrice=0;
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
             //Looping CartItems from FinalCart
             finalCart.cartItems.forEach(cartItemElement => {
@@ -453,22 +463,11 @@
                 priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(cartItemElement.count).value;
                 cartItemElement.totalItemcost = currency(currency(totalItemcost, { precision: 2 })
                     .multiply(cartItemElement.count).value, { formatWithSymbol: true }).format();
+                addCartButtonPrice = cartItemElement.totalItemcost;
             });
-
-            // for(let p=0 ; p< finalCart.cartItems.length ; p++){
-            //     priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].price).value;
-            //     let totalItemcost= currency(finalCart.cartItems[p].price).value;
-            //     for(let l =0 ; l<finalCart.cartItems[p].choices.length ; l++){
-            //         priceOnButton= currency(priceOnButton).add(finalCart.cartItems[p].choices[l].price).value;
-            //         totalItemcost = currency(totalItemcost).add(finalCart.cartItems[p].choices[l].price).value;
-            //     }
-            //     priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(finalCart.cartItems[p].count).value;
-            //     finalCart.cartItems[p].totalItemcost = currency(currency(totalItemcost, { precision: 2 })
-            //         .multiply(finalCart.cartItems[p].count).value, { formatWithSymbol: true }).format();;
-            // }
            finalCart.cartTotalPrice = currency(priceOnButton, { formatWithSymbol: true }).format();
             sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-           return  finalCart.cartTotalPrice;
+           return addCartButtonPrice ;
         }
         function increaseItemCount() {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
@@ -515,11 +514,12 @@
                 $("#row").css('flex-wrap' ,'wrap');
                 $(".header").find('h1').css('display' ,'block');
                 $('#checkout-inner').html($('#row'));
-                $('.checkout-container').append($('.footer1'));
+              //  $('.checkout-container').append($('.footer1'));
                 $('#checkoutButton').html('ADD TO CART' + currency(cartItemCount, {formatWithSymbol: true}).format());
                 $('#itemCount').html(cartItemCount);
                 let finalCart = {cartTotalPrice: 0 , cartItems: []};
                 sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+                $('.footer1').remove();
 
             }
             else {
@@ -528,6 +528,40 @@
             }
 
         }
+       function mainmenunavigation() {
+            $('.mainMenuItems').css('opacity' ,'1');
+            $('#modalPopup').css('display' ,'none');
+            $("#row").css('display' ,'flex');
+            $("#row").css('flex-wrap' ,'wrap');
+            $(".header").find('h1').css('display' ,'block');
+            $('#checkout-inner').html($('#row'));
+          let finalCart =  JSON.parse(sessionStorage.getItem("finalCart"));
+            if(finalCart.cartItems.length ===0) {
+                $('.checkout-container').find('.addToCartBtn').remove();
+            }
+            else{
+
+                let button = "<div class='footer1 row' style='width: 100%;bottom: 0; position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
+                    "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
+                    "<div class=' row col s12 ' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button id ='checkoutButton' class=' row col s12 ' style='background: #C53131;margin:0;height: 50px;'>" +
+                    "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'Checkout' + "</p>" + "</button>" +
+                    "</div>" + "</div>";
+
+
+                let col =$('#itemModifierImage').find('.categoryItem');
+                $('#itemModifierImage').find('.categoryItem').css('display' , 'inline-block');
+                $('.footer1').remove();
+                    $('.checkout-container').append(button);
+
+
+
+                    $('.orderButton').append(col);
+                    $('#subMenuItems').css('display' , 'flex');
+
+            }
+
+        };
 
     </script>
 </html>

@@ -56,10 +56,6 @@
                 timeout: 100000,
                 success: function (data) {
                     sessionStorage.setItem('WelcomeCategoryList', JSON.stringify(data));
-                    const catList = data.data.list ;
-                    catList.forEach(element => {
-                        console.log(element.site_code);
-                    });
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);

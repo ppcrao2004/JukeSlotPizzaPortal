@@ -546,3 +546,11 @@ body{
 .column{
     padding-bottom: 10px;
 }
+.navbar .column.zoom.mainMenuItems  img{
+    height: 100px !important;
+    width: 100px !important;
+}
+.navbar  .column.zoom.mainMenuItems a{
+    width:100px !important;
+    padding:0 !important;
+}

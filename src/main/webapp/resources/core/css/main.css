@@ -200,7 +200,7 @@
 /*Table*/
 .table {
     width: 100%;
-    -webkit-overflow-scrolling: touch;
+   /* -webkit-overflow-scrolling: touch;*/
     overflow-x: auto;
     display: block;
 }
@@ -323,12 +323,12 @@ button:focus:after {
     flex-wrap: wrap;
     padding: 0 4px;
     margin-bottom: 20px;
-    overflow-x: scroll;
+
 }
 .column{
     -ms-flex: 25%; /* IE10 */
     flex: 25%;
-    max-width: 24%;
+    max-width: 25%;
     padding: 0 4px;
     display: block;
 }
@@ -343,7 +343,7 @@ button:focus:after {
     .column {
         -ms-flex: 50%;
         flex: 50%;
-        max-width: 48%;
+        max-width: 50%;
     }
 }
 @media screen and (max-width: 600px) {
@@ -490,9 +490,7 @@ h1{
 
 
 }
-body{
-    background: #000 !important;
-}
+
 @media screen  and(max-width: 900px) {
     #image{
         display: table-row;
@@ -546,11 +544,98 @@ body{
 .column{
     padding-bottom: 10px;
 }
-.navbar .column.zoom.mainMenuItems  img{
-    height: 100px !important;
-    width: 100px !important;
+.navbar .column.zoom.mainMenuItems{
+    margin:0;
+    padding: 0;
 }
+/*.navbar .column.zoom.mainMenuItems  img{
+    height: 150px !important;
+    width: 150px !important;
+}*/
+.categoryItem img{
+    height: 200px;
+    width:200px;
+}
+.mainMenuItems  img{
+    height:200px;
+    width:200px;
+}
+#subMenuItems .column img{
+    height:200px;
+    width:200px;
+}
+.navbar #row{
+    margin:0;
+}
+/*
 .navbar  .column.zoom.mainMenuItems a{
-    width:100px !important;
+    width:150px !important;
     padding:0 !important;
+}*/
+
+@media only screen and (max-width: 767px) {
+    #subMenuItems,
+    #mainMenuItems {
+        text-align: center;
+    }
+    #subMenuItems .column p,
+    #subMenuItems .column a,
+    #mainMenuItems a{
+        display: inline-block !important;
+    }
+}
+@media only screen and (min-width: 768px) {
+#subMenuItems .categoryItem{
+    text-align: center;
+}
+    #subMenuItems .categoryItem p,
+    #subMenuItems .categoryItem img,
+    #subMenuItems .categoryItem a{
+        display: inline-block !important;
+    }
+
+
+}
+
+#wrapper {
+    width: 100%;
+    display: grid;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    z-index: 2000;
+}
+header{
+    width: 100%;
+    top: 0;
+    margin: 0;
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:2000;
+}
+html{
+    left:0;
+    right:0;
+    width:100%;
+}
+body{
+    left:0;
+    right: 0;
+width:100%;
+}
+/*
+#wrapper img{
+    height: 80px;
+width:80px;
+}
+#wrapper a{
+    padding: 0!important;
+    width:80px !important;
+    font-size: 10px;
+}
+#subMenuItems{
+    position: relative;
+
 }

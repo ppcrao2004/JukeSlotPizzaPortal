@@ -14,20 +14,14 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META name="viewport" content="initial-scale=0.66, user-scalable=no">
-    <title>Happy Joes</title>
-
+    <!-- <title>Happy Joes</title> -->
     <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
     <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
-    <!-- Compiled and minified CSS -->
-
-    <!-- Compiled and minified JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
 </head>
     <body style="background: #BBDEFB">
     <div id ="wrapper">
@@ -54,11 +48,7 @@
            <h1 style="background:#fff ;color: #d24f4f;background: #fff;height: 20px;font-size: 20px;margin: 10px 0;"> Let 's get started!</h1>
         </div> -->
         <div class ="checkout-page-conatiner" id ="checkout-page-conatiner">
-         <div class ="checkout-container" style="
-            display: flex;
-            height: auto;
-            width: 100%;
-            overflow-x: scroll;">
+         <div class ="checkout-container" style="display: flex;height: auto;width: 100%;overflow-x: scroll;">
              <div id="checkout-inner"  class="checkout-inner" style="display: flex; margin: auto;max-height: 100vh;">
              </div>
          </div>
@@ -70,6 +60,7 @@
             let tb1 =$("<div/>").attr("id" ,"row");
             let menuItems ="<div id ='subMenuItems'>"+ "</div>";
             $("body").append(menuItems);
+            $("body").css("background",sessionStorage.getItem("backGroundColor"));
             $("#checkout-inner").append(tb1);
             //Initializing  Cart and saving into session , same finalCart should be used all over the flow.
             let finalCart = {cartTotalPrice: 0 , cartItems: []};
@@ -88,26 +79,15 @@
 
                         header.addClass("sticky");
                     }
-
-
-
                  else {
                     $('#wrapper').find('#row img').css('width' , '150px');;
                     $('#wrapper').find('#row img').css('height' , '150px');
                     $('#wrapper').find('#row a').css('width' , '150px');
-
                     $('#wrapper').find('#row a').css('font-size' , '15px');
                     $('#wrapper').find('#row a').css('padding' , '10px');
                     header.removeClass("sticky");
-
                 }
-
-
-
-
             }
-
-
         });
 
     function mainMenuLoad() {
@@ -139,14 +119,12 @@
                             "</div>";
                         $("#row").append(col2);
                     }
-
                 }
             },
             error : function(e) {
                 console.log("ERROR: ", e);
                 display(e);
             }
-
         });
 
     }
@@ -160,9 +138,6 @@
         $('.mainMenuItems').css('opacity' ,'0.5');
         $(menuID).css('opacity' ,'1');
         $(menuID).attr('id' ,'active');
-
-
-
         /* category List AJAX Call */
         $.ajax({
             type : "GET",
@@ -181,9 +156,7 @@
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             '' + data.data[i].title + '</a>' +
                             "</div>";
-
                         $("#subMenuItems").append(col);
-
                     } else {
                         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
                             '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
@@ -191,9 +164,7 @@
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             '' + data.data[i].title + '</a>' +
                             "</div>";
-
                         $("#subMenuItems").append(col);
-
                     }
                 }
             },
@@ -214,7 +185,6 @@
         $(menuID).removeAttr('id');
         $('.mainMenuItems').css('opacity' ,'0.5');
         $(menuID).css('opacity' ,'1');
-
         $(menuID).attr('id' ,'active');
         /* category List AJAX Call */
         $.ajax({
@@ -225,7 +195,6 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
-
                 for (let i = 0; i <= data.data.length-1;i++) {
                     sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
                     let item_cost = data.data[i].price.toFixed(2);
@@ -237,7 +206,6 @@
                         '' + data.data[i].title + '</a>' +
                         "</div>";
                     $("#subMenuItems").append(col);
-
                 }
             },
             error : function(e) {
@@ -268,7 +236,6 @@
                     "</div>";
                 $("#subMenuItems").append(col);
             }
-
         }
     }
 
@@ -276,7 +243,6 @@
         let categoryId = $(Item).find('img').attr('id');
         $("#subMenuItems").empty();
         if (sessionStorage.key(categoryId) != null) {
-
             $.ajax({
                 type: "GET",
                 contentType: "application/json",
@@ -295,10 +261,8 @@
                                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                                 '' + data.data[i].title + '</a>' +
                                 "</div>";
-
                             $("#subMenuItems").append(col);
                         }
-
                     }
                 },
                 error: function (e) {
@@ -320,20 +284,17 @@
         $('#row').css('display', 'none');
         let selectedCartItem = $(item);
         let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
-        console.log("selectedCartItemId selectedCartItemId",selectedCartItemId);
         let itemDetail = JSON.parse(sessionStorage.getItem(selectedCartItemId));
-        console.log("Item Detail :", itemDetail);
+        console.log("selectedCartItemDetail spicy level catgory", itemDetail.spicy_levels);
         $("#subMenuItems").empty();
         let selectedCartItemPrice = $(selectedCartItem).find('p').text();
         let selectedCartItemName = $(selectedCartItem).find('a').text();
-
         let selectedCartItemImgURL = $(item).find('img').attr('src');
         //$('.ItemPrice').append(itemPrice);
         //$('.ItemPrice').append(itemName);
         // let choice = itemDetail.modifiers;
          if(itemDetail.modifiers.length !=null) {
-                let modifierLength = itemDetail.modifiers.length;
-                for (let j = 0; j <= modifierLength - 1; j++) {
+                for (let j = 0; j <= itemDetail.modifiers.length - 1; j++) {
                     let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
                         ' <p>' + itemDetail.modifiers[j].heading + '</p>' +
                         "</div>";
@@ -348,8 +309,6 @@
                             "</div>";
                         $('#itemModifierImage').append(col);
                     }
-
-
                 }
             }
 
@@ -361,8 +320,6 @@
             "<button id ='checkoutButton' class=' row col s12 ' style='background: #C53131;margin:0;height: 50px;'>" +
             "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'Checkout' + "</p>" + "</button>" +
             "</div>" + "</div>"+"<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>";
-
-
     }
 
     function customizeItems(item) {
@@ -376,8 +333,10 @@
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         finalCart.cartItems.push(cartArrayItem);
         sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
-
         let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
+        let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
+            :selectedCartItemDetail.spicy_levels[0] ;
+       console.log("spicyLevel: ", spicyLevel);
         if(selectedCartItemDetail.modifiers == null) {
             let count =1;
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
@@ -395,7 +354,6 @@
                 'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                 '' + selectedCartItemName + '</a>' +
                 "</div>";
-
             if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                 $('.checkout-container').append(button);
             }
@@ -407,10 +365,7 @@
             //finalCart.cartItems.push(cartArrayItem);
             //  sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
             let itemPrice =getPrice();
-
             $('#checkoutButton').html('checkout');
-
-
         }
         else {
             $('#modalPopup').css('display' ,'block');
@@ -427,10 +382,11 @@
             let description = "<div class='col s12 m7'>"+
                                "<div class='card horizontal'>"+
                 "<div class='card-stacked'>"+ "<div class='card-content'>"+
-                "<p  class ='red darken-1'>"+'Price from'+PriceFromDisplay+ "</p><p>"+selectedCartItemName+"</p><p>"+itemDescription+"</p></div></div>" +
+                "<p  class='red-text text-darken-2' >"+'Price from'+"<br> <strong class='red-text text-darken-2'>"+PriceFromDisplay+ "<strong></p>" +
+                "<p class='red-text text-darken-2'>"+selectedCartItemName+"</p>" +
+                "<p class='red-text text-darken-2'>"+itemDescription+"</p></div></div>" +
                 "<div class='card-image'>"+
                 "<img style='width: 200px;height: 200px' src="+selectedCartItemImgURL+">"+ "</div> </div>";
-
 
             $('#itemModifierImage').append(description);
            // $('#itemModifierImage').append($(item));
@@ -441,7 +397,7 @@
                 $('#itemModifierImage').append(div);
                 cartItemModifiers.choices.forEach(cartItemModifiersChoices => {
                     let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
-                        '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + cartItemModifiersChoices.choice_cost + '</p> ' +
+                        '<strong class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + cartItemModifiersChoices.choice_cost + '</strong> ' +
                         '<img  id ='+cartItemModifiersChoices.id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" src =' + cartItemModifiersChoices.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -450,23 +406,6 @@
                     $('#itemModifierImage').append(col);
                 });
             });
-
-            // for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
-            //     let div = "<div id ='modifiers' style='display: flex; width: 100%;'>" +
-            //         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
-            //         "</div>";
-            //     $('#itemModifierImage').append(div);
-            //     for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
-            //         let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
-            //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
-            //             '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
-            //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
-            //             'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-            //             '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
-            //             "</div>";
-            //         $('#itemModifierImage').append(col);
-            //     }
-            // }
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -504,17 +443,6 @@
                     });
                 }
             });
-
-            // for(let i=0 ; i < finalCart.cartItems.length ;i++){
-            //     if(finalCart.cartItems[i].id == selectedCartItemId){
-            //         let cartItemListChoices = finalCart.cartItems[i].choices;
-            //         for(let h=0 ;h< cartItemListChoices.length; h++){
-            //             if(itemID == cartItemListChoices[h].id){
-            //                 cartItemListChoices.splice(h,1);
-            //             }
-            //         }
-            //     }
-            // }
         }
         else {
             $(item).addClass('selected');
@@ -524,13 +452,6 @@
                     cartItemElement.choices.push(choice);
                 }
             });
-
-            // for(let i=0 ; i < finalCart.cartItems.length ;i++){
-            //     if(finalCart.cartItems[i].id == selectedCartItemId){
-            //         let choice ={id:itemID,price:itemPrice ,name:itemName,imageURL:itemImageURL }
-            //         finalCart.cartItems[i].choices.push(choice);
-            //     }
-            // }
         }
         sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
         $('#checkoutButton').html('ADD TO CART '+ getPrice());
@@ -569,7 +490,6 @@
             if(value.id===id){
                 value.count =cartItemCount;
             }
-
         });
         sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
         let itemPrice =getPrice();
@@ -587,11 +507,9 @@
             if(value.id===id){
                 value.count =cartItemCount;
             }
-
         });
         sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
         let itemPrice =getPrice();
-
         if(cartItemCount === 0)
         {
             $('#checkoutButton').html('ADD TO CART $0');
@@ -609,14 +527,13 @@
             let finalCart = {cartTotalPrice: 0 , cartItems: []};
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             $('.footer1').remove();
-
         }
         else {
             $('#checkoutButton').html('ADD TO CART' + currency(itemPrice, {formatWithSymbol: true}).format());
             $('#itemCount').html(cartItemCount);
         }
-
     }
+
     function mainmenunavigation() {
         $('.mainMenuItems').css('opacity' ,'1');
         $('#modalPopup').css('display' ,'none');
@@ -637,14 +554,9 @@
                 "<button id ='checkoutButton' class=' row col s12 ' style='background: #C53131;margin:0;height: 50px;'>" +
                 "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'Checkout' + "</p>" + "</button>" +
                 "</div>" + "</div>"+"<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>";
-
-
             let itemPrice =$('#itemModifierImage').find('.categoryItem p').text();
             let imgsrc = $('#itemModifierImage').find('.categoryItem img').attr('src');
             let itemName =$('#itemModifierImage').find('.categoryItem a').text();
-
-
-
             $('#itemModifierImage').find('.categoryItem').css('display' , 'inline-block');
             $('.footer1').remove();
             if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
@@ -667,10 +579,9 @@
                 $('.checkoutbutton').append(col);
             }
             $('#subMenuItems').css('display' , 'none');
-
         }
-
     };
+
     function removeItem(item) {
         let removedItem =$(item);
         let selectedItemId =$(removedItem).attr('id');

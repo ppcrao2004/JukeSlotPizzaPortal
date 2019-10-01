@@ -93,6 +93,7 @@
                 success: function (data) {
                     sessionStorage.setItem('welcomeService', JSON.stringify(data));
                     let bgColor =data.data.back_ground_color;
+                    sessionStorage.setItem("backGroundColor",bgColor);
                     $('.starter-template').css('background-color' , bgColor);
                     $('.navbar-header').css('background-color' ,bgColor);
                     //$('#imageText').append(data.data.slogan);

@@ -9,13 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <META name="viewport" content="initial-scale=0.66, user-scalable=no">
-<title>Happy Joes</title>
-
+    <!-- <title>Happy Joes</title> -->
 <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
-<!-- Compiled and minified CSS -->
-
 <!-- Compiled and minified JavaScript -->
 <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>

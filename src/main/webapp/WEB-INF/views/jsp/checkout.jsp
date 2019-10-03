@@ -8,7 +8,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
- <html lang="en">
+ <html lang="en" style="overflow-y: hidden;">
  <head>
      <%@ page contentType="text/html;charset=UTF-8" language="java" %>
      <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,26 +22,28 @@
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <nav class="navbar" style="height:unset;line-height:unset;  ">
-         <div class="navbar-container">
-             <div class="navbar-header">
-                 <div class="navbar-header-image">
-                     <a class="navbar-brand">
-                         <img id="logoimage" alt="">
-                     </a>
+     <div id ="wrapper">
+         <nav class="navbar" style="height:unset;line-height:unset;  ">
+             <div class="navbar-container">
+                 <div class="navbar-header">
+                     <div class="navbar-header-image">
+                         <a class="navbar-brand">
+                             <img id="logoimage" alt="">
+                         </a>
+                     </div>
+                     <!-- <div class="navbar-header-text">
+                          <span class="headerTitle" style="alignment: center">Good times to be together</span>
+                      </div> -->
                  </div>
-                 <!-- <div class="navbar-header-text">
-                      <span class="headerTitle" style="alignment: center">Good times to be together</span>
-                  </div> -->
              </div>
-         </div>
-     </nav>
+         </nav>
+     </div>
  </head>
 
 
     <body >
-            <div style="text-align: center;width: 100%;background: #ffffff">
-                <span style="background:#fff ;height: 50px; font-size: 6vw; color: #C53131;"> What is your preference ? </span>
+            <div style="text-align: center;width: 100%;background: #ffffff; padding-top: 100px;">
+                <span style="background:#fff ;height: 50px; font-size: 6vw;  color: #C53131;"> What is your preference ? </span>
             </div>
             <div class ="maincontainer">
             <div class ="checkout-container">

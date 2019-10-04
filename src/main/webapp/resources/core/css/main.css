@@ -641,6 +641,7 @@ width:80px;
  */
 #wrapper{
     position: fixed;
+    top:0;
 }
 #wrapper .mainMenuItems img{
     height: 90px;

@@ -99,27 +99,51 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('menuList',JSON.stringify(data));
-                for (let i = 0; i <= data.data.length-1;i++) {
-                    if (data.data[i].has_category === false && data.data[i].has_item === true){
-                        sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+
+                data.data.forEach(dataData => {
+                    if (dataData.has_category === false && dataData.has_item === true){
+                        sessionStorage.setItem(dataData.id,JSON.stringify(dataData));
                         let col2 = "<div class ='column zoom mainMenuItems '  onclick='itemListMenu(this)'>" +
-                            '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                            '<img  id = '+dataData.id +' style=" padding: 10px;background: #fff;" src ='+ dataData.image +'>'+
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            ''+ data.data[i].title+'</a>'+
+                            ''+ dataData.title+'</a>'+
                             "</div>";
                         $("#row").append(col2);
                     }else{
-                        sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                        sessionStorage.setItem(dataData.id,JSON.stringify(dataData));
                         let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
-                            '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                            '<img  id = '+dataData.id +' style=" padding: 10px;background: #fff;" src ='+ dataData.image +'>'+
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            ''+ data.data[i].title+'</a>'+
+                            ''+ dataData.title+'</a>'+
                             "</div>";
                         $("#row").append(col2);
                     }
-                }
+                });
+
+
+                // for (let i = 0; i <= data.data.length-1;i++) {
+                //     if (data.data[i].has_category === false && data.data[i].has_item === true){
+                //         sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                //         let col2 = "<div class ='column zoom mainMenuItems '  onclick='itemListMenu(this)'>" +
+                //             '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //             ''+ data.data[i].title+'</a>'+
+                //             "</div>";
+                //         $("#row").append(col2);
+                //     }else{
+                //         sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
+                //         let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
+                //             '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
+                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //             ''+ data.data[i].title+'</a>'+
+                //             "</div>";
+                //         $("#row").append(col2);
+                //     }
+                // }
             },
             error : function(e) {
                 console.log("ERROR: ", e);
@@ -147,26 +171,46 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('categoryListMenuId',JSON.stringify(data));
-                for (let i = 0; i <= data.data.length-1;i++) {
-                    if (data.data[i].has_sub_category === true) {
-                        sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
+                data.data.forEach(dataData => {
+                    if (dataData.has_sub_category === true) {
+                        sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
                         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
-                            '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                            '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            '' + data.data[i].title + '</a>' +
+                            '' + dataData.title + '</a>' +
                             "</div>";
                         $("#subMenuItems").append(col);
                     } else {
                         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
-                            '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                            '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                            '' + data.data[i].title + '</a>' +
+                            '' + dataData.title + '</a>' +
                             "</div>";
                         $("#subMenuItems").append(col);
                     }
-                }
+                });
+                // for (let i = 0; i <= data.data.length-1;i++) {
+                //     if (data.data[i].has_sub_category === true) {
+                //         sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
+                //         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
+                //             '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //             '' + data.data[i].title + '</a>' +
+                //             "</div>";
+                //         $("#subMenuItems").append(col);
+                //     } else {
+                //         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
+                //             '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
+                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //             '' + data.data[i].title + '</a>' +
+                //             "</div>";
+                //         $("#subMenuItems").append(col);
+                //     }
+                // }
             },
             error : function(e) {
                 console.log("ERROR: ", e);
@@ -195,18 +239,33 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
-                for (let i = 0; i <= data.data.length-1;i++) {
-                    sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
-                    let item_cost = data.data[i].price.toFixed(2);
+                data.data.forEach(dataData => {
+                    sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
+                    let item_cost = dataData.price.toFixed(2);
                     let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
-                        '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
-                        '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
+                        '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
+                        '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                        '' + data.data[i].title + '</a>' +
+                        '' + dataData.title + '</a>' +
                         "</div>";
                     $("#subMenuItems").append(col);
-                }
+                });
+
+
+
+                // for (let i = 0; i <= data.data.length-1;i++) {
+                //     sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
+                //     let item_cost = data.data[i].price.toFixed(2);
+                //     let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
+                //         '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
+                //         '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
+                //         '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                //         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                //         '' + data.data[i].title + '</a>' +
+                //         "</div>";
+                //     $("#subMenuItems").append(col);
+                // }
             },
             error : function(e) {
                 console.log("ERROR: ", e);
@@ -224,18 +283,32 @@
         $(".header").find('h1').css('display' ,'none');
         if (sessionStorage.key(categoryItemID) != null) {
             let categoryItemgetSubCategory = JSON.parse(sessionStorage.getItem(categoryItemID));
-            for (let i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
+            categoryItemgetSubCategory.sub_categories.forEach(subCategory => {
                 let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
                     //     show_image(categoryItemgetSubCategory.sub_categories[i].image,200,200,10,'#fff',categoryItemgetSubCategory.sub_categories[i].id,'testSelectSubcatImage',)
-                    '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style=" padding: 10px;background: #fff;" src =' +
-                    categoryItemgetSubCategory.sub_categories[i].image + '>'
+                    '<img  id = ' + subCategory.id + ' style=" padding: 10px;background: #fff;" src =' +
+                    subCategory.image + '>'
                     +
                     '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                     'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                    '' + categoryItemgetSubCategory.sub_categories[i].title + '</a>' +
+                    '' + subCategory.title + '</a>' +
                     "</div>";
                 $("#subMenuItems").append(col);
-            }
+            });
+
+
+            // for (let i = 0; i <= categoryItemgetSubCategory.sub_categories.length - 1; i++) {
+            //     let col = "<div class ='column zoom'  style='display: block;' onclick='selectSubCategoryItem(this)'>" +
+            //         //     show_image(categoryItemgetSubCategory.sub_categories[i].image,200,200,10,'#fff',categoryItemgetSubCategory.sub_categories[i].id,'testSelectSubcatImage',)
+            //         '<img  id = ' + categoryItemgetSubCategory.sub_categories[i].id + ' style=" padding: 10px;background: #fff;" src =' +
+            //         categoryItemgetSubCategory.sub_categories[i].image + '>'
+            //         +
+            //         '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
+            //         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+            //         '' + categoryItemgetSubCategory.sub_categories[i].title + '</a>' +
+            //         "</div>";
+            //     $("#subMenuItems").append(col);
+            // }
         }
     }
 
@@ -250,20 +323,36 @@
                 dataType: 'json',
                 timeout: 100000,
                 success: function (data) {
-                    for (let i = 0; i <= data.data.length - 1; i++) {
-                        sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
-                        if (data.data[i].active_item == true) {
-                            let item_cost = data.data[i].price.toFixed(2);
+                    data.data.forEach(dataData => {
+                        sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
+                        if (dataData.active_item == true) {
+                            let item_cost = dataData.price.toFixed(2);
                             let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
-                                '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
-                                '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
+                                '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
+                                '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                                 '<a class ="selectItem" style="background: #fff ; margin :0;' +
                                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                                '' + data.data[i].title + '</a>' +
+                                '' + dataData.title + '</a>' +
                                 "</div>";
                             $("#subMenuItems").append(col);
                         }
-                    }
+                    });
+
+
+                    // for (let i = 0; i <= data.data.length - 1; i++) {
+                    //     sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
+                    //     if (data.data[i].active_item == true) {
+                    //         let item_cost = data.data[i].price.toFixed(2);
+                    //         let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
+                    //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
+                    //             '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
+                    //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                    //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                    //             '' + data.data[i].title + '</a>' +
+                    //             "</div>";
+                    //         $("#subMenuItems").append(col);
+                    //     }
+                    // }
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);
@@ -326,32 +415,58 @@
              let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
                  totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,spicyLevel:spicyLevel, modifiers:[]};
 
-            for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
-                let modifier = {modifierID: selectedCartItemDetail.modifiers[j].id,modifierHeading:selectedCartItemDetail.modifiers[j].heading,
-                    numberOfOptions:selectedCartItemDetail.modifiers[j].number_of_options,choices:[]};
-                cartArrayItem.modifiers.push(modifier);
-                let div = "<div id ="+selectedCartItemDetail.modifiers[j].id+" class ='modifiers' allowedchoices = "+selectedCartItemDetail.modifiers[j].number_of_options+" " +
-                    "style='display: flex; width: 100%;'>" +
-                    ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
-                    "</div>";
-                $('#itemModifierImage').append(div);
-                for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
-                    let col = "<div  class ='column zoom addToCart ' style='display: inline-block;' onclick='addToCart(this)' >" +
-                        '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
-                        '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id+' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" ' +
-                        'src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
-                        '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                        'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                        '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
-                        "</div>";
-                    $('.modifiers').append(col);
-                   // $('.addTocart').appendTo($('.modifiers'));
-                    //$('.addToCart').remove();
+             selectedCartItemDetail.modifiers.forEach(modifierItem => {
+                 let modifier = {modifierID: modifierItem.id,modifierHeading:modifierItem.heading,numberOfOptions:modifierItem.number_of_options,choices:[]};
+                 cartArrayItem.modifiers.push(modifier);
+                 let div = "<div id ="+modifierItem.id+" class ='modifiers' allowedchoices = "+modifierItem.number_of_options+" " +
+                     "style='display: flex; width: 100%;'>" +
+                     ' <p><strong>' + modifierItem.heading + '</strong></p><br>' +
+                     "</div>";
+                 $('#itemModifierImage').append(div);
 
-                }
-                $('.modifiers').addClass('choices').removeClass('modifiers');
-                $("#subMenuItems").css('display' ,'none');
-            }
+                 modifierItem.choices.forEach(choice => {
+                     let col = "<div  class ='column zoom addToCart ' style='display: inline-block;' onclick='addToCart(this)' >" +
+                         '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + choice.choice_cost + '</p> ' +
+                         '<img  id ='+choice.id+' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" ' +
+                         'src =' + choice.image + '>' +
+                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                         'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                         '' + choice.choice_name + '</a>' +
+                         "</div>";
+                     $('.modifiers').append(col);
+                 });
+                 $('.modifiers').addClass('choices').removeClass('modifiers');
+                 $("#subMenuItems").css('display' ,'none');
+             });
+
+
+
+            // for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
+            //     let modifier = {modifierID: selectedCartItemDetail.modifiers[j].id,modifierHeading:selectedCartItemDetail.modifiers[j].heading,
+            //         numberOfOptions:selectedCartItemDetail.modifiers[j].number_of_options,choices:[]};
+            //     cartArrayItem.modifiers.push(modifier);
+            //     let div = "<div id ="+selectedCartItemDetail.modifiers[j].id+" class ='modifiers' allowedchoices = "+selectedCartItemDetail.modifiers[j].number_of_options+" " +
+            //         "style='display: flex; width: 100%;'>" +
+            //         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
+            //         "</div>";
+            //     $('#itemModifierImage').append(div);
+            //     for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
+            //         let col = "<div  class ='column zoom addToCart ' style='display: inline-block;' onclick='addToCart(this)' >" +
+            //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
+            //             '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id+' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" ' +
+            //             'src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
+            //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
+            //             'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+            //             '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
+            //             "</div>";
+            //         $('.modifiers').append(col);
+            //        // $('.addTocart').appendTo($('.modifiers'));
+            //         //$('.addToCart').remove();
+            //
+            //     }
+            //     $('.modifiers').addClass('choices').removeClass('modifiers');
+            //     $("#subMenuItems").css('display' ,'none');
+            // }
              finalCart.cartItems.push(cartArrayItem);
              sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             let count =1;
@@ -383,13 +498,13 @@
         let selectedCartItemImgURL = $(item).find('img').attr('src');
 
         let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
-        let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
-            :selectedCartItemDetail.spicy_levels[0] ;
-        let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice
-            ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL, spicyLevel: spicyLevel,modifiers:[]};
-        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        finalCart.cartItems.push(cartArrayItem);
-        sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+        // let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
+        //     :selectedCartItemDetail.spicy_levels[0] ;
+        // let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice
+        //     ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL, spicyLevel: spicyLevel,modifiers:[]};
+        // let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+        // finalCart.cartItems.push(cartArrayItem);
+        // sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
         if(selectedCartItemDetail.modifiers == null) {
             let count =1;
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
@@ -419,8 +534,7 @@
             //  sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
             let itemPrice =getPrice();
             $('#checkoutButton').html('checkout');
-        }
-        else {
+        } else {
             $('#modalPopup').css('display' ,'block');
             $('#row').css('display' ,'none');
             $('.footer1').remove();
@@ -443,36 +557,77 @@
                 "<img  id ="+selectedCartItemId+" style='width: 200px;height: 200px' src="+selectedCartItemImgURL+">"+ "</div> </div>";
             $('#itemModifierImage').append(description);
            // $('#itemModifierImage').append($(item));
-
+            let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
+                :selectedCartItemDetail.spicy_levels[0] ;
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
             let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
                 totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,spicyLevel:spicyLevel, modifiers:[]};
-            for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
-                let modifier = {modifierID: selectedCartItemDetail.modifiers[j].id,modifierHeading:selectedCartItemDetail.modifiers[j].heading,
-                    numberOfOptions:selectedCartItemDetail.modifiers[j].number_of_options,choices:[]};
+            selectedCartItemDetail.modifiers.forEach(modifierItem => {
+                let modifier = {modifierID: modifierItem.id,modifierHeading:modifierItem.heading,numberOfOptions:modifierItem.number_of_options,choices:[]};
                 cartArrayItem.modifiers.push(modifier);
-
-
-                let div = "<div id ="+selectedCartItemDetail.modifiers[j].id+" class ='modifiers' allowedchoices = "+selectedCartItemDetail.modifiers[j].number_of_options+" " +
+                let div = "<div id ="+modifierItem.id+" class ='modifiers' allowedchoices = "+modifierItem.number_of_options+" " +
                     "style='display: flex; width: 100%;'>" +
-                    ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
+                    ' <p>' + modifierItem.heading + '</p>' +
                     "</div>";
                 $('#itemModifierImage').append(div);
-                for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
+                modifierItem.choices.forEach(choice => {
                     let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
                         '<p>'+'<strong class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' +
-                        selectedCartItemDetail.modifiers[j].choices[k].choice_cost+ '</strong> ' +'</p>'+
-                        '<img  id ='+ selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" ' +
-                        'src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
+                        choice.choice_cost+ '</strong> ' +'</p>'+
+                        '<img  id ='+ choice.id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" ' +
+                        'src =' + choice.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                        '' +  selectedCartItemDetail.modifiers[j].choices[k].choice_name+ '</a>' +
+                        '' +  choice.choice_name+ '</a>' +
                         "</div>";
                     $('.modifiers').append(col);
-                }
+                });
                 $('.modifiers').addClass('choices').removeClass('modifiers');
-            }
+            });
+
+
+            // for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
+            //     let modifier = {modifierID: selectedCartItemDetail.modifiers[j].id,modifierHeading:selectedCartItemDetail.modifiers[j].heading,
+            //         numberOfOptions:selectedCartItemDetail.modifiers[j].number_of_options,choices:[]};
+            //     cartArrayItem.modifiers.push(modifier);
+            //
+            //
+            //     let div = "<div id ="+selectedCartItemDetail.modifiers[j].id+" class ='modifiers' allowedchoices = "+selectedCartItemDetail.modifiers[j].number_of_options+" " +
+            //         "style='display: flex; width: 100%;'>" +
+            //         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
+            //         "</div>";
+            //     $('#itemModifierImage').append(div);
+            //
+            //
+            //     selectedCartItemDetail.modifiers[j].choices.forEach(choice => {
+            //         let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
+            //             '<p>'+'<strong class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' +
+            //             choice.choice_cost+ '</strong> ' +'</p>'+
+            //             '<img  id ='+ choice.id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" ' +
+            //             'src =' + choice.image + '>' +
+            //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
+            //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+            //             '' +  choice.choice_name+ '</a>' +
+            //             "</div>";
+            //         $('.modifiers').append(col);
+            //     });
+            //
+            //     // for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
+            //     //     let col = "<div class ='column zoom ' style='display: inline-block;' onclick='addToCart(this)'>" +
+            //     //         '<p>'+'<strong class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' +
+            //     //         selectedCartItemDetail.modifiers[j].choices[k].choice_cost+ '</strong> ' +'</p>'+
+            //     //         '<img  id ='+ selectedCartItemDetail.modifiers[j].choices[k].id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" ' +
+            //     //         'src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
+            //     //         '<a class ="selectItem" style="background: #fff ; margin :0;' +
+            //     //         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+            //     //         '' +  selectedCartItemDetail.modifiers[j].choices[k].choice_name+ '</a>' +
+            //     //         "</div>";
+            //     //     $('.modifiers').append(col);
+            //     // }
+            //     $('.modifiers').addClass('choices').removeClass('modifiers');
+            // }
             finalCart.cartItems.push(cartArrayItem);
+            sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -569,16 +724,8 @@
                                 modifier.choices.push(choice);
                             }
                         });
-
-                        // let choice = {id: itemID, price: itemPrice, name: itemName, imageURL: itemImageURL}
-                        // cartItemElement.choices.push(choice);
                     }
                 });
-                //allowedchoices =allowedchoices-1;
-                //$(item).parent().attr('allowedchoices', allowedchoices);
-
-
-
         }
         sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
         $('#checkoutButton').html('ADD TO CART '+ getPrice());
@@ -593,11 +740,16 @@
             priceOnButton= currency(priceOnButton).add(cartItemElement.price).value;
             let totalItemcost= currency(cartItemElement.price).value;
             //Looping Choices from CartItem
-            cartItemElement.modifiers();
-            cartItemElement.choices.forEach(choices => {
-                priceOnButton= currency(priceOnButton).add(choices.price).value;
-                totalItemcost = currency(totalItemcost).add(choices.price).value;
+            cartItemElement.modifiers.forEach(modifier => {
+                modifier.choices.forEach(choices => {
+                    priceOnButton= currency(priceOnButton).add(choices.price).value;
+                    totalItemcost = currency(totalItemcost).add(choices.price).value;
+                });
             });
+            // cartItemElement.choices.forEach(choices => {
+            //     priceOnButton= currency(priceOnButton).add(choices.price).value;
+            //     totalItemcost = currency(totalItemcost).add(choices.price).value;
+            // });
             priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(cartItemElement.count).value;
             cartItemElement.totalItemcost = currency(currency(totalItemcost, { precision: 2 })
                 .multiply(cartItemElement.count).value, { formatWithSymbol: true }).format();
@@ -670,12 +822,10 @@
         $(".header").find('h1').css('display' ,'block');
         $('#checkout-inner').html($('#row'));
         let finalCart =  JSON.parse(sessionStorage.getItem("finalCart"));
-        console.log(finalCart);
         if(finalCart.cartItems.length ===0) {
             $('.checkout-container').find('.addToCartBtn').remove();
-        }
-        else{
-           console.log (finalCart.cartItems);
+        } else{
+
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0; position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s12 ' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -689,25 +839,36 @@
             $('.footer1').remove();
             if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                 //$('.checkout-container').append(button);
-
-
             }
             $('.checkout-container').append(button);
-            for(let i =0;i<finalCart.cartItems.length;i++)
-            {
-                console.log(finalCart.cartItems[i].id);
-                console.log(finalCart.cartItems);
+
+            finalCart.cartItems.forEach(cartitem => {
                 let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
-                "<button id = "+finalCart.cartItems[i].id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
+                    "<button id = "+cartitem.id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
                     "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
-                    '<p style=" margin: 0;width: 150px;"> ' +finalCart.cartItems[i].price+ '</p> ' +
-                    '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + finalCart.cartItems[i].imageURL + '>' +
+                    '<p style=" margin: 0;width: 150px;"> ' +cartitem.price+ '</p> ' +
+                    '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + cartitem.imageURL + '>' +
                     '<a class ="selectItem" style="background: #fff ; margin :0;' +
                     'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                    '' + finalCart.cartItems[i].itemName + '</a>' +
+                    '' + cartitem.itemName + '</a>' +
                     "</div>";
                 $('.checkoutbutton').append(col);
-            }
+            });
+            // for(let i =0;i<finalCart.cartItems.length;i++)
+            // {
+            //     console.log(finalCart.cartItems[i].id);
+            //     console.log(finalCart.cartItems);
+            //     let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
+            //     "<button id = "+finalCart.cartItems[i].id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
+            //         "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
+            //         '<p style=" margin: 0;width: 150px;"> ' +finalCart.cartItems[i].price+ '</p> ' +
+            //         '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + finalCart.cartItems[i].imageURL + '>' +
+            //         '<a class ="selectItem" style="background: #fff ; margin :0;' +
+            //         'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+            //         '' + finalCart.cartItems[i].itemName + '</a>' +
+            //         "</div>";
+            //     $('.checkoutbutton').append(col);
+            // }
            $('#subMenuItems').css('display' , 'flex');
         }
     };
@@ -730,8 +891,7 @@
         if(finalCart.cartItems.length ===0){
             $('.footer1').remove();
 
-        }
-            else {
+        }else {
             for (let i = 0; i < finalCart.cartItems.length; i++) {
                 let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
                     "<button id = " + finalCart.cartItems[i].id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
@@ -774,5 +934,7 @@
     </div>
 </div>
 
+
+<%--For Each Example   arr.forEach(element => {  console.log(element); });--%>
 
 

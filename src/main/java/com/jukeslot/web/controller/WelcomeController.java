@@ -23,4 +23,13 @@ public class WelcomeController {
 		return "mainMenu";
 	}
 
+	@RequestMapping(value = "/reviewOrder", method = RequestMethod.GET)
+	public String reviewOrder(ModelMap model) {
+		return "reviewOrder";
+	}
+	@RequestMapping(value = "/orderReview", method = RequestMethod.GET)
+	public String orderReview(ModelMap model) {
+		return "orderReview";
+	}
+
 }

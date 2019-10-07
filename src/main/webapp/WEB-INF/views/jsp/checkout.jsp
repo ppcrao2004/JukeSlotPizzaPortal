@@ -46,7 +46,7 @@
                 <span style="background:#fff ;height: 50px; font-size: 6vw;  color: #C53131;"> What is your preference ? </span>
             </div>
             <div class ="maincontainer">
-            <div class ="checkout-container">
+            <div class ="checkout-container" style="background: #000">
                 <div class="checkout-inner">
                     <div class="left zoom">
                         <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">

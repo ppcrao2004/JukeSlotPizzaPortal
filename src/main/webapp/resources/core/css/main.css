@@ -712,3 +712,30 @@ ul.stepper>.step:not(:last-of-type):after{
     padding-left: 10% !important;
     padding-right: 10% !important;
 }
+.hidden{
+    display: none;
+}
+.modal.show
+{
+    display: block;
+}
+.nextBtn{
+    background: #fff;
+    border: 1px solid;
+    border-radius: 25px;
+    border: 1px solid #000;
+    width: 107px;
+    font-weight: 600;
+    font-size: 10px;
+    float: right;
+    background: #0000005e !important;
+    color: #fff;"
+}
+.backBtn{
+     background: #fff;
+    border: 1px solid;
+    border-radius: 25px;/
+    border: 1px solid #000;
+    width: 107px;
+    font-weight: 600;
+}

@@ -123,4 +123,20 @@ public class AjaxController {
         log.info("==== RESTful API Response Order Service END placeOrder=======");
         return orderServiceResponse;
     }
+
+    @RequestMapping(value = "/template/item/list/recommends/{siteID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+    public OrderRecommendationResp getRecommendations(@PathVariable String siteID) throws  Exception{
+        OrderRecommendationResp orderRecommendationResp=null;
+        try{
+            log.info("==== RESTful API Response Recommendations  Service START  placeOrder=======");
+            orderRecommendationResp= new GenericRestClient<String, OrderRecommendationResp>().execute(
+                    new RequestDetails(Constants.WEB_SERVICE_URL + Constants.TEMPLATE_ORDER_RECOMMENDATIONS_SITE_ID_URL + siteID, HttpMethod.GET), " ", OrderRecommendationResp.class);
+            log.info(orderRecommendationResp.toString());
+            log.info("==== RESTful API Response Recommendations Service END placeOrder=======");
+        }catch(Exception error){
+            System.out.println("Error message:"+ error.getMessage());
+        }
+
+        return orderRecommendationResp;
+    }
 }

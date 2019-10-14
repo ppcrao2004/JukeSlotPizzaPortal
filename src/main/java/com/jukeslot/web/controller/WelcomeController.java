@@ -31,5 +31,17 @@ public class WelcomeController {
 	public String orderReview(ModelMap model) {
 		return "orderReview";
 	}
+	@RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
+	public String paymentMethod(ModelMap model) {
+		return "paymentMethod";
+	}
 
+	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	public String summary(ModelMap model) {
+		return "summary";
+	}
+	@RequestMapping(value = "/personInfo", method = RequestMethod.GET)
+	public String personInfo(ModelMap model) {
+		return "personInfo";
+	}
 }

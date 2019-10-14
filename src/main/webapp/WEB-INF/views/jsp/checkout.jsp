@@ -81,4 +81,11 @@
             </div>
         </div>
     </body>
+ <script>
+ $(document).ready(function() {
+     let finalCart = {cartTotalPrice: 0 , cartItems: []};
+     sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+ });
+ </script>
+
  </html>

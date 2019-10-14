@@ -28,6 +28,7 @@ public class Constants {
     public final static String TEMPLATE_ITEM_LIST_CATEGORY_ID_URL = "api/template/item/list/";
     public final static String TEMPLATE_ITEM_LIST_MENU_MENU_ID_URL = "api/template/item/list/menu/";
     public final static String ORDER_SERVICE = "api/order";
+    public final static String TEMPLATE_ORDER_RECOMMENDATIONS_SITE_ID_URL = "api/template/item/recommends?site_code=";
 
 
     public final static String OVERVIEW_URL = "http://devpadshop.luyishifu.com/maininfo";

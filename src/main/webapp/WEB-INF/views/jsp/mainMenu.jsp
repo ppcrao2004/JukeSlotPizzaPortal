@@ -16,9 +16,9 @@
     <META name="viewport" content="initial-scale=0.66, user-scalable=no">
     <!-- <title>Happy Joes</title> -->
     <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
     <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/core/js/mainMenu.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -57,14 +57,14 @@
 
     <script>
         $(document).ready(function() {
+            homePageLoad();
+            removeItemConfirm();
             let tb1 =$("<div/>").attr("id" ,"row");
             let menuItems ="<div id ='subMenuItems'>"+ "</div>";
             $("body").append(menuItems);
             $("body").css("background",sessionStorage.getItem("backGroundColor"));
             $("#checkout-inner").append(tb1);
             //Initializing  Cart and saving into session , same finalCart should be used all over the flow.
-            let finalCart = {cartTotalPrice: 0 , cartItems: []};
-            sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             mainMenuLoad();
            /* window.onscroll = function() {scrollFunction()};
            function scrollFunction() {
@@ -100,6 +100,7 @@
             success : function(data) {
                 sessionStorage.setItem('menuList',JSON.stringify(data));
 
+
                 data.data.forEach(dataData => {
                     if (dataData.has_category === false && dataData.has_item === true){
                         sessionStorage.setItem(dataData.id,JSON.stringify(dataData));
@@ -121,7 +122,37 @@
                         $("#row").append(col2);
                     }
                 });
-
+                let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+                if(finalCart.cartItems.length !=0)
+                {
+                let button = "<div class='footer1 row' style='width: 100%;bottom: 0; position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
+                    "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
+                    "<div class=' row col s12 ' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<form class='formaction'>"+
+                    "<button  style='background: #C53131;margin:0;height: 50px; " +
+                    " type='submit' id='checkoutButton' class='checkoutButtonText row col s12' formaction='${pageContext.request.contextPath}/reviewOrder'>"+
+                    'checkout'+
+                    "</button>"+
+                    "</form>"+
+                    "</div>" + "</div>"+"<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>";
+                if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
+                    $('.checkout-container').append(button);
+                }
+                finalCart.cartItems.forEach(cartitem => {
+                    let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
+                        "<button id = "+cartitem.id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
+                        "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
+                        '<p style=" margin: 0;width: 150px;"> ' +cartitem.totalItemcost+ '</p> ' +
+                        '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + cartitem.imageURL + '>' +
+                        '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                        'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                        '' + cartitem.itemName + '</a>' +
+                        "<p>" +'Quantity - '+cartitem.count+ "</p>"+
+                        "</div>";
+                    $('.checkoutbutton').append(col);
+                    console.log(cartitem.modifiers.choices);
+                });
+                }
 
                 // for (let i = 0; i <= data.data.length-1;i++) {
                 //     if (data.data[i].has_category === false && data.data[i].has_item === true){
@@ -491,9 +522,7 @@
                 selectedCartItemPrice + "</button>" +
                 "</div>" + "</div>";
 
-            if( $('.checkout-container').find(
-
-                '.footer1').attr('class') ==undefined) {
+            if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                 $('.checkout-container').append(button);
             }
 
@@ -508,15 +537,63 @@
         let selectedCartItemImgURL = $(item).find('img').attr('src');
 
         let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
-        // let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
-        //     :selectedCartItemDetail.spicy_levels[0] ;
-        // let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice
-        //     ,totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL, spicyLevel: spicyLevel,modifiers:[]};
-        // let finalCart = JSON.parse(sessionStorage.getI tem("finalCart"));
-        // finalCart.cartItems.push(cartArrayItem);
-        // sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
         if(selectedCartItemDetail.modifiers == null) {
-            let count =1;
+            let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+            if(finalCart.cartItems.length ===0){
+                finalCart.cartItems.push({id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
+                    totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,modifiers:[]});
+                sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
+            } else {
+                if(finalCart.cartItems.some(cartItemElement =>cartItemElement.id === selectedCartItemId)){
+                    finalCart.cartItems.forEach(cartItemElement => {
+                        if (cartItemElement.id === selectedCartItemId) {
+                           cartItemElement.count = parseInt(cartItemElement.count) + 1;
+                         }
+                    });
+                }else{
+                    let cartArrayItem = {id: selectedCartItemId,count: 1,itemName: selectedCartItemName,
+                        price: selectedCartItemPrice,totalItemcost: selectedCartItemPrice,imageURL: selectedCartItemImgURL,modifiers: []
+                    };
+                    finalCart.cartItems.push(cartArrayItem);
+                }
+                sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
+                     // finalCart.cartItems.forEach(cartItemElement => {
+                     //     if (cartItemElement.id === selectedCartItemId) {
+                     //
+                     //       // $(selectedCartItem).find('.quantity').text('Quantity'+count);
+                     //        cartItemElement.count = parseInt(cartItemElement.count) + 1;
+                     //         sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
+                     //      } else {
+                     //            let count =1;
+                     //             cartArrayItem = {id: selectedCartItemId,count: count,itemName: selectedCartItemName,
+                     //                   price: selectedCartItemPrice,totalItemcost: selectedCartItemPrice,imageURL: selectedCartItemImgURL,modifiers: []
+                     //               };
+                     //                finalCart.cartItems.push(cartArrayItem);
+                     //         sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
+                     //      }
+                     // });
+            }
+
+            //JSON.parse(sessionStorage.getItem("finalCart")).;
+//            finalCart.cartItems.cartTotalPrice = getPrice();
+           // sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
+            getPrice();
+
+
+              /*  else{
+                    cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
+                        totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,modifiers:[]};
+                    let col = "<div class ='column zoom ' style='display: inline-block; background: #fff;margin-right: 20px;float: left;'>" +
+                        "<button  id="+selectedCartItemId+" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px'>" +
+                        "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
+                        '<p style=" margin: 0;width: 150px;"> ' +selectedCartItemPrice+ '</p> ' +
+                        '<img  id ='+selectedCartItemId +' style="height:70px; width:70px;float: right; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemImgURL + '>' +
+                        '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                        'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                        '' + selectedCartItemName + '</a>' +
+                        "</div>";
+                }*/
+
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s12 ' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -527,26 +604,28 @@
                 "</button>"+
                 "</form>"+
                 "</div>" + "</div>"+"<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>";
-            let col = "<div class ='column zoom ' style='display: inline-block; background: #fff;margin-right: 20px;float: left;'>" +
-                "<button  id="+selectedCartItemId+" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px'>" +
-                "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
-                '<p style=" margin: 0;width: 150px;"> ' +selectedCartItemPrice+ '</p> ' +
-                '<img  id ='+selectedCartItemId +' style="height:70px; width:70px;float: right; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemImgURL + '>' +
-                '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                '' + selectedCartItemName + '</a>' +
-                "</div>";
+
             if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                 $('.checkout-container').append(button);
             }
-            //$('.checkout-container').html(col);
-            $('.checkoutbutton').append(col);
-            let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
-             let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
-              totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,modifiers:[]};
-             finalCart.cartItems.push(cartArrayItem);
-            sessionStorage.setItem("finalCart" ,JSON.stringify(finalCart));
-            let itemPrice =getPrice();
+            $('.checkoutbutton').empty();
+            finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+            finalCart.cartItems.forEach(cartItemElement => {
+                console.log("cartItemElement.count cartItemElement.count",cartItemElement.count);
+                console.log("cartItemElement.totalItemcost cartItemElement.totalItemcost",cartItemElement.totalItemcost);
+                let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
+                    "<button id =" + cartItemElement.id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
+                    "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
+                    '<p style=" margin: 0;width: 150px;"> ' + cartItemElement.totalItemcost + '</p> ' +
+                    '<img  id =' + selectedCartItemId + ' style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + cartItemElement.imageURL + '>' +
+                    '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                    'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                    '' + cartItemElement.itemName + '</a>' +
+                    "<p class='quantity'>" + 'Quantity - ' + cartItemElement.count + "</p>" +
+                    "</div>";
+                    $('.checkoutbutton').append(col);
+
+            });
             $('#checkoutButton').html('checkout');
         }
         else {
@@ -899,60 +978,54 @@
     };
 
     function removeItem(item) {
-        let selectedItemId = $(item).attr('id');
-        let removedItem = $(item).parent();
-        $('#row').css('display' , 'flex' );
-        $('#subMenuItems').css('display' , 'flex');
-        $('#modalPopup').css('display' ,'none');
-
-        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        for (let i = 0; i < finalCart.cartItems.length; i++) {
-            if (finalCart.cartItems[i].id === selectedItemId) {
-                finalCart.cartItems.splice(i, 1);
-                console.log('removed items array', finalCart.cartItems);
-
+        if(item !=undefined) {
+            let removedItem = $(item).parent();
+            if ($('.row .column').hasClass('selected-item')) {
+                $('.row .column').removeClass('selected-item');
+            } else {
+                $(removedItem).addClass('selected-item');
             }
-        }
-        $(removedItem).remove();
-        let items = $('.footer1 .checkoutbutton').find('.column');
-        console.log("items", items);
-        console.log("items length", items.length);
-        //if(selectedItemId ===  $('.checkoutbutton').find('.column img').attr('id')) {
-        /*  for(let i =0;i<items.length;i++) {
-              console.log("items " , items[i].find('img'));
-              if(items[i].find('img').attr('id') ===selectedItemId ) {
-                  $(items[i]).remove();
-              }
-          }*/
-
-        //}
-        console.log("Final Cart Cart Items before storage", finalCart);
-        sessionStorage.setItem("finalCart", JSON.stringify(finalCart));
-        finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        console.log("Final Cart Cart Items after storage", finalCart);
-
-        if (finalCart.cartItems.length === 0) {
-            $('.footer1').remove();
+            $('#window').removeClass('hidden');
+            $('#window').addClass('show');
+            $('#subMenuItems').css('z-index' ,'1000');
+            $('#subMenuItems').css('pointer-events' ,'none');
+            $('#subMenuItems').css('position' ,'fixed');
 
         }
-        /*else {
-            for (let i = 0; i < finalCart.cartItems.length; i++) {
-                let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
-                    "<button id = " + finalCart.cartItems[i].id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
-                    "<i  class='material-icons' style='font-size: 10px;'>close</i></button>"   +
-                    '<p style=" margin: 0;width: 150px;"> ' + finalCart.cartItems[i].price + '</p> ' +
-                    '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + finalCart.cartItems[i].imageURL + '>' +
-                    '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                    'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                    '' + finalCart.cartItems[i].itemName + '</a>' +
-                    "</div>";
-                $('.checkoutbutton').append(col);
-            } */
-
-        //}
     }
 
+       function removeItemConfirm(){
+           let selectedItemId = $('.selected-item').find('button').attr('id');
+          // let removedItem = $(item).parent();
+           $('#row').css('display' , 'flex' );
+           $('#subMenuItems').css('display' , 'flex');
+           $('#modalPopup').css('display' ,'none');
+           let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+           for (let i = 0; i < finalCart.cartItems.length; i++) {
+               if (finalCart.cartItems[i].id === selectedItemId) {
+                   finalCart.cartItems.splice(i, 1);
+                   console.log('removed items array', finalCart.cartItems);
 
+               }
+           }
+           $('.selected-item').remove();
+           let items = $('.footer1 .checkoutbutton').find('.column');
+           sessionStorage.setItem("finalCart", JSON.stringify(finalCart));
+           finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+           console.log("Final Cart Cart Items after storage", finalCart);
+
+           if (finalCart.cartItems.length === 0) {
+               $('.footer1').remove();
+
+           }
+           getPrice();
+           $('#window').addClass('hidden');
+           $('#window').removeClass('show');
+           $('#subMenuItems').css('z-index' ,'0');
+           $('#subMenuItems').css('pointer-events' ,'all');
+           $('#subMenuItems').css('position' ,'static');
+
+       }
 </script>
 </html>
 
@@ -976,6 +1049,36 @@
             </div>
         </div>
 
+    </div>
+</div>
+<div  class ='hidden modal' id="window"
+      style="position: absolute;
+        border: 1px solid;
+        width:270px;
+        z-index:1100;
+       /* left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);*/
+        background: #fff;
+          left: 10%;
+         top: 50%;
+        right: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 58px;">
+    <div>
+        <p style="display: inline-block;width: 100%;
+    margin: 0;">Are You Sure Want To Delete This Item</p>
+    </div>
+    <div  style=" position: absolute;
+     bottom: 0;
+     width: 100%;">
+        <button  style="padding:0;width:48%;
+    bottom: 0;"  onclick="removeItemConfirm()" value="Continue">
+            Yes
+        </button>
+        <button  onclick="exit()" style="padding:0;width:48%;
+    bottom: 0;">No</button>
     </div>
 </div>
 

@@ -5,7 +5,7 @@
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <META name="viewport" content="initial-scale=0.66, user-scalable=no">
+
     <!-- <title>Happy Joes</title> -->
     <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
@@ -45,32 +45,94 @@
 </form>
 
 <div class ="cartItems"></div>
-
+<div class ="footer" style="background: #fff;height: 45px;">
+    <form class="formaction">
+        <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
+            Continue Shopping
+        </button>
+        <button class="nextBtn" formaction="/personInfo"  style="float: right">
+            NEXT
+        </button>
+    </form>
+</div>
 </body>
 <script>
     $(document).ready(function() {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         finalCart.cartItems.forEach(cartitem => {
             let col = "<div class='row' style='background:#fff; display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
-                "<button id='increaseCount' class='col'  style='display: inline;height: 35px;'><i class='material-icons'>remove</i></button>" +
+                "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 35px;'>" +
+                "<i class='material-icons'>remove</i></button>" +
                 "<p id='itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" +cartitem.count+
                 "</p>" +
-                "<button id='decreaseCount' class='col'  style='display: inline;height: 35px;'><i class='material-icons'> add </i></button>" +
+                "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 35px;'>" +
+                "<i class='material-icons'> add </i></button>" +
                 "<div class ='column zoom ' style='display: inline-block; flex:80%!important; max-width: unset; margin-right: 20px; float: left;'>" +
-                '<a class ="selectItem" style=" margin :0;' +
+                '<p id = '+cartitem.id+ ' class ="selectItem" style=" margin :0;' +
+
                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                '' + cartitem.itemName + '</a>' +
+                '' + cartitem.itemName + '</p>' +
                 "</div>"+
                  "<div class= 'cartItemPrice' style='flex: 20%;justify-content: end;display: inline-block;'>"+
-                '<div style=" margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
-                "<button  id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
-                "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
+                '<div  class ="price" style=" margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
+                "<button  class ='show'  onclick='show(this)' id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
+                "<i    class='material-icons' style='font-size: 10px'>close</i></button>" +
                 "</div>"+
                 "</div>";
             $('body').append(col);
 
         });
         $('.row').appendTo($('.cartItems'));
+        function increaseItemCount() {
+            let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+            //let id =$('.card-image').find('img').attr('id');
+            //let cartItemCount =$('#itemCount').text();
+            // cartItemCount =parseInt(cartItemCount);
+            // cartItemCount =cartItemCount+1;
+            // let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+            $.each(finalCart.cartItems, function( index, value ) {
+                if(value.id===id){
+                    value.count =cartItemCount;
+                }
+            });
+            sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
+            let itemPrice =getPrice();
+            $('#checkoutButton').html('ADD TO CART'+currency(itemPrice, { formatWithSymbol: true }).format());
+            $('#itemCount').html(cartItemCount);
+
+        }
+
+
     });
 </script>
 </html>
+<div  class ='hidden' id="window"
+        style="position: absolute;
+        border: 1px solid;
+        width:270px;
+       /* left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);*/
+        background: #fff;
+          left: 10%;
+         top: 50%;
+        right: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 58px;">
+    <div>
+    <p style="display: inline-block;width: 100%;
+    margin: 0;">Are You Sure Want To Delete This Item</p>
+    </div>
+<div  style=" position: absolute;
+     bottom: 0;
+     width: 100%;">
+    <button  style="padding:0;width:48%;
+    bottom: 0;"  onclick="removeItem()" value="Continue">
+        Yes
+    </button>
+    <button  onclick="exit()" style="padding:0;width:48%;
+    bottom: 0;">No</button>
+</div>
+</div>
+

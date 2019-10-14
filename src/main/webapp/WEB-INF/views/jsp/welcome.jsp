@@ -16,15 +16,7 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
             <!-- Compiled and minified JavaScript -->
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
-            <link rel="stylesheet"
-                  href="https://fonts.googleapis.com/css?family=Tangerine">
-            <style>
-                textFont {
-                    font-family: 'Tangerine', serif;
-                    font-size: 28px;
-                    text-shadow: 4px 4px 4px #aaa;
-                }
-            </style>
+
         </head>
         <div id ="wrapper">
             <nav class="navbar" style="height:unset;line-height:unset;  ">

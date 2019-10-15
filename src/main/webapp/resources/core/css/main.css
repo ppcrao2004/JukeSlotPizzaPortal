@@ -698,9 +698,21 @@ ul.stepper>.step:not(:last-of-type):after{
         padding-left: 50px;
     }
 
-    .items .column{
-        width:40%;
+    .items .column,
+    .choice{
+        width:40% !important;
         margin-bottom: 5%;
+    }
+    .choice img{
+        width:50% !important;
+    }
+    .choice .right{
+        width:50%!important;
+    padding: 0 !important;
+    }
+    .choice .backBtn{
+        width: 70px !important;
+
     }
 }
 .items .column{

@@ -44,9 +44,10 @@
     </ul>
 </form>
 <button  class ='backBtn' onclick="previousStep()" >BACK</button>
-<div class ='price'>Your Pay</div>
+<div class ='price' style="float: right"></div>
 <p>Please check your order</p>
-<p>SelectedItem</p>
+<div class ='cartItems'></div>
+
 <button   style=" background: #fff;
         border: 1px solid;
         border-radius: 25px;
@@ -79,5 +80,31 @@ font-weight: 600;">TIP</button>
     function previousStep(){
         history.go(-1);
     }
+
+    $(document).ready(function () {
+        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+        $('.price').text('You Pay' +finalCart.cartTotalPrice);
+        let choices = '';
+        finalCart.cartItems.forEach(cartItem => {
+            cartItem.modifiers.forEach(modifier => {
+                modifier.choices.forEach(choice => {
+                    choices = choices +choice.name+',';
+                });
+            });
+            let col = '<div class="cartItem">' +
+                    '<div style="width:80%; float: left">'+
+                '<p>' + cartItem.itemName + '</p>' +
+                '<p>' +choices+'</p>' +
+                    '</div>'+
+                '<p style="float: right;">'+cartItem.totalItemcost+'</p>' +
+
+
+                '</div>';
+
+            $('.cartItems').append(col);
+
+        });
+
+    })
 </script>
 </html>

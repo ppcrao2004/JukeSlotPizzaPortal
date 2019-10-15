@@ -44,9 +44,23 @@
     </ul>
 </form>
 <button class ='backBtn' onclick="previousStep()">BACK</button>
-<div class ='price'>Your Pay</div>
+<div class ='price' style="float: right"></div>
 <p>Please select a payment method</p>
-<div class ="footer" style="background: #fff; height: 45px;">
+<div class="checkout-inner">
+    <div class="left zoom">
+        <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">
+            <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/cash.png" alt="CASH">
+            <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Cash payment</p>
+        </a>
+    </div>
+    <div class="right zoom">
+        <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;" >
+            <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/credit.png" alt="CREDITCARD"  />
+            <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Card Payment</p>
+        </a>
+    </div>
+</div>
+<div class ="footer" style="background: #fff; height: 45px;position: fixed;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
             Continue Shopping
@@ -61,5 +75,9 @@
     function previousStep(){
         history.go(-1);
     }
+    $(document).ready(function () {
+        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+        $('.price').text('You Pay' +finalCart.cartTotalPrice);
+    })
 </script>
 </html>

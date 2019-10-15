@@ -44,8 +44,8 @@
     </ul>
 </form>
 
-<div class ="cartItems"></div>
-<div class ="footer" style="background: #fff;height: 45px;">
+<div  style="margin-bottom: 60px;" class ="cartItems"></div>
+<div class ="footer" style="background: #fff;height: 45px;position: fixed;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
             Continue Shopping

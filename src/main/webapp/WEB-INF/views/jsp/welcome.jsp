@@ -90,6 +90,7 @@
             }else{
                 sessionStorage.setItem('siteID',siteIDName);
                 homePageLoad();
+                siteConfiguration();
             };
         }
 
@@ -145,6 +146,29 @@
 
                     }
                     nextSlide();
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done: function (e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+
+        }
+        function siteConfiguration() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/template/site/configuration/"+sessionStorage.getItem('siteID'),
+                dataType: 'json',
+                timeout: 100000,
+                success: function (data) {
+                    sessionStorage.setItem('siteConfiguration', JSON.stringify(data));
+                    let taxRate =data.data.tax_rate;
+                    sessionStorage.setItem("taxRate",taxRate);
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);

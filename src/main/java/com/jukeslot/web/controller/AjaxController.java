@@ -24,11 +24,11 @@ public class AjaxController {
         return templateSiteListResponse;
     }
 
-	@RequestMapping(value = "/template/site/configuration", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
-	public SiteConfigResponse getTemplateSiteConfig() throws  Exception{
+	@RequestMapping(value = "/template/site/configuration/{siteID}", method = RequestMethod.GET, produces = { "application/json" }, consumes = { "application/json" })
+	public SiteConfigResponse getTemplateSiteConfig(@PathVariable String siteID) throws  Exception{
         log.info("==== RESTful API Response Template Site Configuration START getTemplateSiteConfig=======");
         SiteConfigResponse siteConfigurationRes= new GenericRestClient<String, SiteConfigResponse>().execute(
-                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_SITE_CONFIGURATION_URL, HttpMethod.GET), " ", SiteConfigResponse.class);
+                new RequestDetails(Constants.WEB_SERVICE_URL+Constants.TEMPLATE_SITE_CONFIGURATION_URL+siteID, HttpMethod.GET), " ", SiteConfigResponse.class);
         log.info(siteConfigurationRes.toString());
 		log.info("==== RESTful API Response Template Site Configuration END getTemplateSiteConfig=======");
 		return siteConfigurationRes;

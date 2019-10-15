@@ -19,7 +19,7 @@ public class Constants {
     // public final static String WEB_SERVICE_URL = "http://50.56.214.164:8080/";
     public final static String WEB_SERVICE_URL = "http://104.239.141.95:8081/";
     public final static String TEMPLATE_LIST_URL= "api/template/list/"+SITE_ID;
-    public final static String TEMPLATE_SITE_CONFIGURATION_URL = "api/template/site_configuration/"+SITE_ID;
+    public final static String TEMPLATE_SITE_CONFIGURATION_URL = "api/template/site_configuration/";
     public final static String TEMPLATE_HOMEPAGE_URL ="api/template/home_page/";
     public final static String TEMPLATE_COMPANY_CONFIGURATION="api/template/company_configuration/Jukeslot";
     public final static String TEMPLATE_MENU_LIST_URL = "api/template/menu/list/";

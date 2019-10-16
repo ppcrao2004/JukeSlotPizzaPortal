@@ -46,16 +46,19 @@
 <button  class ='backBtn' onclick="previousStep()" >Back</button>
 <div class ='price' style="float: right"></div>
 <form class="formaction">
-Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%" type="text" name="name" required/>
+    Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%" type="text" name="name" required></form>
 
 <div class ="footer"  style="background: #fff;height: 45px;">
+    <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
             Continue Shopping
         </button>
+
         <button  class ='nextBtn' formaction="/paymentMethod"   type="submit" style="float: right">
             NEXT
         </button>
     </form>
+
 </div>
 </body>
 <script>

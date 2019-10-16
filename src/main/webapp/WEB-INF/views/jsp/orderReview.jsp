@@ -45,16 +45,20 @@
 </form>
 
 <div  style="margin-bottom: 60px;" class ="cartItems"></div>
-<div>
-    <p>Tax</p>
-    <p>You Pay</p>
+<div style="float: right;
+    bottom: 0;
+    margin-bottom: 50px;
+    padding-left: 80%;
+    width: 100%;">
+    <p style='font-weight:800;' class ='tax'>Tax</p>
+    <p style="font-weight:800;" class ='cartPrice'>You Pay</p>
 </div>
-<div class ="footer" style="background: #fff;height: 45px;position: fixed;">
+<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
     <form class="formaction">
-        <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
+        <button  formaction="/mainMenu" style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping
         </button>
-        <button class="nextBtn" formaction="/personInfo"  style="float: right">
+        <button class="nextBtn" formaction="/personInfo"  style="float: right;width: 200px; padding:8px;font-size: 18px; font-weight:600;font-size: 18px;">
             NEXT
         </button>
     </form>
@@ -78,15 +82,18 @@
                 '' + cartitem.itemName + '</p>' +
                 "</div>"+
                  "<div class= 'cartItemPrice' style='flex: 20%;justify-content: end;display: inline-block;'>"+
-                '<div  class ="price" style=" margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
+                '<div  class ="price" style=" font-weight:800;margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
                 "<button  class ='show'  onclick='show(this)' id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
                 "<i    class='material-icons' style='font-size: 10px'>close</i></button>" +
                 "</div>"+
                 "</div>";
             $('body').append(col);
 
+
         });
         $('.row').appendTo($('.cartItems'));
+        let taxRate = JSON.parse(sessionStorage.getItem("taxRate"));
+
         function increaseItemCount() {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
             //let id =$('.card-image').find('img').attr('id');
@@ -106,7 +113,8 @@
 
         }
 
-
+    $('.tax').text('Tax  :'+sessionStorage.getItem("taxPay"));
+    $('.cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
     });
 </script>
 </html>

@@ -395,14 +395,23 @@
     }
 
     function customizeCategory(item) {
-
         let selectedCartItem = $(item);
         let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
         let selectedCartItemDetail = JSON.parse(sessionStorage.getItem(selectedCartItemId));
         let selectedCartItemPrice = $(selectedCartItem).find('p').text();
         let selectedCartItemName = $(selectedCartItem).find('a').text();
         let selectedCartItemImgURL = $(item).find('img').attr('src');
-         if(selectedCartItemDetail.modifiers=== null) {
+
+         if(selectedCartItemDetail.modifiers=== null ||selectedCartItemDetail.has_modifier ===false) {
+             let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
+                 :selectedCartItemDetail.spicy_levels[0] ;
+             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+             let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
+                 totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,spicyLevel:spicyLevel, modifiers:[]};
+             finalCart.cartItems.push(cartArrayItem);
+             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+             getPrice();
+             console.log(finalCart);
              let button = "<div class='footer1 row' style='width: 100%;bottom: 0; position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                  "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                  "<form class='formaction'>"+
@@ -411,24 +420,32 @@
                   'checkout'+
                   "</button>"+
                  "</form>"+
-                 "</div>" + "</div>"+"<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>";
-             let col = "<div class ='column zoom ' style='display: inline-block; background: #fff;margin-right: 20px;float: left;'>" +
-                 "<button  id="+selectedCartItemId+" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px'>" +
-                 "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
-                 '<p style=" margin: 0;width: 150px;"> ' +selectedCartItemPrice+ '</p> ' +
-                 '<img  style="height:70px; width:70px;float: right; padding: 0 10px;background: #fff; margin: 0;" src =' + selectedCartItemImgURL + '>' +
-                 '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                 'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                 '' + selectedCartItemName + '</a>' +
-                 "</div>";
+                 "</div>" +
+                 "<div class ='checkoutbutton' style='flex-wrap: nowrap;display: inline-flex;overflow-x: scroll;width: 100vw;'>"+"</div>"+"</div>";
              if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
                  $('.checkout-container').append(button);
              }
-             //$('.checkout-container').html(col);
-             $('.checkoutbutton').append(col);
 
 
-         }else {
+             finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+             $('.checkoutbutton').empty();
+             finalCart.cartItems.forEach(cartitem => {
+                 let col = "<div class ='column zoom ' style='display: inline-block; background: #fff;margin-right: 20px;float: left;'>" +
+                     "<button  id=" + cartitem.id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px'>" +
+                     "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
+                     '<p style=" margin: 0;width: 150px;"> ' + cartitem.price + '</p> ' +
+                     '<img  style="height:70px; width:70px;float: right; padding: 0 10px;background: #fff; margin: 0;" src =' + cartitem.imageURL + '>' +
+                     '<a class ="selectItem" style="background: #fff ; margin :0;' +
+                     'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                     '' + cartitem.itemName + '</a>' +
+                     "</div>";
+
+                 //$('.checkout-container').html(col);
+                 $('.checkoutbutton').append(col);
+             });
+
+         }
+         else {
              $("#subMenuItems").empty();
              $('#modalPopup').css('display', 'block');
 
@@ -477,34 +494,6 @@
                  $("#subMenuItems").css('display' ,'none');
              });
 
-
-
-            // for (let j = 0; j <= selectedCartItemDetail.modifiers.length - 1; j++) {
-            //     let modifier = {modifierID: selectedCartItemDetail.modifiers[j].id,modifierHeading:selectedCartItemDetail.modifiers[j].heading,
-            //         numberOfOptions:selectedCartItemDetail.modifiers[j].number_of_options,choices:[]};
-            //     cartArrayItem.modifiers.push(modifier);
-            //     let div = "<div id ="+selectedCartItemDetail.modifiers[j].id+" class ='modifiers' allowedchoices = "+selectedCartItemDetail.modifiers[j].number_of_options+" " +
-            //         "style='display: flex; width: 100%;'>" +
-            //         ' <p>' + selectedCartItemDetail.modifiers[j].heading + '</p>' +
-            //         "</div>";
-            //     $('#itemModifierImage').append(div);
-            //     for (let k = 0; k <= selectedCartItemDetail.modifiers[j].choices.length - 1; k++) {
-            //         let col = "<div  class ='column zoom addToCart ' style='display: inline-block;' onclick='addToCart(this)' >" +
-            //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 150px;"> $' + selectedCartItemDetail.modifiers[j].choices[k].choice_cost + '</p> ' +
-            //             '<img  id ='+selectedCartItemDetail.modifiers[j].choices[k].id+' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" ' +
-            //             'src =' + selectedCartItemDetail.modifiers[j].choices[k].image + '>' +
-            //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
-            //             'display: block;width: 150px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-            //             '' + selectedCartItemDetail.modifiers[j].choices[k].choice_name + '</a>' +
-            //             "</div>";
-            //         $('.modifiers').append(col);
-            //        // $('.addTocart').appendTo($('.modifiers'));
-            //         //$('.addToCart').remove();
-            //
-            //     }
-            //     $('.modifiers').addClass('choices').removeClass('modifiers');
-            //     $("#subMenuItems").css('display' ,'none');
-            // }
              finalCart.cartItems.push(cartArrayItem);
              sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             let count =1;

@@ -26,9 +26,6 @@
                     <img id="logoimage" alt="">
                 </a>
             </div>
-           <!-- <div class="navbar-header-text">
-                <span class="headerTitle" style="alignment: center">Good times to be together</span>
-            </div> -->
         </div>
     </div>
 </nav>

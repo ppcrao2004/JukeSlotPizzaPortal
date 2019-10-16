@@ -151,7 +151,10 @@ function getPrice(){
     finalCart.cartTotalPrice = currency(priceOnButton, { formatWithSymbol: true }).format();
     sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
     console.log("addCartButtonPrice" ,addCartButtonPrice);
-    return addCartButtonPrice
+    let taxRateOrderReview =currency(currency(finalCart.cartTotalPrice).multiply(sessionStorage.getItem("taxRate")).divide(100), { formatWithSymbol: true }).format();
+    sessionStorage.setItem("taxPay",taxRateOrderReview);
+    sessionStorage.setItem("customerPayPrice",currency(currency(finalCart.cartTotalPrice).add(taxRateOrderReview), { formatWithSymbol: true }).format());
+    return addCartButtonPrice;
 
 }
 

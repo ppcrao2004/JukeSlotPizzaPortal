@@ -3,10 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
     <html lang="en" style="overflow-y: hidden;">
-        <head>
+       <!-- <head>
             <META name="viewport" content="width=device-width, initial-scale=1.0">
             <META name="viewport" content="initial-scale=0.66, user-scalable=no">
-            <!--<title>Happy Joes</title> -->
+            <title>Happy Joes</title> -->
 
             <c:url var="home" value="/" scope="request"/>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
@@ -16,7 +16,7 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
             <!-- Compiled and minified JavaScript -->
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
-
+-->
         </head>
         <div id ="wrapper">
             <nav class="navbar" style="height:unset;line-height:unset;  ">
@@ -79,6 +79,7 @@
             });
 
             $('#myModal').css('display' ,'block');
+
         });
 
         function empty()
@@ -193,7 +194,6 @@
     width: 100%;
     background: #000;
      max-height: 100%;">
-
     <!-- Modal content -->
     <div class="modal-content" style="text-align: center;
     position: relative;

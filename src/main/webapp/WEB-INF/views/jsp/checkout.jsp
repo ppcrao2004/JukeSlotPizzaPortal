@@ -15,7 +15,6 @@
      <META name="viewport" content="initial-scale=0.66, user-scalable=no">
      <!-- <title>Happy Joes</title> -->
      <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
-     <script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>
      <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
      <!-- Compiled and minified JavaScript -->
      <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
@@ -45,7 +44,7 @@
             <div style="text-align: center;width: 100%;background: #ffffff; padding-top: 100px;">
                 <span style="background:#fff ;height: 50px; font-size: 6vw;  color: #C53131;"> What is your preference ? </span>
             </div>
-            <div class ="maincontainer">
+            <div class ="maincontainer" style="padding-top: 10px;">
             <div class ="checkout-container" style="background: #000">
                 <div class="checkout-inner">
                     <div class="left zoom">
@@ -63,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
+        <div class="footer" style="position: fixed;">
             <div class="footerContainer" >
                 <button type="submit" id="btn-search" style=" display: inline-block;
     margin: 0px;
@@ -85,7 +84,52 @@
  $(document).ready(function() {
      let finalCart = {cartTotalPrice: 0 , cartItems: []};
      sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+     homePageLoad();
+
  });
+ function homePageLoad() {
+     $('#myModal').css('display' ,'none');
+     $.ajax({
+         type: "GET",
+         contentType: "application/json",
+         url: "/template/homepage/"+sessionStorage.getItem('siteID'),
+         dataType: 'json',
+         timeout: 100000,
+         success: function (data) {
+             sessionStorage.setItem('welcomeService', JSON.stringify(data));
+             if (data.data.logo != null) {
+                 document.getElementById("logoimage").src = data.data.logo;
+
+
+             } else {
+                 document.getElementById("logoimage").src = "/resources/core/images/mipmap-port-1800x1030/logo_happyjoes.png";
+             }
+
+             if (data.data.back_ground_color != null) {
+                 $('.starter-template').css = ("background-color", "data.data.back_ground_color");
+             } else {
+                 $('.starter-template').css("background-color", "#000");
+             }
+
+             //  let imageHome = document.getElementById("image").setAttribute("src",img_array);
+             let img_array=[];
+             for(let i=0 ; i<=data.data.display_images.length-1;i++)
+             {
+                 img_array.push(data.data.display_images[i].image);
+             }
+
+         },
+         error: function (e) {
+             console.log("ERROR: ", e);
+             display(e);
+         },
+         done: function (e) {
+             console.log("DONE");
+             enableSearchButton(true);
+         }
+     });
+
+ }
  </script>
 
  </html>

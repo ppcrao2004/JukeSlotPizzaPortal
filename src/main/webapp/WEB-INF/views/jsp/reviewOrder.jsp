@@ -74,6 +74,10 @@ margin-bottom: 30px;"></div>
 
         finalCart.cartItems.forEach(cartitem => {
             let itemDescription = JSON.parse(sessionStorage.getItem(cartitem.id)).description;
+            if(itemDescription ===null){
+                itemDescription ='';
+
+            }
                 let col = "<div class ='column zoom ' style=' height:170px;display: inline-block;background: rgb(221, 221, 221); flex:50%; margin-right: 20px; float: left;'>" +
                 '<a class ="selectItem" style=" margin :0;' +
                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -101,12 +105,12 @@ margin-bottom: 30px;"></div>
                              '<img  id = '+cartitem.id +' style=" width:40%; float:left; display:inline-block; padding: 5px;background:#fff; display:inline-block; height:100px;width:90px;" src ='+ cartitem.image +'>'+
                         "<div  class ='right'style='float:right;width:140px;'>"+
                         '<p class="title" >'+cartitem.title+'</p>'+
-                            "<div >"+
-                               '<button onclick="decreaseCount(this)" id="decreaseCount" class="col" style="display: inline-block;height: 35px;padding:0;">'+
+                            "<div style='display: inline-flex;' >"+
+                               '<button onclick="decreaseCount(this)" id="decreaseCount" class="col" style="display: inline-block;height: 30px; width:30px;padding:0;">'+
                                '<i class="material-icons">'+'remove'+'</i>'+
                                 '</button>'+
-                                '<p  class="quantity" id="itemCount" class="col" style="margin: 0;padding: 0;display: inline-block; background: rgb(221, 221, 221);padding-top: 5px;">'+1+'</p>'+
-                               '<button  onClick="increaseCount(this)" id="increaseCount" class="col" style="display: inline-block;padding:0;height: 35px; ">'+
+                                '<p  class="quantity" id="itemCount" class="col" style="margin: 0;font-size: 20px;display: inline-block; background: padding-top: 5px;">'+1+'</p>'+
+                               '<button  onClick="increaseCount(this)" id="increaseCount" class="col" style="display: inline-block;padding:0;height: 30px;width:30px; ">'+
                               '<i class="material-icons"> '+"add"+'</i>'+
                              '</button>'+
                             '</div>'+

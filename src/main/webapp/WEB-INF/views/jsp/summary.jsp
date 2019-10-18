@@ -44,10 +44,10 @@
     </ul>
 </form>
 <button  class ='backBtn' onclick="previousStep()" >BACK</button>
-<div class ='price' style="float: right"></div>
+<div class ='personalinfo-cartPrice' style="float: right"></div>
 <p>Please check your order</p>
 <div class ='cartItems'></div>
-
+<div class ='' style="width: 100%; display: inline-block;">
 <button   style=" background: #fff;
         border: 1px solid;
         border-radius: 25px;
@@ -65,9 +65,10 @@ float: right;
 border: 1px solid #000;
 width: 107px;
 font-weight: 600;">TIP</button>
-<div class ="footer" style="background: #fff;height: 45px;">
+</div>
+<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
     <form class="formaction">
-        <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
+        <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping
         </button>
         <button  class="nextBtn" formaction="/summary"  style="float: right">
@@ -83,7 +84,7 @@ font-weight: 600;">TIP</button>
 
     $(document).ready(function () {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        $('.price').text('You Pay' +finalCart.cartTotalPrice);
+        $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
         let choices = '';
         finalCart.cartItems.forEach(cartItem => {
             cartItem.modifiers.forEach(modifier => {

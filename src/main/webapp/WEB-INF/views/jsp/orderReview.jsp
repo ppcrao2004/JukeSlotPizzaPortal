@@ -28,8 +28,6 @@
     <ul class="stepper parallel horizontal" style="min-height: unset;">
         <li class="step active">
             <div class="step-title waves-effect waves-dark">View Order</div>
-
-
         </li>
         <li class="step">
             <div class="step-title waves-effect waves-dark">Personal Info</div>
@@ -51,7 +49,7 @@
     padding-left: 80%;
     width: 100%;">
     <p style='font-weight:800;' class ='tax'>Tax</p>
-    <p style="font-weight:800;" class ='cartPrice'>You Pay</p>
+    <p style="font-weight:800;" class ='personalinfo-cartPrice'>You Pay</p>
 </div>
 <div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
     <form class="formaction">
@@ -71,7 +69,7 @@
             let col = "<div class='row' style='background:#fff; display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
                 "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 35px;'>" +
                 "<i class='material-icons'>remove</i></button>" +
-                "<p id='itemCount' class='col' style='margin: 0;padding: 0;display: table-row; background: rgb(221, 221, 221);padding-top: 5px;'>" +cartitem.count+
+                "<p id='itemCount' class='col' style='margin: 0;padding: 0;display: table-row;padding-top: 5px;'>" +cartitem.count+
                 "</p>" +
                 "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 35px;'>" +
                 "<i class='material-icons'> add </i></button>" +
@@ -113,8 +111,8 @@
 
         }
 
-    $('.tax').text('Tax  :'+sessionStorage.getItem("taxPay"));
-    $('.cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
+    $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+    $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
     });
 </script>
 </html>

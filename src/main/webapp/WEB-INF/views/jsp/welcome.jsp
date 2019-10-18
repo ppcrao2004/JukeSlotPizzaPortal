@@ -2,7 +2,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-    <html lang="en" style="overflow-y: hidden;">
+    <html lang="en" style="overflow: auto; position: fixed;">
        <!-- <head>
             <META name="viewport" content="width=device-width, initial-scale=1.0">
             <META name="viewport" content="initial-scale=0.66, user-scalable=no">
@@ -18,7 +18,7 @@
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
 -->
         </head>
-        <div id ="wrapper">
+        <div id ="wrapper" class ='welcomePage'>
             <nav class="navbar" style="height:unset;line-height:unset;  ">
                 <div class="navbar-container">
                     <div class="navbar-header">
@@ -34,13 +34,11 @@
                 </div>
             </nav>
         </div>
-        <body  class ="starter-template">
-             <div class="maincontainer">
+        <body  style="overflow-y: hidden;width:100%;" class ="starter-template">
+             <div class="maincontainer" style="scroll-behavior: unset;">
                  <!--<div class="imageText" id ="imageText" style="text-align: center">
                  </div> -->
                 <div class="maincontainer-image fade" style="
-    padding-top: 105px;
-    padding-bottom: 80px;
     overflow-y: hidden;
     ">
                     <img id="image" alt="" style="padding-bottom: 80px;">

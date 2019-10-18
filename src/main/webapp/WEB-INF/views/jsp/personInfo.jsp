@@ -44,7 +44,7 @@
     </ul>
 </form>
 <button  class ='backBtn' onclick="previousStep()" >Back</button>
-<div class ='price' style="float: right"></div>
+<div class ='cartPrice' style="float: right"></div>
 <form class="formaction">
     Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%" type="text" name="name" required></form>
 
@@ -68,7 +68,8 @@
 
    $(document).ready(function () {
        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-       $('.price').text('You Pay' +finalCart.cartTotalPrice);
+       //$('.price').text('You Pay' +finalCart.cartTotalPrice);
+       $('.cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
    })
 </script>
 </html>

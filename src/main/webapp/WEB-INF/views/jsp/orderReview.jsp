@@ -18,9 +18,9 @@
 </head>
 
 <%@include file="header.jsp" %>
-<body>
+<body style="background: #efefef">
 <div class ="header">
-    <h1>Your Order</h1>
+    <h1 style="font-size: 30px!important;">Your Order</h1>
 </div>
 
 
@@ -66,7 +66,7 @@
     $(document).ready(function() {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         finalCart.cartItems.forEach(cartitem => {
-            let col = "<div class='row' style='background:#fff; display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
+            let col = "<div class='row' style=' display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
                 "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 35px;'>" +
                 "<i class='material-icons'>remove</i></button>" +
                 "<p id='itemCount' class='col' style='margin: 0;padding: 0;display: table-row;padding-top: 5px;'>" +cartitem.count+

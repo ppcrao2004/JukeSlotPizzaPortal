@@ -18,7 +18,7 @@
 </head>
 
 <%@include file="header.jsp" %>
-<body>
+<body style="background: #efefef;">
 <div class ="header">
     <h1>Your Order</h1>
 </div>
@@ -60,7 +60,7 @@
         </a>
     </div>
 </div>
-<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;"">
+<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping

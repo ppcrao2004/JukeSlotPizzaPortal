@@ -18,9 +18,9 @@
 </head>
 
 <%@include file="header.jsp" %>
-<body>
-<div class ="header">
-    <h1>Your Order</h1>
+<body style="background: #efefef">
+<div class ="header" style="text-align: center">
+    <h1 style="font-weight: 600;">Your Order</h1>
 </div>
 
 
@@ -44,16 +44,15 @@
     </ul>
 </form>
 <button  class ='backBtn' onclick="previousStep()" >Back</button>
-<div class ='cartPrice' style="float: right"></div>
-<form class="formaction">
-    Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%" type="text" name="name" required></form>
+<div class ='cartPrice' style="float: right;font-weight: 600;"></div>
+<form class="formaction" style="font-weight: 600;">
+    Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%;background: #fff;" type="text" name="name" required></form>
 
 <div class ="footer"  style="background: #fff;height: 45px;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
             Continue Shopping
         </button>
-
         <button  class ='nextBtn' formaction="/paymentMethod"   type="submit" style="float: right">
             NEXT
         </button>

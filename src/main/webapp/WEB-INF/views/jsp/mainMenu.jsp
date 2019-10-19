@@ -940,17 +940,31 @@
     }
 
     function mainmenunavigation() {
+        let choice ='true';
+        let finalCart =  JSON.parse(sessionStorage.getItem("finalCart"));
+        finalCart.cartItems.forEach(cartitem => {
+            cartitem.modifiers.forEach(modifierItem => {
+                if(modifierItem.numberOfOptions ===1 && modifierItem.choices.length !=1){
+                      choice ='false';
+                    }
+            });
+        });
+       if(choice === 'false'){
+           $('#popup').removeClass('hidden');
+           $('#popup').addClass('show');
+           $('#modalPopup').css('position' ,'fixed');
+       }
+       else{
         $('.mainMenuItems').css('opacity' ,'1');
         $('#modalPopup').css('display' ,'none');
         $("#row").css('display' ,'flex');
         $("#row").css('padding-top' ,'105px');
         $("#row").css('flex-wrap' ,'wrap');
-        $(".header").find('h1').css('display' ,'block');
         $('#checkout-inner').html($('#row'));
-        let finalCart =  JSON.parse(sessionStorage.getItem("finalCart"));
         if(finalCart.cartItems.length ===0) {
             $('.checkout-container').find('.addToCartBtn').remove();
-        } else{
+        }
+        else{
 
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0; position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
@@ -990,24 +1004,8 @@
                 $('.checkoutbutton').append(col);
                 console.log(cartitem.modifiers.choices);
             });
-
-            // for(let i =0;i<finalCart.cartItems.length;i++)
-            // {
-            //     console.log(finalCart.cartItems[i].id);
-            //     console.log(finalCart.cartItems);
-            //     let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
-            //     "<button id = "+finalCart.cartItems[i].id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
-            //         "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
-            //         '<p style=" margin: 0;width: 150px;"> ' +finalCart.cartItems[i].price+ '</p> ' +
-            //         '<img  style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + finalCart.cartItems[i].imageURL + '>' +
-            //         '<a class ="selectItem" style="background: #fff ; margin :0;' +
-            //         'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-            //         '' + finalCart.cartItems[i].itemName + '</a>' +
-            //         "</div>";
-            //     $('.checkoutbutton').append(col);
-            // }
-           // $('#subMenuItems').css('display' , 'flex');
         }
+       }
     };
 
     function removeItem(item) {
@@ -1062,6 +1060,12 @@
        }
        function fadeIn() {
            $('img').css('opacity', '1');
+       }
+       function exitpopup(){
+           $('#popup').removeClass('show');
+           $('#popup').addClass('hidden');
+           $('#modalPopup').css('position' ,'relative');
+
        }
 </script>
 </html>
@@ -1119,7 +1123,32 @@
     </div>
 </div>
 
-
+<div  class ='hidden modal' id="popup"
+      style="position: absolute;
+        border: 1px solid;
+        width:270px;
+        z-index:1100;
+       /* left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);*/
+        background: #fff;
+          left: 10%;
+         top: 50%;
+        right: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 58px;">
+    <div>
+        <p style="display: inline-block;width: 100%;
+    margin: 0;">Select One option from each modifier</p>
+    </div>
+    <div  style=" position: absolute;
+     bottom: 0;
+     width: 100%;">
+        <button  onclick="exitpopup()" style="padding:0;width:100%;
+    bottom: 0;">OK</button>
+    </div>
+</div>
 <%--For Each Example   arr.forEach(element => {  console.log(element); });--%>
 
 

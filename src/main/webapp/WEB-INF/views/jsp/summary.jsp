@@ -18,7 +18,7 @@
 </head>
 
 <%@include file="header.jsp" %>
-<body>
+<body style="background: #efefef;">
 <div class ="header">
     <h1>Your Order</h1>
 </div>

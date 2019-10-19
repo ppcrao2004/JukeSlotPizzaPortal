@@ -167,7 +167,11 @@
                 success: function (data) {
                     sessionStorage.setItem('siteConfiguration', JSON.stringify(data));
                     let taxRate =data.data.tax_rate;
+                    if(taxRate <1) {
+                        taxRate = taxRate*100;
+                    }
                     sessionStorage.setItem("taxRate",taxRate);
+                    console.log(taxRate);
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);

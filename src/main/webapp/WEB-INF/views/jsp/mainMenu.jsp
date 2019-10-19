@@ -280,9 +280,13 @@
                 sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
                 data.data.forEach(dataData => {
                     sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
-                    let item_cost = dataData.price.toFixed(2);
+                    let item_cost =currency(dataData.price, { formatWithSymbol: true }).format();
+                    if(item_cost =='$0.00')
+                    {
+                        item_cost  ="Free";
+                    }
                     let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
-                        '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;font-weight: 600;"> $' + item_cost + '</p> ' +
+                        '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;font-weight: 600;">'+item_cost+'</p> ' +
                         '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
                         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -365,9 +369,13 @@
                     data.data.forEach(dataData => {
                         sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
                         if (dataData.active_item == true) {
-                            let item_cost = dataData.price.toFixed(2);
+                           let item_cost=  currency(dataData.price, { formatWithSymbol: true }).format();
+                            if(item_cost == '$0.00'){
+                                item_cost ='Free';
+
+                            }
                             let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
-                                '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
+                                '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;">'+item_cost+'</p> ' +
                                 '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                                 '<a class ="selectItem" style="background: #fff ; margin :0;' +
                                 'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -377,21 +385,6 @@
                         }
                     });
 
-
-                    // for (let i = 0; i <= data.data.length - 1; i++) {
-                    //     sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
-                    //     if (data.data[i].active_item == true) {
-                    //         let item_cost = data.data[i].price.toFixed(2);
-                    //         let col = "<div class ='column zoom categoryItem'   onclick='customizeCategory(this)' style='display: block'>" +
-                    //             '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
-                    //             '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
-                    //             '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                    //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                    //             '' + data.data[i].title + '</a>' +
-                    //             "</div>";
-                    //         $("#subMenuItems").append(col);
-                    //     }
-                    // }
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);
@@ -408,6 +401,10 @@
         let selectedCartItemPrice = $(selectedCartItem).find('p').text();
         let selectedCartItemName = $(selectedCartItem).find('a').text();
         let selectedCartItemImgURL = $(item).find('img').attr('src');
+        if(selectedCartItemPrice =='Free')
+        {
+            selectedCartItemPrice ="$0.00";
+        }
         if(selectedCartItemDetail.modifiers=== null ||selectedCartItemDetail.has_modifier ===false) {
              let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
                  :selectedCartItemDetail.spicy_levels[0] ;
@@ -448,7 +445,7 @@
                  let col = "<div class ='column zoom ' style='display: inline-block; background: #fff;margin-right: 20px;float: left;'>" +
                      "<button  id=" + cartitem.id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px'>" +
                      "<i class='material-icons' style='font-size: 10px'>close</i></button>" +
-                     '<p style=" margin: 0;width: 150px;"> ' + cartitem.totalItemcost + '</p> ' +
+                     '<p style=" margin: 0;width: 150px;"> ' +cartitem.totalItemcost+ '</p> ' +
                      '<img  style="height:70px; width:70px;float: right; padding: 0 10px;background: #fff; margin: 0;" src =' + cartitem.imageURL + '>' +
                      '<a class ="selectItem" style="background: #fff ; margin :0;' +
                      'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -480,6 +477,10 @@
                 "<img  id ="+selectedCartItemId+" style='width: 200px;height: 200px' src="+selectedCartItemImgURL+">"+ "</div> </div>";
             $('#itemModifierImage').empty();
             $('#itemModifierImage').append(description);
+            if(selectedCartItemPrice =='Free')
+            {
+                selectedCartItemPrice ='$0.00';
+            }
              let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
                  :selectedCartItemDetail.spicy_levels[0] ;
              let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
@@ -497,7 +498,7 @@
 
                  modifierItem.choices.forEach(choice => {
                      let col = "<div  class ='column zoom addToCart ' style='display: inline-block; margin-right: 20px;' onclick='addToCart(this)' >" +
-                         '<p style=" margin: 0;  text-align:right ;width: 150px;"> $' + choice.choice_cost + '</p> ' +
+                         '<p style=" margin: 0;  text-align:right ;width: 150px;"> $' +choice.choice_cost+ '</p> ' +
                          '<img  id ='+choice.id+' style="height:150px; width:150px; padding: 0 10px;background: #fff; margin: 0;" ' +
                          'src =' + choice.image + '>' +
                          '<a class ="selectItem" style="background: #fff ; margin :0;' +
@@ -514,6 +515,11 @@
              sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
             let count =1;
             $('.footer1').remove();
+            if(selectedCartItemPrice =='$0.00')
+            {
+                selectedCartItemPrice ='Free';
+            }
+
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -523,8 +529,7 @@
                 "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'><i class='material-icons'>add</i></button>" +
                 "</div>" +
                 "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;' onclick='mainmenunavigation()'>" +
-                "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
-                selectedCartItemPrice + "</button>" +
+                "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +selectedCartItemPrice+ "</button>" +
                 "</div>" + "</div>";
 
             if( $('.checkout-container').find('.footer1').attr('class') ==undefined) {
@@ -540,7 +545,10 @@
         let selectedCartItemName = $(selectedCartItem).find('a').text();
         let selectedCartItemId=  $(selectedCartItem).find('img').attr('id');
         let selectedCartItemImgURL = $(item).find('img').attr('src');
-
+        if(selectedCartItemPrice =='Free')
+        {
+            selectedCartItemPrice ='$0.00';
+        }
         let selectedCartItemDetail= JSON.parse(sessionStorage.getItem(selectedCartItemId));
         if(selectedCartItemDetail.modifiers == null) {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
@@ -616,12 +624,16 @@
             $('.checkoutbutton').empty();
             finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
             finalCart.cartItems.forEach(cartItemElement => {
+                if(cartItemElement.totalItemcost =='$0.00')
+                {
+                    selectedCartItemPrice ='Free';
+                }
                 console.log("cartItemElement.count cartItemElement.count",cartItemElement.count);
                 console.log("cartItemElement.totalItemcost cartItemElement.totalItemcost",cartItemElement.totalItemcost);
                 let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
                     "<button id =" + cartItemElement.id + " onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
                     "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +
-                    '<p style=" margin: 0;width: 150px;"> ' + cartItemElement.totalItemcost + '</p> ' +
+                    '<p style=" margin: 0;width: 150px;"> ' +cartItemElement.totalItemcost+ '</p> ' +
                     '<img  id =' + selectedCartItemId + ' style="height:70px; width:70px; padding: 0 10px;background: #fff; margin: 0; float: right" src =' + cartItemElement.imageURL + '>' +
                     '<a class ="selectItem" style="background: #fff ; margin :0;' +
                     'display: block;width: 180px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -645,6 +657,10 @@
                                "<p>"+selectedCartItemPrice+ "</p>"+
                                 "<p>"+selectedCartItemName+ "</p>"+
                                 "<p>"+itemDescription+ "</p>"+"</div>";*/
+            if(selectedCartItemPrice =='$0.00')
+            {
+                selectedCartItemPrice ='Free';
+            }
             $('#itemModifierImage').empty();
             let description = "<div class='col s12 m7'  style='padding-top:105px;'>"+
                                "<div class='card horizontal'>"+
@@ -661,6 +677,7 @@
             let spicyLevel = (selectedCartItemDetail.spicy_levels  === undefined || selectedCartItemDetail.spicy_levels.length == 0) ? 0
                 :selectedCartItemDetail.spicy_levels[0] ;
             let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+
             let cartArrayItem = {id:selectedCartItemId, count:1 ,itemName: selectedCartItemName,price:selectedCartItemPrice ,
                 totalItemcost:selectedCartItemPrice,imageURL:selectedCartItemImgURL,spicyLevel:spicyLevel, modifiers:[]};
             selectedCartItemDetail.modifiers.forEach(modifierItem => {
@@ -672,17 +689,21 @@
                     "</div>";
                 $('#itemModifierImage').append(div);
                 modifierItem.choices.forEach(choice => {
-
+                  let choice_cost = currency(choice.choice_cost, { formatWithSymbol: true }).format();
+                    if(choice_cost =='$0.00')
+                    {
+                        choice_cost ='Free';
+                    }
                     let col = "<div class ='column zoom ' style='display: inline-block; margin-right: 20px;' onclick='addToCart(this)'>" +
-                        '<p>'+'<strong class="red-text text-darken-2" style=" margin: 0; text-align:right ;width: 200px;"> $' +
-                        choice.choice_cost+ '</strong> ' +'</p>'+
-                        '<img  id ='+ choice.id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" ' +
-                        'src =' + choice.image + '>' +
-                        '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                        'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                        '' +  choice.choice_name+ '</a>' +
+                        '<p>'+'<strong class="red-text text-darken-2" style=" margin: 0; text-align:right ;width: 200px;">' +choice_cost+ '</strong> ' +'</p>'+
+                        '<img  id ='+ choice.id +' style="height:200px; width:200px; padding: 0 10px;background: #fff; margin: 0;" src ='+ choice.image + '>' +
+                        '<a class ="selectItem" style="background: #fff ; margin :0; display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">'+choice.choice_name+ '</a>' +
                         "</div>";
                     $('.modifiers').append(col);
+                    if(choice_cost =='Free')
+                    {
+                        choice_cost ='$0.00';
+                    }
                 });
                 $('.modifiers').addClass('choices').removeClass('modifiers');
             });
@@ -730,6 +751,10 @@
             // }
             finalCart.cartItems.push(cartArrayItem);
             sessionStorage.setItem("finalCart",JSON.stringify(finalCart));
+            if(selectedCartItemPrice =='$0.00')
+            {
+                selectedCartItemPrice ='Free';
+            }
             let button = "<div class='footer1 row' style='width: 100%;bottom: 0;position: fixed;margin: 0;z-index: 2000;background: rgb(221, 221, 221);height: auto;'>" +
                 "<div class ='orderButton ' style='position: relative;bottom: 0;'>" +
                 "<div class=' row col s1 m3' style='background: rgb(221, 221, 221);margin:0; padding: 0;padding-top: 5px;'>" +
@@ -738,14 +763,11 @@
                 "<button id = 'decreaseCount' class='col' onclick='increaseItemCount(this)' style='display: inline;height: 35px;'><i class='material-icons'>add</i></button>" +
                 "</div>" +
                 "<button id ='checkoutButton' class=' row col s11 m9' style='background: #C53131;margin:0;height: 50px;' onclick='mainmenunavigation()'>" +
-                "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +
-                selectedCartItemPrice + "</button>" +
+                "<p  style='padding: 0;margin:0; display: inline-block;' class ='checkoutButtonText'>" + 'ADD TO CART' + "</p>" +selectedCartItemPrice + "</button>" +
                 "</div>" + "</div>";
             //$('#itemModifierImage').append(button);
             $('.checkout-container').append(button);
         }
-
-
     }
     function addToCart(item) {
         let allowedchoices =$(item).parent().attr('allowedchoices');
@@ -951,6 +973,10 @@
             $('.checkout-container').append(button);
 
             finalCart.cartItems.forEach(cartitem => {
+                if(cartitem.totalItemcost =='$0.00')
+                {
+                    selectedCartItemPrice ='Free';
+                }
                 let col = "<div class ='column zoom ' style='display: inline-block;background: #fff; margin-right: 20px; float: left;'>" +
                     "<button id = "+cartitem.id +" onclick='removeItem(this)' style ='margin: 0;height: 15px;width: 15px;float: right; position: relative; padding: 1px 1px;'>" +
                     "<i  class='material-icons' style='font-size: 10px;'>close</i></button>" +

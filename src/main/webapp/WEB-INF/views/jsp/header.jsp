@@ -5,7 +5,7 @@
   Time: 1:05 AM
   To change this template use File | Settings | File Templates.
 --%>
-<header>
+<header style="width: 100%;display: inline-block; position: fixed;z-index:1100;">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <META name="viewport" content="initial-scale=0.66, user-scalable=no">

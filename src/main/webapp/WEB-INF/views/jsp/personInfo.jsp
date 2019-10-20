@@ -19,43 +19,53 @@
 
 <%@include file="header.jsp" %>
 <body style="background: #efefef">
-<div class ="header" style="text-align: center">
-    <h1 style="font-weight: 600;">Your Order</h1>
-</div>
+<div class ='personalInfo-content'>
 
+    <div class ="header" style="width: 100%;
+    display: inline-block;
+    padding-top: 100px;">
+        <h1 style="font-size: 30px!important; text-align: center; margin: 0; margin-top: 20px;">Your Order</h1>
+        <form>
+            <ul class="stepper parallel horizontal" style="min-height: unset;">
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">View Order</div>
+                </li>
+                <li class="step active">
+                    <div class="step-title waves-effect waves-dark">Personal Info</div>
 
-<form>
-    <ul class="stepper parallel horizontal" style="min-height: unset;">
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">View Order</div>
-
-
-        </li>
-        <li class="step active">
-            <div class="step-title waves-effect waves-dark">Personal Info</div>
-
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Payment Method</div>
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Summary</div>
-        </li>
-    </ul>
-</form>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Payment Method</div>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Summary</div>
+                </li>
+            </ul>
+        </form>
+        <div style="padding:0 20px;">
 <button  class ='backBtn' onclick="previousStep()" >Back</button>
 <div class ='cartPrice' style="float: right;font-weight: 600;"></div>
-<form class="formaction" style="font-weight: 600;">
-    Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%;background: #fff;" type="text" name="name" required></form>
 
-<div class ="footer"  style="background: #fff;height: 45px;">
-    <form class="formaction">
-        <button  formaction="/mainMenu"  style="float: left;font-size: 20px;">
+
+<form class="formaction" id ='personalinfo-form' style="background: #efefef;height: 45px;position: fixed;margin-bottom: 10px;width: 100%;">
+    Please Enter Your Name: <input style="border: 1px solid #9e9e9e; width: 80%;background: #fff;" type="text"  name="name" class="invalid" required>
+            <div class ='error_showmessage' style="display: inline-block;color:#000" >Required *</div>
+</form>
+</div>
+</div>
+</div>
+<div class ="footer" style="background: #efefef;height: 45px;position: fixed;margin-bottom: 0px;">
+    <form class="formaction" >
+        <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping
         </button>
-        <button  class ='nextBtn' formaction="/paymentMethod"   type="submit" style="float: right">
-            NEXT
-        </button>
+        <input  id ='sub' class ='nextBtn'  value="NEXT"  method ='post'  formaction="/paymentMethod"  type="submit" onclick="validation()" style=" float: right;
+    width: 200px;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 18px;
+"/>
+        </input>
     </form>
 
 </div>
@@ -69,6 +79,25 @@
        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
        //$('.price').text('You Pay' +finalCart.cartTotalPrice);
        $('.cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
+       console.log('reached');
+      $('#personalinfo-form').on("keyup" ,function() {
+          var input = $('#personalinfo-form').find('input');
+          var is_name = input.val();
+          if (is_name) {
+              input.removeClass("invalid").addClass('valid');
+              input.removeClass("valid").removeClass('error_show');
+              document.getElementById('sub'). removeAttribute('disabled');
+              $('.error_showmessage').css('color' , '#000');
+          } else {
+              $('.error_showmessage').css('color' , 'red');
+              input.removeClass("valid").addClass('error_show');
+              document.getElementById('sub').setAttribute('disabled' ,'true');
+
+          }
+      })
+
+
    })
+
 </script>
 </html>

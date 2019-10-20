@@ -19,12 +19,12 @@
 
 <%@include file="header.jsp" %>
 <body style="background: #efefef">
-<div class ="header">
-    <h1 style="font-size: 30px!important;">Your Order</h1>
-</div>
-
-
-<form>
+<div class ='orderReview-content' style="z-index:999;">
+<div class ="header" style="width: 100%;
+    display: inline-block;
+    padding-top: 100px;">
+    <h1 style="font-size: 30px!important; text-align: center; margin: 0; margin-top: 20px;">Your Order</h1>
+    <form>
     <ul class="stepper parallel horizontal" style="min-height: unset;">
         <li class="step active">
             <div class="step-title waves-effect waves-dark">View Order</div>
@@ -41,17 +41,14 @@
         </li>
     </ul>
 </form>
-
-<div  style="margin-bottom: 60px;" class ="cartItems"></div>
-<div style="float: right;
-    bottom: 0;
-    margin-bottom: 50px;
-    padding-left: 80%;
-    width: 100%;">
+</div>
+<div  style="margin-bottom: 60px;padding: 0 20px;" class ="cartItems"></div>
+<div style="float: right; bottom: 0; margin-bottom: 50px; padding-left: 80%; width: 100%;">
     <p style='font-weight:800;' class ='tax'>Tax</p>
     <p style="font-weight:800;" class ='personalinfo-cartPrice'>You Pay</p>
 </div>
-<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
+</div>
+<div class ="footer" style="background: #efefef;height: 45px;position: fixed;margin-bottom:0px;">
     <form class="formaction">
         <button  formaction="/mainMenu" style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping
@@ -67,11 +64,11 @@
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         finalCart.cartItems.forEach(cartitem => {
             let col = "<div class='row' style=' display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
-                "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 35px;'>" +
+                "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
                 "<i class='material-icons'>remove</i></button>" +
-                "<p id='itemCount' class='col' style='margin: 0;padding: 0;display: table-row;padding-top: 5px;'>" +cartitem.count+
+                "<p id='itemCount' class='col' style='margin: 0;display: table-row; font-size: 17px;padding: 0;margin: 0;'>" +cartitem.count+
                 "</p>" +
-                "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 35px;'>" +
+                "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
                 "<i class='material-icons'> add </i></button>" +
                 "<div class ='column zoom ' style='display: inline-block; flex:80%!important; max-width: unset; margin-right: 20px; float: left;'>" +
                 '<p id = '+cartitem.id+ ' class ="selectItem" style=" margin :0;' +

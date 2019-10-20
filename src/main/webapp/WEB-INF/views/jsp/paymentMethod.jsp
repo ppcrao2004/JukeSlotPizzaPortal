@@ -19,48 +19,52 @@
 
 <%@include file="header.jsp" %>
 <body style="background: #efefef;">
-<div class ="header">
-    <h1>Your Order</h1>
-</div>
+<div class ='paymentMethod-content'>
 
+    <div class ="header" style="width: 100%;
+    display: inline-block;
+    padding-top: 100px;">
+        <h1 style="font-size: 30px!important; text-align: center; margin: 0; margin-top: 20px;">Your Order</h1>
+        <form>
+            <ul class="stepper parallel horizontal" style="min-height: unset;">
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">View Order</div>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Personal Info</div>
 
-<form>
-    <ul class="stepper parallel horizontal" style="min-height: unset;">
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">View Order</div>
-
-
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Personal Info</div>
-
-        </li>
-        <li class="step active">
-            <div class="step-title waves-effect waves-dark">Payment Method</div>
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Summary</div>
-        </li>
-    </ul>
-</form>
+                </li>
+                <li class="step active">
+                    <div class="step-title waves-effect waves-dark">Payment Method</div>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Summary</div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div style="padding:0 20px;">
 <button class ='backBtn' onclick="previousStep()">BACK</button>
 <div class ='personalinfo-cartPrice' style="float: right"></div>
 <p>Please select a payment method</p>
-<div class="checkout-inner">
-    <div class="left zoom">
+<div class="checkout-inner" style="padding-top: 0;">
+    <div class="left zoom" style="width:50%;padding: 20px;">
         <a href="${pageContext.request.contextPath}/mainMenu"  style="text-decoration: none;">
-            <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/cash.png" alt="CASH">
+            <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/cash.png" alt="CASH">
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Cash payment</p>
         </a>
     </div>
-    <div class="right zoom">
+    <div class="right zoom" style="width:50%;padding: 20px;">
         <a href="${pageContext.request.contextPath}/mainMenu" style="text-decoration: none;" >
-            <img  src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/credit.png" alt="CREDITCARD"  />
+            <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/credit.png" alt="CREDITCARD"  />
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Card Payment</p>
         </a>
     </div>
 </div>
-<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
+</div>
+
+</div>
+<div class ="footer" style="background: #efefef;height: 45px;position: fixed;margin-bottom: 0px;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping

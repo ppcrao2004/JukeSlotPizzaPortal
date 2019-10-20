@@ -924,6 +924,7 @@
             $('#modalPopup').css('display' ,'none');
             $("#row").css('display' ,'flex');
             $("#row").css('flex-wrap' ,'wrap');
+            $("#row").css('margin-top' ,'100px');
             $(".header").find('h1').css('display' ,'block');
             $('#checkout-inner').html($('#row'));
             //  $('.checkout-container').append($('.footer1'));
@@ -952,7 +953,8 @@
        if(choice === 'false'){
            $('#popup').removeClass('hidden');
            $('#popup').addClass('show');
-           $('#modalPopup').css('position' ,'fixed');
+           $('#modalPopup').css('position' ,'relative');
+           $('body').css('overflow-y' , 'hidden');
        }
        else{
         $('.mainMenuItems').css('opacity' ,'1');
@@ -1065,6 +1067,7 @@
            $('#popup').removeClass('show');
            $('#popup').addClass('hidden');
            $('#modalPopup').css('position' ,'relative');
+           $('body').css('overflow-y' , 'scroll');
 
        }
 </script>

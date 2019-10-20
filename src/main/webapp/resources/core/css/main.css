@@ -789,6 +789,32 @@ img{
     transition: opacity 5s ease-in !important;
     /*opacity: 0;*/
 }
+
+@media only screen and (min-width: 993px) {
+    ul.stepper.horizontal .step:not(:last-of-type):after, ul.stepper.horizontal > .step.active:not(:last-of-type):after {
+        background: #efefef !important;
+        width: 0% !important;
+
+    }
+}
+ul.stepper>.step:not(:last-of-type):after {
+    background: #efefef;
+}
+.personalInfo-content,
+.orderReview-content,
+.summary-content,
+.paymentMethod-content{
+    z-index:999;
+}
+.personalInfo-content .header,
+.orderReview-content .header,
+.summary-content .header,
+.paymentMethod-content .header{
+    width: 100%;
+    display: inline-block;
+    padding-top: 100px;
+
+}
 /*.step{
     width:24%;
 }
@@ -804,3 +830,7 @@ img{
      padding:0 !important;
  }
  */
+.error_show{
+    border: 2px solid red !important;
+    display: block !important;
+}

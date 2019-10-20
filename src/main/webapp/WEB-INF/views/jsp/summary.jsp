@@ -19,30 +19,30 @@
 
 <%@include file="header.jsp" %>
 <body style="background: #efefef;">
-<div class ="header">
-    <h1>Your Order</h1>
-</div>
+<div class ='summary-content'>
+    <div class ="header" style="width: 100%;
+    display: inline-block;
+    padding-top: 100px;">
+        <h1 style="font-size: 30px!important; text-align: center; margin: 0; margin-top: 20px;">Your Order</h1>
+        <form>
+            <ul class="stepper parallel horizontal" style="min-height: unset;">
+                <li class="step ">
+                    <div class="step-title waves-effect waves-dark">View Order</div>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Personal Info</div>
 
-
-<form>
-    <ul class="stepper parallel horizontal" style="min-height: unset;">
-        <li class="step ">
-            <div class="step-title waves-effect waves-dark">View Order</div>
-
-
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Personal Info</div>
-
-        </li>
-        <li class="step">
-            <div class="step-title waves-effect waves-dark">Payment Method</div>
-        </li>
-        <li class="step active">
-            <div class="step-title waves-effect waves-dark">Summary</div>
-        </li>
-    </ul>
-</form>
+                </li>
+                <li class="step">
+                    <div class="step-title waves-effect waves-dark">Payment Method</div>
+                </li>
+                <li class="step active">
+                    <div class="step-title waves-effect waves-dark">Summary</div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div style="padding:0 20px;margin-bottom: 50px;">
 <button  class ='backBtn' onclick="previousStep()" >BACK</button>
 <div class ='personalinfo-cartPrice' style="float: right"></div>
 <p>Please check your order</p>
@@ -66,7 +66,9 @@ border: 1px solid #000;
 width: 107px;
 font-weight: 600;">TIP</button>
 </div>
-<div class ="footer" style="background: #fff;height: 45px;position: fixed;margin-bottom: 10px;">
+</div>
+</div>
+<div class ="footer" style="background: #efefef;height: 45px;position: fixed;margin-bottom: 0px;">
     <form class="formaction">
         <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping

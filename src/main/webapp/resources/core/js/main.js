@@ -277,5 +277,20 @@ function removeItem() {
     }
 
 }
+function validation() {
+    var input = $('#personalinfo-form').find('input');
+    var is_name = input.val();
+    if (is_name) {
+        input.removeClass("invalid").addClass('valid');
+        input.removeClass("valid").removeClass('error_show');
+        document.getElementById('sub').removeAttribute('disabled');
+        $('.error_showmessage').css('color' , '#000');
+    } else {
+        input.removeClass("valid").addClass('error_show');
+        document.getElementById('sub').setAttribute('disabled' ,'true');
+        $('.error_showmessage').css('color' , 'red');
+
+    }
+}
 
 

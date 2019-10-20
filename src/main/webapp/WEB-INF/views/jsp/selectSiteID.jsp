@@ -3,52 +3,71 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
     <html lang="en" style="overflow: auto; position: fixed;">
-       <!-- <head>
-            <META name="viewport" content="width=device-width, initial-scale=1.0">
-            <META name="viewport" content="initial-scale=0.66, user-scalable=no">
-            <title>Happy Joes</title> -->
 
-            <c:url var="home" value="/" scope="request"/>
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
-            <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
-           <!--<script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>-->
-            <!-- Compiled and minified CSS -->
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
-            <!-- Compiled and minified JavaScript -->
-            <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
--->
-        </head>
 
-        <body  style="overflow-y: hidden;width:100%;" class ="starter-template"  onclick="window.location.href='${pageContext.request.contextPath}/checkout;';" >
+        <body  style="overflow-y: hidden;width:100%;" class ="starter-template" >
 
-             </div>
+        <div id="myModal" class="modal" style="position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    background: #000;
+     max-height: 100%;">
+            <!-- Modal content -->
+            <div class="modal-content" style="text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2px;
+    border: 1px solid #fff;
+    width: 300px;">
+        <span  style="color:#fff; padding-left: 20px;
+    margin-bottom: 20px;
+    display: inline-block;"> Please input site ID</span><br/>
+                <select id ="siteID" style="display: inline-block; width: 216px; color:#ff3d00;" name="id" required>
+                    <option value="16thstreet-0001">16thstreet</option>
+                    <option value="TomCoffee-0001">TomCoffee</option>
+                    <option value="BellaNapoli-0001">BellaNapoli</option>
+                    <option value="SoupDive-0001">SoupDive</option>
+                    <option value="MelbourneSeafood-0001">MelbourneSeafood</option>
+                    <option value="Rocatone-0001" selected>Rocatone</option>
+                    <option value="Chocolatte-0001">Chocolatte</option>
+                    <option value="DBosWings-0001">DBosWings</option>
+                    <option value="GenesPoBoys-0001">GenesPoBoys</option>
+                    <option value="Jukeslot-USA-Northeast-NJ-SITE_1">Jukeslot</option>
+                    <option value="Kingsway-0001">Kingsway</option>
+                    <option value="TestC-USA-Northeast-NJ-Africal">TestC</option>
+                </select><br/>
+                <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
+                <form class="formaction">
+                    <button type="submit"  style=" position: relative;
+    overflow: hidden;
+    padding: 16px 32px;
+    margin: 0 auto;
+    text-align: center;
+    margin: 20px;
+    background: grey;
+    /* outline: none; */
+    border: none;" value="submit"  formaction="/welcome" onclick=" return empty()">COMMIT </button>
+                </form>
+            </div>
 
+        </div>
 
         </body>
 
+
     <script>
         $(document).ready(function (e) {
-            sessionStorage.clear();
-           /* $.ajax({
-                type: "GET",
-                contentType: "application/json",
-                url: "/template/catetory/list",
-                dataType: 'json',
-                timeout: 100000,
-                success: function (data) {
-                    sessionStorage.setItem('WelcomeCategoryList', JSON.stringify(data));
-                },
-                error: function (e) {
-                    console.log("ERROR: ", e);
-                    display(e);
-                },
-                done: function (e) {
-                    console.log("DONE");
-                    enableSearchButton(true);
-                }
-            });*/
+           sessionStorage.clear();
 
-            $('#myModal').css('display' ,'block');
+
+
+           // $('#myModal').css('display' ,'block');
 
         });
 
@@ -60,9 +79,7 @@
                 $('#error').css("display" ,"block");
             }else{
                 sessionStorage.setItem('siteID',siteIDName);
-                //homePageLoad();
-               //
-                // siteConfiguration();
+
             };
         }
 
@@ -160,53 +177,4 @@
     </script>
 
     </html>
-<div id="myModal" class="modal" style="position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    height: 100%;
-    width: 100%;
-    background: #000;
-     max-height: 100%;">
-    <!-- Modal content -->
-    <div class="modal-content" style="text-align: center;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2px;
-    border: 1px solid #fff;
-    width: 300px;">
-        <span  style="color:#fff; padding-left: 20px;
-    margin-bottom: 20px;
-    display: inline-block;"> Please input site ID</span><br/>
-        <select id ="siteID" style="display: inline-block; width: 216px; color:#ff3d00;" name="id" required>
-            <option value="16thstreet-0001">16thstreet</option>
-            <option value="TomCoffee-0001">TomCoffee</option>
-            <option value="BellaNapoli-0001">BellaNapoli</option>
-            <option value="SoupDive-0001">SoupDive</option>
-            <option value="MelbourneSeafood-0001">MelbourneSeafood</option>
-            <option value="Rocatone-0001" selected>Rocatone</option>
-            <option value="Chocolatte-0001">Chocolatte</option>
-            <option value="DBosWings-0001">DBosWings</option>
-            <option value="GenesPoBoys-0001">GenesPoBoys</option>
-            <option value="Jukeslot-USA-Northeast-NJ-SITE_1">Jukeslot</option>
-            <option value="Kingsway-0001">Kingsway</option>
-            <option value="TestC-USA-Northeast-NJ-Africal">TestC</option>
-        </select><br/>
-        <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
-        <form class="formaction">
-        <button type="submit"  style=" position: relative;
-    overflow: hidden;
-    padding: 16px 32px;
-    margin: 0 auto;
-    text-align: center;
-    margin: 20px;
-    background: grey;
-    /* outline: none; */
-    border: none;" value="submit"  formaction="/welcome" onclick=" return empty()">COMMIT </button>
-        </form>
-    </div>
 
-</div>

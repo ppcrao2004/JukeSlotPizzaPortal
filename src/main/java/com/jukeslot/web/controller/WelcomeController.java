@@ -10,6 +10,10 @@ public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
+		return "selectSiteID";
+	}
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String welcome(ModelMap model) {
 		return "welcome";
 	}
 

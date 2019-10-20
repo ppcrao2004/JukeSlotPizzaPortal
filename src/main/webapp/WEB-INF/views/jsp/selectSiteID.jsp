@@ -8,7 +8,7 @@
             <META name="viewport" content="initial-scale=0.66, user-scalable=no">
             <title>Happy Joes</title> -->
 
-
+            <c:url var="home" value="/" scope="request"/>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/main.css"/>
             <script src="${pageContext.request.contextPath}/resources/core/js/jquery-3.4.1.min.js"></script>
            <!--<script src="${pageContext.request.contextPath}/resources/core/js/main.js"></script>-->
@@ -16,38 +16,11 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
             <!-- Compiled and minified JavaScript -->
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
+-->
         </head>
-        <div id ="wrapper" class ='welcomePage'>
-            <nav class="navbar" style="height:unset;line-height:unset;  ">
-                <div class="navbar-container">
-                    <div class="navbar-header">
-                        <div class="navbar-header-image">
-                            <a class="navbar-brand">
-                                <img id="logoimage" alt="">
-                            </a>
-                        </div>
-                        <!-- <div class="navbar-header-text">
-                             <span class="headerTitle" style="alignment: center">Good times to be together</span>
-                         </div> -->
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <body  style="overflow-y: hidden;width:100%;" class ="starter-template"  onclick="window.location.href='${pageContext.request.contextPath}/checkout;';" >
-             <div class="maincontainer" style="scroll-behavior: unset;">
-                 <!--<div class="imageText" id ="imageText" style="text-align: center">
-                 </div> -->
-                <div class="maincontainer-image fade" style="
-    overflow-y: hidden;
-    ">
-                    <img id="image" alt="" style="padding-bottom: 80px;">
 
-                </div>
-                 <div class="footer-main" style="height: 80px;">
-               <form class="form-group">
-                   <button   type="submit" id="btn-nav"  height="80px;  " class="buttonContainer"  formaction="${pageContext.request.contextPath}/checkout">TAP TO START</button>
-               </form>
-             </div>
+        <body  style="overflow-y: hidden;width:100%;" class ="starter-template"  onclick="window.location.href='${pageContext.request.contextPath}/checkout;';" >
+
              </div>
 
 
@@ -55,8 +28,8 @@
 
     <script>
         $(document).ready(function (e) {
-            //sessionStorage.clear();
-            $.ajax({
+            sessionStorage.clear();
+           /* $.ajax({
                 type: "GET",
                 contentType: "application/json",
                 url: "/template/catetory/list",
@@ -73,18 +46,28 @@
                     console.log("DONE");
                     enableSearchButton(true);
                 }
-            });
-            homePageLoad();
-            siteConfiguration();
+            });*/
 
-            //$('#myModal').css('display' ,'block');
+            $('#myModal').css('display' ,'block');
 
         });
 
+        function empty()
+        {
+            let siteIDName;
+            siteIDName = document.getElementById("siteID").value;
+            if (siteIDName == null || siteIDName == "") {
+                $('#error').css("display" ,"block");
+            }else{
+                sessionStorage.setItem('siteID',siteIDName);
+                //homePageLoad();
+               //
+                // siteConfiguration();
+            };
+        }
 
-
-        function homePageLoad() {
-            //$('#myModal').css('display' ,'none');
+      /*  function homePageLoad() {
+            $('#myModal').css('display' ,'none');
             $.ajax({
                 type: "GET",
                 contentType: "application/json",
@@ -173,11 +156,10 @@
                 }
             });
 
-        }
+        }*/
     </script>
 
     </html>
-<!--
 <div id="myModal" class="modal" style="position: fixed;
     left: 50%;
     top: 50%;
@@ -187,7 +169,7 @@
     width: 100%;
     background: #000;
      max-height: 100%;">
-    <Modal content
+    <!-- Modal content -->
     <div class="modal-content" style="text-align: center;
     position: relative;
     top: 50%;
@@ -214,6 +196,7 @@
             <option value="TestC-USA-Northeast-NJ-Africal">TestC</option>
         </select><br/>
         <p id ="error" style="color: #C53131;display: none"> Please Enter Site ID</p>
+        <form class="formaction">
         <button type="submit"  style=" position: relative;
     overflow: hidden;
     padding: 16px 32px;
@@ -222,8 +205,8 @@
     margin: 20px;
     background: grey;
     /* outline: none; */
-    border: none;" value="submit"  onclick=" return empty()">COMMIT </button>
+    border: none;" value="submit"  formaction="/welcome" onclick=" return empty()">COMMIT </button>
+        </form>
     </div>
 
 </div>
--->

@@ -103,20 +103,21 @@ margin-bottom: 30px;"></div>
                 let OrderRecommendations =JSON.parse(sessionStorage.getItem("OrderRecommendations"));
                 OrderRecommendations.data.forEach(cartitem => {
                     sessionStorage.setItem(cartitem.id , JSON.stringify(cartitem));
-                    let col ="<div class ='column zoom choice' style='display: inline-block;margin-right: 20px; width: 250px;'> "+
-                             '<img  id = '+cartitem.id +' style=" width:40%; float:left; display:inline-block; padding: 5px;background:#fff; display:inline-block; height:100px;width:90px;" src ='+ cartitem.image +'>'+
+                    let col ="<div class ='column zoom choice' style='display: inline-block;margin-right: 20px; width: 250px; max-width: unset'> "+
+                             '<img  id = '+cartitem.id +' style=" width:40%; float:left; display:inline-block; padding: 5px;background:#fff; display:inline-block; ' +
+                        'height:85px;width:75px;" src ='+ cartitem.image +'>'+
                         "<div  class ='right'style='float:right;width:140px;'>"+
                         '<p class="title" >'+cartitem.title+'</p>'+
                             "<div style='display: inline-flex;' >"+
-                               '<button onclick="decreaseCount(this)" id="decreaseCount" class="col" style="display: inline-block;height: 30px; width:30px;padding:0;">'+
+                               '<button onclick="decreaseCount(this)" id="decreaseCount" class="col" style="display: inline-block;height: 30px; border-radius:0px;width:30px;padding:0;">'+
                                '<i class="material-icons">'+'remove'+'</i>'+
                                 '</button>'+
                                 '<p  class="quantity" id="itemCount" class="col" style="margin: 0;font-size: 20px;display: inline-block; background: padding-top: 5px;">'+1+'</p>'+
-                               '<button  onClick="increaseCount(this)" id="increaseCount" class="col" style="display: inline-block;padding:0;height: 30px;width:30px; ">'+
+                               '<button  onClick="increaseCount(this)" id="increaseCount" class="col" style="display: inline-block;padding:0;height: 30px;width:30px;border-radius: 0px ">'+
                               '<i class="material-icons"> '+"add"+'</i>'+
                              '</button>'+
                             '</div>'+
-                        '<button onclick="addToOrder(this)" class="backBtn" style="padding:0;margin-top: 10px;width:120px;">'+'Add To My Order'+'</button>'+
+                        '<button onclick="addToOrder(this)" class="addToOrder" style="padding:0;margin-top: 10px;width:120px;font-weight: 600;border-radius: 25px">'+'Add To My Order'+'</button>'+
                           '</div>'+
 
                     '</div>';

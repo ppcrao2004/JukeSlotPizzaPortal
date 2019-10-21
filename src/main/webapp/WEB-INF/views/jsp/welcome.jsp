@@ -158,7 +158,7 @@
                 timeout: 100000,
                 success: function (data) {
                     sessionStorage.setItem('siteConfiguration', JSON.stringify(data));
-                    let taxRate = currency(data.data.tax_rate, { precision: 2 }).multiply(100).value;
+                    let taxRate = currency(data.data.tax_rate).value;
                     console.log("Tax Rate TaxRate:",taxRate);
                     if(taxRate <1) {
                         taxRate = currency(taxRate, { precision: 2 }).multiply(100).value;

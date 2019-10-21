@@ -91,10 +91,10 @@
 
         function increaseItemCount() {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
-            //let id =$('.card-image').find('img').attr('id');
-            //let cartItemCount =$('#itemCount').text();
-            // cartItemCount =parseInt(cartItemCount);
-            // cartItemCount =cartItemCount+1;
+            let id =$('.card-image').find('img').attr('id');
+            let cartItemCount =$('#itemCount').text();
+            cartItemCount =parseInt(cartItemCount);
+             cartItemCount =cartItemCount+1;
             // let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
             $.each(finalCart.cartItems, function( index, value ) {
                 if(value.id===id){
@@ -105,6 +105,10 @@
             let itemPrice =getPrice();
             $('#checkoutButton').html('ADD TO CART'+currency(itemPrice, { formatWithSymbol: true }).format());
             $('#itemCount').html(cartItemCount);
+           // finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+            $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+            console.log("TAX inceremnt:", sessionStorage.getItem("taxPay") );
+            $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
 
         }
 

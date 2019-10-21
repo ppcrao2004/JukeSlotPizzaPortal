@@ -115,8 +115,10 @@
                         //console.log($(+dataData.id));
                         console.log(temp);
                         $(temp).animate({
-                            opacity: 1
-                        }, timeoutCount);
+                            opacity: 1,
+                            flex: '50%',
+                            width:'50%'
+                        }, timeoutCount,'swing');
 
                     //  $(temp).fadeIn('slow');
                         //$("#row").find('img').show(1000);
@@ -138,8 +140,10 @@
                         let temp =$('#'+id).parent();
                         console.log(temp);
                             $(temp).animate({
-                                opacity: 1
-                            }, timeoutCount);
+                                opacity: 1,
+                                flex: '50%',
+                               width:'50%'
+                            }, timeoutCount ,'swing');
                        // $(temp).slideDown('slow');
                         //$("#row").find('img').fadeIn('slow');
                         //$("#row").find('img').show(1000);
@@ -212,46 +216,44 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('categoryListMenuId',JSON.stringify(data));
+
+                let timeoutCount = 0;
                 data.data.forEach(dataData => {
+
+                    timeoutCount=timeoutCount+500;
                     if (dataData.has_sub_category === true) {
                         sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
-                        let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
+                        let col = "<div class ='column zoom'  style='display: block;opacity: 0;'  onclick='selectSubMenuItem(this)'>" +
                             '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             '' + dataData.title + '</a>' +
                             "</div>";
                         $("#subMenuItems").append(col);
+                        let id =dataData.id;
+                        let temp =$('#'+id).parent();
+                        //console.log($(+dataData.id));
+                        $(temp).animate({
+                            opacity: 1
+                        }, timeoutCount,'swing');
+
                     } else {
-                        let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
+                        let col = "<div class ='column zoom'  style='display: block;opacity: 0'  onclick='selectSubCategoryItem(this)'>" +
                             '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             '' + dataData.title + '</a>' +
                             "</div>";
                         $("#subMenuItems").append(col);
+                        let id =dataData.id;
+                        let temp =$('#'+id).parent();
+                        $(temp).animate({
+                            opacity: 1
+                        }, timeoutCount,'swing');
+
                     }
                 });
-                // for (let i = 0; i <= data.data.length-1;i++) {
-                //     if (data.data[i].has_sub_category === true) {
-                //         sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
-                //         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubMenuItem(this)'>" +
-                //             '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
-                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                //             '' + data.data[i].title + '</a>' +
-                //             "</div>";
-                //         $("#subMenuItems").append(col);
-                //     } else {
-                //         let col = "<div class ='column zoom'  style='display: block'  onclick='selectSubCategoryItem(this)'>" +
-                //             '<img  id = ' + data.data[i].id + ' style="padding: 10px;background: #fff;" src =' + data.data[i].image + '>' +
-                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                //             '' + data.data[i].title + '</a>' +
-                //             "</div>";
-                //         $("#subMenuItems").append(col);
-                //     }
-                // }
+
             },
             error : function(e) {
                 console.log("ERROR: ", e);
@@ -282,14 +284,17 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('itemListMenuMenuId',JSON.stringify(data));
+                let timeoutCount=0;
                 data.data.forEach(dataData => {
+
+                    timeoutCount=timeoutCount+500;
                     sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
                     let item_cost =currency(dataData.price, { formatWithSymbol: true }).format();
                     if(item_cost =='$0.00')
                     {
                         item_cost  ="Free";
                     }
-                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
+                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block;opacity: 0;'>" +
                         '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;font-weight: 600;">'+item_cost+'</p> ' +
                         '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +
@@ -297,22 +302,19 @@
                         '' + dataData.title + '</a>' +
                         "</div>";
                     $("#subMenuItems").append(col);
+                    let id =dataData.id;
+                    let temp =$('#'+id).parent();
+                    //console.log($(+dataData.id));
+                    console.log(temp);
+                    $(temp).animate({
+                        opacity: 1
+                    }, timeoutCount,'swing');
+
                 });
+                $('.mainMenuItems').css('opacity' ,'0.5');
+                $(menuID).css('opacity' ,'1');
 
 
-
-                // for (let i = 0; i <= data.data.length-1;i++) {
-                //     sessionStorage.setItem(data.data[i].id, JSON.stringify(data.data[i]));
-                //     let item_cost = data.data[i].price.toFixed(2);
-                //     let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block'>" +
-                //         '<p style=" margin: 0; background: #fff; text-align:right ;width: 200px;"> $' + item_cost + '</p> ' +
-                //         '<img  id = ' + data.data[i].id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + data.data[i].image + '>' +
-                //         '<a class ="selectItem" style="background: #fff ; margin :0;' +
-                //         'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                //         '' + data.data[i].title + '</a>' +
-                //         "</div>";
-                //     $("#subMenuItems").append(col);
-                // }
             },
             error : function(e) {
                 console.log("ERROR: ", e);
@@ -689,7 +691,7 @@
                 cartArrayItem.modifiers.push(modifier);
                 let div = "<div id ="+modifierItem.id+" class ='modifiers' allowedchoices = "+modifierItem.number_of_options+" " +
                     "style='width: 100%;'>" +
-                    ' <p style="font-size: 15px;font-weight: 600;color: crimson;color: #D32F2F !important;">' + modifierItem.heading + '</p>' +
+                    ' <p style="font-size: 30px;font-weight: 700;color: crimson;color: #D32F2F !important;">' + modifierItem.heading + '</p>' +
                     "</div>";
                 $('#itemModifierImage').append(div);
                 modifierItem.choices.forEach(choice => {
@@ -928,7 +930,6 @@
             $('#modalPopup').css('display' ,'none');
             $("#row").css('display' ,'flex');
             $("#row").css('flex-wrap' ,'wrap');
-            $("#row").css('margin-top' ,'100px');
             $(".header").find('h1').css('display' ,'block');
             $('#checkout-inner').html($('#row'));
             //  $('.checkout-container').append($('.footer1'));
@@ -1131,7 +1132,7 @@
 </div>
 
 <div  class ='hidden modal' id="popup"
-      style="position: absolute;
+      style="position: fixed;
         border: 1px solid;
         width:270px;
         z-index:1100;

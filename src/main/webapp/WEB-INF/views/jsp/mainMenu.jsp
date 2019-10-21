@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-    <body style="background: #BBDEFB" onLoad ="fadeIn()">
+    <body style="background: #BBDEFB">
     <div id ="wrapper">
         <nav class="navbar" style="height:unset;line-height:unset;  ">
             <div class="navbar-container">
@@ -96,27 +96,53 @@
             timeout : 100000,
             success : function(data) {
                 sessionStorage.setItem('menuList',JSON.stringify(data));
-
-
+                let timeoutCount = 0;
                 data.data.forEach(dataData => {
+                    timeoutCount=timeoutCount+500;
                     if (dataData.has_category === false && dataData.has_item === true){
                         sessionStorage.setItem(dataData.id,JSON.stringify(dataData));
-                        let col2 = "<div class ='column zoom mainMenuItems '   onclick='itemListMenu(this)'>" +
+                        let col2 = "<div class ='column zoom mainMenuItems '  style='opacity: 0' onclick='itemListMenu(this)'>" +
                             '<img  id = '+dataData.id +' style=" padding: 10px;background: #fff; display:inline-block;" src ='+ dataData.image +'>'+
                             '<a class ="selectItem" style="background: #fff ;padding: 10px;display:inline-block; margin :0;' +
                             'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             ''+ dataData.title+'</a>'+
                             "</div>";
-                        $("#row").append(col2);
+
+
+                        $('#row').append(col2);
+                        let id =dataData.id;
+                        let temp =$('#'+id).parent();
+                        //console.log($(+dataData.id));
+                        console.log(temp);
+                        $(temp).animate({
+                            opacity: 1
+                        }, timeoutCount);
+
+                    //  $(temp).fadeIn('slow');
+                        //$("#row").find('img').show(1000);
+
                     }else{
                         sessionStorage.setItem(dataData.id,JSON.stringify(dataData));
-                        let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
+                        let col2 = "<div class ='column zoom mainMenuItems ' style='opacity: 0'  onclick='categoryList(this)'>" +
                             '<img  id = '+dataData.id +' style=" padding: 10px;background: #fff;display:inline-block;" src ='+ dataData.image +'>'+
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: inline-block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
                             ''+ dataData.title+'</a>'+
                             "</div>";
-                        $("#row").append(col2);
+                        // $("#row").find('img').show('slow');.slideToggle();
+
+
+                        $('#row').append(col2);
+                        let id =dataData.id;
+                       // console.log($('+dataData.id+'));
+                        let temp =$('#'+id).parent();
+                        console.log(temp);
+                            $(temp).animate({
+                                opacity: 1
+                            }, timeoutCount);
+                       // $(temp).slideDown('slow');
+                        //$("#row").find('img').fadeIn('slow');
+                        //$("#row").find('img').show(1000);
                        // delay(5000).fadeIn();
                         //$("#row").append(col2).delay(2000).fadeIn();
                        // $('.column').css('opacity' ,'1');
@@ -156,28 +182,6 @@
                     console.log(cartitem.modifiers.choices);
                 });
                 }
-
-                // for (let i = 0; i <= data.data.length-1;i++) {
-                //     if (data.data[i].has_category === false && data.data[i].has_item === true){
-                //         sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
-                //         let col2 = "<div class ='column zoom mainMenuItems '  onclick='itemListMenu(this)'>" +
-                //             '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
-                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                //             ''+ data.data[i].title+'</a>'+
-                //             "</div>";
-                //         $("#row").append(col2);
-                //     }else{
-                //         sessionStorage.setItem(data.data[i].id,JSON.stringify(data.data[i]));
-                //         let col2 = "<div class ='column zoom mainMenuItems '  onclick='categoryList(this)'>" +
-                //             '<img  id = '+data.data[i].id +' style=" padding: 10px;background: #fff;" src ='+ data.data[i].image +'>'+
-                //             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
-                //             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                //             ''+ data.data[i].title+'</a>'+
-                //             "</div>";
-                //         $("#row").append(col2);
-                //     }
-                // }
             },
             error : function(e) {
                 console.log("ERROR: ", e);

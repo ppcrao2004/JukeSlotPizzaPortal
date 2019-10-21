@@ -74,6 +74,7 @@ margin-bottom: 30px;"></div>
 
         finalCart.cartItems.forEach(cartitem => {
             let itemDescription = JSON.parse(sessionStorage.getItem(cartitem.id)).description;
+            console.log("ItemDescription :", itemDescription);
             if(itemDescription ===null){
                 itemDescription ='';
 
@@ -101,6 +102,7 @@ margin-bottom: 30px;"></div>
                 sessionStorage.setItem('OrderRecommendations', JSON.stringify(data));
                 let OrderRecommendations =JSON.parse(sessionStorage.getItem("OrderRecommendations"));
                 OrderRecommendations.data.forEach(cartitem => {
+                    sessionStorage.setItem(cartitem.id , JSON.stringify(cartitem));
                     let col ="<div class ='column zoom choice' style='display: inline-block;margin-right: 20px; width: 250px;'> "+
                              '<img  id = '+cartitem.id +' style=" width:40%; float:left; display:inline-block; padding: 5px;background:#fff; display:inline-block; height:100px;width:90px;" src ='+ cartitem.image +'>'+
                         "<div  class ='right'style='float:right;width:140px;'>"+

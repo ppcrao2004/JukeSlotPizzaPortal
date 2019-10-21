@@ -16,6 +16,8 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/core/css/materialize.min.css"/>
             <!-- Compiled and minified JavaScript -->
             <script src="${pageContext.request.contextPath}/resources/core/js/materialize.min.js"></script>
+
+       <script src="${pageContext.request.contextPath}/resources/core/js/currency.min.js"></script>
         </head>
         <div id ="wrapper" class ='welcomePage'>
             <nav class="navbar" style="height:unset;line-height:unset;  ">
@@ -156,9 +158,10 @@
                 timeout: 100000,
                 success: function (data) {
                     sessionStorage.setItem('siteConfiguration', JSON.stringify(data));
-                    let taxRate =data.data.tax_rate;
+                    let taxRate = currency(data.data.tax_rate, { precision: 2 }).multiply(100).value;
+                    console.log("Tax Rate TaxRate:",taxRate);
                     if(taxRate <1) {
-                        taxRate = taxRate*100;
+                        taxRate = currency(taxRate, { precision: 2 }).multiply(100).value;
                     }
                     sessionStorage.setItem("taxRate",taxRate);
                     console.log(taxRate);

@@ -55,16 +55,14 @@ function increaseItemCount(item) {
     let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
     //let id =$('.card-image').find('img').attr('id');
     //let cartItemCount =$('#itemCount').text();
-   // cartItemCount =parseInt(cartItemCount);
-   // cartItemCount =cartItemCount+1;
-    // let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+    finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
     $.each(finalCart.cartItems, function( index, value ) {
         if(value.id===selectedItemId){
             value.count =cartItemCount;
         }
     });
     sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-    let itemPrice =getPrice();
+    getPrice();
     finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
     let totalItemcost= 0;
     $.each(finalCart.cartItems, function( index, value ) {
@@ -74,7 +72,9 @@ function increaseItemCount(item) {
     });
     $(selectedItem).find('#itemCount').text(cartItemCount);
     $(selectedItem).find('.cartItemPrice .price').text(currency(totalItemcost, { formatWithSymbol: true }).format());
-
+     getPrice();
+    $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+    $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
 
 }
 
@@ -87,14 +87,13 @@ function decreaseItemCount(item) {
     cartItemCount = cartItemCount - 1;
     let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
     if(cartItemCount !=0) {
-
         $.each(finalCart.cartItems, function( index, value ) {
             if(value.id===selectedItemId){
                 value.count =cartItemCount;
             }
         });
         sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-        let itemPrice =getPrice();
+        getPrice();
         finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         let totalItemcost= 0;
         $.each(finalCart.cartItems, function( index, value ) {
@@ -102,60 +101,60 @@ function decreaseItemCount(item) {
                 totalItemcost = value.totalItemcost ;
             }
         });
-        $(selectedItem).find('.cartItemPrice .price').text(currency(totalItemcost, { formatWithSymbol: true }).format());
         $(selectedItem).find('#itemCount').text(cartItemCount);
+        $(selectedItem).find('.cartItemPrice .price').text(currency(totalItemcost, { formatWithSymbol: true }).format());
+        getPrice();
+        $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+        $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
     }
     else{
         cartItemCount =0;
       let selectedItemBtn= $(selectedItem).find('.show');
         show(selectedItemBtn);
-       /* $(selectedItem).remove();
+        //$(selectedItem).remove();
         if(finalCart.cartItems.length ==0) {
             history.go(-1);
             history.go(-1);
         }
-        else {
-            $.each(finalCart.cartItems, function (index, value) {
-                finalCart.cartItems = finalCart.cartItems.filter(cartItem => cartItem.id != selectedItemId);
-                sessionStorage.setItem("finalCart", JSON.stringify(finalCart));
-                getPrice();
 
-            });
-        }*/
+       // $(selectedItem).find('#itemCount').text(cartItemCount);
 
+       finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
+       // $(selectedItem).find('.cartItemPrice .price').text(currency(totalItemcost, { formatWithSymbol: true }).format());
+        //getPrice();
+        $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+        console.log("TaxTest:", $('.tax').text());
+        $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
     }
 
 }
+
 function getPrice(){
-    let priceOnButton=0;
-    let addCartButtonPrice=0;
+let finalCartTotalPrice=0;
     let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
     //Looping CartItems from FinalCart
      finalCart.cartItems.forEach(cartItemElement => {
-        priceOnButton= currency(priceOnButton).add(cartItemElement.price).value;
+
+       // priceOnButton= currency(priceOnButton).add(cartItemElement.price).value;
         let totalItemcost= currency(cartItemElement.price).value;
         //Looping Choices from CartItem
         cartItemElement.modifiers.forEach(modifier => {
             modifier.choices.forEach(choices => {
-                priceOnButton= currency(priceOnButton).add(choices.price).value;
+               // priceOnButton= currency(priceOnButton).add(choices.price).value;
                 totalItemcost = currency(totalItemcost).add(choices.price).value;
-                console.log("totalItemcost" ,totalItemcost);
             });
         });
-
-        priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(cartItemElement.count).value;
+        //priceOnButton = currency(priceOnButton, { precision: 2 }).multiply(cartItemElement.count).value;
         cartItemElement.totalItemcost = currency(currency(totalItemcost, { precision: 2 })
             .multiply(cartItemElement.count).value, { formatWithSymbol: true }).format();
-        addCartButtonPrice = cartItemElement.totalItemcost;
+        finalCartTotalPrice = currency(finalCartTotalPrice).add(cartItemElement.totalItemcost).value;
     });
-    finalCart.cartTotalPrice = currency(priceOnButton, { formatWithSymbol: true }).format();
+    finalCart.cartTotalPrice = currency(finalCartTotalPrice, { formatWithSymbol: true }).format();
     sessionStorage.setItem("finalCart" ,JSON.stringify( finalCart));
-    console.log("addCartButtonPrice" ,addCartButtonPrice);
     let taxRateOrderReview =currency(currency(finalCart.cartTotalPrice).multiply(sessionStorage.getItem("taxRate")).divide(100), { formatWithSymbol: true }).format();
     sessionStorage.setItem("taxPay",taxRateOrderReview);
     sessionStorage.setItem("customerPayPrice",currency(currency(finalCart.cartTotalPrice).add(taxRateOrderReview), { formatWithSymbol: true }).format());
-    return addCartButtonPrice;
-
+    //return addCartButtonPrice;
 }
 
 /*
@@ -245,9 +244,7 @@ function show(item) {
         $('#window').removeClass('hidden');
         $('#window').addClass('show');
     }
-
-
-   // let selectedItemId=$('.selected').find('.column p').attr('id');
+    // let selectedItemId=$('.selected').find('.column p').attr('id');
 
 };
 
@@ -269,8 +266,9 @@ function removeItem() {
         $('#window').removeClass('show');
         $('#window').addClass('hidden');
         finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-
-
+    $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
+    console.log("TaxTest:", $('.tax').text());
+    $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
     if(finalCart.cartItems.length ==0) {
         history.go(-1);
         history.go(-1);

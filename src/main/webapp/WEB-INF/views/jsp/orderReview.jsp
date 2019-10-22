@@ -88,7 +88,7 @@
         });
         $('.row').appendTo($('.cartItems'));
         let taxRate = JSON.parse(sessionStorage.getItem("taxRate"));
-
+/*
         function increaseItemCount() {
             let finalCart= JSON.parse(sessionStorage.getItem("finalCart"));
             let id =$('.card-image').find('img').attr('id');
@@ -111,6 +111,8 @@
             $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
 
         }
+
+ */
 
     $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
     $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));

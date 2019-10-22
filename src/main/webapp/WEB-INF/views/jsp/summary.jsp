@@ -87,8 +87,9 @@ font-weight: 600;">TIP</button>
     $(document).ready(function () {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
-        let choices = '';
+
         finalCart.cartItems.forEach(cartItem => {
+            let choices = '';
             cartItem.modifiers.forEach(modifier => {
                 modifier.choices.forEach(choice => {
                     choices = choices +choice.name+',';

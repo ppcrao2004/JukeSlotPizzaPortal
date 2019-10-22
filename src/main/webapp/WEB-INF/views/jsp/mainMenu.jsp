@@ -223,7 +223,7 @@
                     timeoutCount=timeoutCount+500;
                     if (dataData.has_sub_category === true) {
                         sessionStorage.setItem(dataData.id, JSON.stringify(dataData));
-                        let col = "<div class ='column zoom'  style='display: block;opacity: 0;'  onclick='selectSubMenuItem(this)'>" +
+                        let col = "<div class ='column zoom'  style='display: block;'  onclick='selectSubMenuItem(this)'>" +
                             '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -238,7 +238,7 @@
                         }, timeoutCount,'swing');
 
                     } else {
-                        let col = "<div class ='column zoom'  style='display: block;opacity: 0'  onclick='selectSubCategoryItem(this)'>" +
+                        let col = "<div class ='column zoom'  style='display: block;'  onclick='selectSubCategoryItem(this)'>" +
                             '<img  id = ' + dataData.id + ' style="padding: 10px;background: #fff;" src =' + dataData.image + '>' +
                             '<a class ="selectItem" style="background: #fff ;padding: 10px; margin :0;' +
                             'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
@@ -294,7 +294,7 @@
                     {
                         item_cost  ="Free";
                     }
-                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block;opacity: 0;'>" +
+                    let col = "<div class ='column zoom categoryItem'   onclick='customizeItems(this)' style='display: block;'>" +
                         '<p class="red-text text-darken-2" style=" margin: 0; background: #fff; text-align:right ;width: 200px;font-weight: 600;">'+item_cost+'</p> ' +
                         '<img  id = ' + dataData.id + ' style=" padding: 0 10px;background: #fff; margin: 0;" src =' + dataData.image + '>' +
                         '<a class ="selectItem" style="background: #fff ; margin :0;' +

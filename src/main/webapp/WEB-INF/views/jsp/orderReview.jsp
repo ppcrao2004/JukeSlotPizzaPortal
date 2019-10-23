@@ -62,26 +62,52 @@
 <script>
     $(document).ready(function() {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+        let col;
         finalCart.cartItems.forEach(cartitem => {
-            let col = "<div class='row' style=' display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
-                "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
-                "<i class='material-icons'>remove</i></button>" +
-                "<p id='itemCount' class='col' style='margin: 0;display: table-row; font-size: 17px;padding: 0;margin: 0;'>" +cartitem.count+
-                "</p>" +
-                "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
-                "<i class='material-icons'> add </i></button>" +
-                "<div class ='column zoom ' style='display: inline-block; flex:80%!important; max-width: unset; margin-right: 20px; float: left;'>" +
-                '<p id = '+cartitem.id+ ' class ="selectItem" style=" margin :0;' +
+            if(undefined === cartitem.secondaryId|| null === cartitem.secondaryId){
+                 col = "<div class='row' style=' display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
+                    "<i class='material-icons'>remove</i></button>" +
+                    "<p id='itemCount' class='col' style='margin: 0;display: table-row; font-size: 17px;padding: 0;margin: 0;'>" +cartitem.count+
+                    "</p>" +
+                    "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
+                    "<i class='material-icons'> add </i></button>" +
+                    "<div class ='column zoom ' style='display: inline-block; flex:80%!important; max-width: unset; margin-right: 20px; float: left;'>" +
+                    '<p id = '+cartitem.id+ ' class ="selectItem" style=" margin :0;' +
 
-                'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
-                '' + cartitem.itemName + '</p>' +
-                "</div>"+
-                 "<div class= 'cartItemPrice' style='flex: 20%;justify-content: end;display: inline-block;'>"+
-                '<div  class ="price" style=" font-weight:800;margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
-                "<button  class ='show'  onclick='show(this)' id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
-                "<i    class='material-icons' style='font-size: 10px'>close</i></button>" +
-                "</div>"+
-                "</div>";
+                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                    '' + cartitem.itemName + '</p>' +
+                    "</div>"+
+                    "<div class= 'cartItemPrice' style='flex: 20%;justify-content: end;display: inline-block;'>"+
+                    '<div  class ="price" style=" font-weight:800;margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
+                    "<button  class ='show'  onclick='show(this)' id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
+                    "<i    class='material-icons' style='font-size: 10px'>close</i></button>" +
+                    "</div>"+
+                    "</div>";
+
+            }
+            else{
+                col = "<div class='row'  secondaryid = "+cartitem.secondaryId+" style=' display:flex;margin:0; padding: 0;padding-top: 5px;'>" +
+                    "<button onclick=' return decreaseItemCount(this)' id='decreaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
+                    "<i class='material-icons'>remove</i></button>" +
+                    "<p id='itemCount' class='col' style='margin: 0;display: table-row; font-size: 17px;padding: 0;margin: 0;'>" +cartitem.count+
+                    "</p>" +
+                    "<button  onclick='  increaseItemCount(this)' id='increaseCount' class='col'  style='display: inline;height: 25px;padding: 0px 0;background: #000;color: #fff;'>" +
+                    "<i class='material-icons'> add </i></button>" +
+                    "<div class ='column zoom ' style='display: inline-block; flex:80%!important; max-width: unset; margin-right: 20px; float: left;'>" +
+                    '<p id = '+cartitem.id+ ' class ="selectItem" style=" margin :0;' +
+
+                    'display: block;width: 200px; text-align: center; color: #C53131;text-transform: uppercase;font-weight: 800;">' +
+                    '' + cartitem.itemName + '</p>' +
+                    "</div>"+
+                    "<div class= 'cartItemPrice' style='flex: 20%;justify-content: end;display: inline-block;'>"+
+                    '<div  class ="price" style=" font-weight:800;margin: 0; display: inline-block;"> ' +cartitem.totalItemcost+ '</div> ' +
+                    "<button  class ='show'  onclick='show(this)' id="+cartitem.id+"  style ='margin: 0;height: 15px;width: 15px; position: relative; padding: 1px 1px; float:right;'>" +
+                    "<i    class='material-icons' style='font-size: 10px'>close</i></button>" +
+                    "</div>"+
+                    "</div>";
+            }
+
             $('body').append(col);
 
 

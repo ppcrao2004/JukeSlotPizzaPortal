@@ -834,3 +834,12 @@ ul.stepper>.step:not(:last-of-type):after {
     border: 2px solid red !important;
     display: block !important;
 }
+#row {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.footer1 .column{
+ width: 300px !important;
+height: unset !important;
+}

@@ -257,22 +257,56 @@ function exit() {
 
 };
 function removeItem() {
-        let selectedItemId = $('.selected-item').find('.column p').attr('id');
-        $('.selected-item').remove();
-        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        finalCart.cartItems = finalCart.cartItems.filter(cartItem => cartItem.id != selectedItemId);
+    let selectedItemId = $('.selected-item').find('.column p').attr('id');
+    let secondaryid;
+    if(undefined === $('.selected-item').attr('secondaryid')){
+
+    }
+    else{
+        secondaryid= $('.selected-item').attr('secondaryid');
+    }
+    let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
+    // for (let i = 0; i < finalCart.cartItems.length; i++) {
+    //     if (finalCart.cartItems[i].id === selectedItemId && null === finalCart.cartItems[i].secondaryId) {
+    //         finalCart.cartItems.splice(i, 1);
+    //         console.log('removed items array', finalCart.cartItems);
+    //
+    //     } else if (finalCart.cartItems[i].id === selectedItemId && finalCart.cartItems[i].secondaryId === secondaryId) {
+    //         finalCart.cartItems.splice(i, 1);
+    //
+    //     } else if (finalCart.cartItems[i].id === selectedItemId && finalCart.cartItems[i].secondaryId === secondaryId) {
+    //
+    //
+    //     }
+    // }
+
+    if('undefined'!= secondaryid){
+        finalCart.cartItems.forEach(cartItem=>{
+            if(cartItem.id===selectedItemId && secondaryid===cartItem.secondaryId){
+                finalCart.cartItems.splice(finalCart.cartItems.indexOf(cartItem),1);
+            }
+        });
+    }else{
+        finalCart.cartItems.forEach(cartItem=>{
+            if(cartItem.id===selectedItemId && undefined === cartItem.secondaryId){
+                finalCart.cartItems.splice(finalCart.cartItems.indexOf(cartItem),1);
+            }
+        });
+    }
+
         sessionStorage.setItem("finalCart", JSON.stringify(finalCart));
         getPrice();
+    $('.selected-item').remove();
         $('#window').removeClass('show');
         $('#window').addClass('hidden');
         finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-    $('.tax').text('Tax :'+sessionStorage.getItem("taxPay"));
-    console.log("TaxTest:", $('.tax').text());
-    $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
-    if(finalCart.cartItems.length ==0) {
-        history.go(-1);
-        history.go(-1);
-    }
+        $('.tax').text('Tax :' + sessionStorage.getItem("taxPay"));
+        console.log("TaxTest:", $('.tax').text());
+        $('.personalinfo-cartPrice').text('You Pay  :' + sessionStorage.getItem("customerPayPrice"));
+        if (finalCart.cartItems.length == 0) {
+            history.go(-1);
+            history.go(-1);
+        }
 
 }
 function validation() {
@@ -290,5 +324,3 @@ function validation() {
 
     }
 }
-
-

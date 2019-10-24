@@ -160,6 +160,20 @@
     bottom: 0;">OK</button>
     </div>
 </div>
+
+<!-- Modal Structure -->
+<%--<div id="popup" class="hidden modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer" style=" position: absolute;
+     bottom: 0;
+     width: 100%;">
+        <button  onclick="exitpopup()" style="padding:0;width:100%;
+    bottom: 0;" class="modal-close waves-effect waves-green btn-flat">OK</button>
+    </div>
+</div>
 <%--For Each Example   arr.forEach(element => {  console.log(element); });--%>
 
 

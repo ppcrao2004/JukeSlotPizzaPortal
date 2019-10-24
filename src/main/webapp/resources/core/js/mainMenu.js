@@ -126,6 +126,7 @@ function categoryList(menuID) {
     $("#subMenuItems").empty();
     $("#subMenuItems").css('display' ,'flex');
     $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-bottom' ,'160px');
     let menuItemId =$(menuID).find('img').attr('id');
     $("#row").css('flex-wrap' ,'nowrap');
     $(".navbar").append($('#row'));
@@ -191,6 +192,7 @@ function itemListMenu(menuID) {
     $(".header").find('h1').css('display' ,'none');
     $("#subMenuItems").css('display' ,'flex');
     $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-bottom' ,'160px');
     $(menuID).removeAttr('id');
     $('.mainMenuItems').css('opacity' ,'0.5');
     $(menuID).css('opacity' ,'1');
@@ -637,11 +639,13 @@ function addToCart(item) {
         $(item).parent().attr('allowedchoices', allowedchoices);
         finalCart.cartItems.forEach(cartItemElement => {
             if(cartItemElement.id == selectedCartItemId){
-                let cartItemListChoices = cartItemElement.choices;
-                cartItemElement.choices.forEach(choices => {
-                    if(itemID == choices.id){
-                        cartItemElement.choices.splice(cartItemElement.choices.indexOf(choices),1);
-                    }
+                cartItemElement.modifiers.forEach(modifierItem => {
+                    //let cartItemListChoices = cartItemElement.choices;
+                    modifierItem.choices.forEach(choice=> {
+                        if (modifierId == choice.id) {
+                            cartItemElement.modifierItem.choices.splice(cartItemElement.modifierItem.indexOf(choice), 1);
+                        }
+                    });
                 });
 
 
@@ -893,6 +897,7 @@ function removeItemConfirm(){
     $('#row').css('display' , 'flex' );
     $('#subMenuItems').css('display' , 'flex');
     $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-bottom' ,'160px');
     $('#modalPopup').css('display' ,'none');
     let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
     for (let i = 0; i < finalCart.cartItems.length; i++) {

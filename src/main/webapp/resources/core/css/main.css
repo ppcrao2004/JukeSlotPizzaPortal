@@ -843,3 +843,6 @@ ul.stepper>.step:not(:last-of-type):after {
  width: 300px !important;
 height: unset !important;
 }
+#modalPopupInner{
+    padding-bottom: 45px;
+}

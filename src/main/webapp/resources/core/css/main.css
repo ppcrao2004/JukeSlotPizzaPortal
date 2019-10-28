@@ -846,3 +846,21 @@ height: unset !important;
 #modalPopupInner{
     padding-bottom: 45px;
 }
+.tipPercentage{
+    display: inline-block;
+    /* position: absolute; */
+    top: 12px;
+    counter-increment: section;
+    content: counter(section);
+    height: 28px;
+    width: 28px;
+    color: white;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 400;
+    padding:  0;
+    /* width: 10%; */
+    margin-right: 5%
+}

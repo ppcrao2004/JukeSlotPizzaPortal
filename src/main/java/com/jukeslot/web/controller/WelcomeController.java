@@ -48,4 +48,8 @@ public class WelcomeController {
 	public String personInfo(ModelMap model) {
 		return "personInfo";
 	}
+	@RequestMapping(value = "/summaryAfterTip", method = RequestMethod.GET)
+	public String summaryAfterTip(ModelMap model) {
+		return "summaryAfterTip";
+	}
 }

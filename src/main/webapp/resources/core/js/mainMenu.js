@@ -641,11 +641,21 @@ function addToCart(item) {
             if(cartItemElement.id == selectedCartItemId){
                 cartItemElement.modifiers.forEach(modifierItem => {
                     //let cartItemListChoices = cartItemElement.choices;
+                    let index =0;
                     modifierItem.choices.forEach(choice=> {
-                        if (modifierId == choice.id) {
-                            cartItemElement.modifierItem.choices.splice(cartItemElement.modifierItem.indexOf(choice), 1);
+                        //let index = cartItemElement.modifiers.choices.indexOf(this);
+                        if (itemID == choice.id) {
+                            index =modifierItem.choices.indexOf(choice);
+                           // let index = cartItemElement.modifiers.choices.indexOf(choice);
+ console.log(cartItemElement);
+ console.log(modifierItem);
+ console.log(choice);
+                            modifierItem.choices.splice(index, 1);
+                            console.log("choice choice:",modifierItem.choices);
                         }
                     });
+
+
                 });
 
 

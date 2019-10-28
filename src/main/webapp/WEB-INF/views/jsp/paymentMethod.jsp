@@ -49,13 +49,13 @@
         <h1 style="font-size: 20px!important; text-align: center; margin: 0; margin-top: 20px;">Please select a payment method</h1>
 
 <div class="checkout-inner" style="padding-top: 0;">
-    <div class="left zoom" style="width:50%;padding: 20px;">
+    <div class="left zoom" style="width:50%;padding: 20px;" onclick="selectionPayment(this)">
         <a href="#"  style="text-decoration: none;">
             <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/cash.png" alt="CASH">
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Cash payment</p>
         </a>
     </div>
-    <div class="right zoom" style="width:50%;padding: 20px;">
+    <div class="right zoom" style="width:50%;padding: 20px;"  onclick="selectionPayment(this)">
         <a href="#" style="text-decoration: none;" >
             <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/credit.png" alt="CREDITCARD"  />
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Card Payment</p>
@@ -70,7 +70,7 @@
         <button  formaction="/mainMenu"  style="float: left; padding:8px;width:200px; font-weight:600;font-size: 18px;border-radius: 25px;border: 1px solid #000;">
             Continue Shopping
         </button>
-        <button class="nextBtn" formaction="/summary"  style="float: right">
+        <button class="nextBtn"formaction="/summary" onClick ='validation()' style="float: right">
             NEXT
         </button>
     </form>
@@ -80,6 +80,37 @@
     function previousStep(){
         history.go(-1);
     }
+    function selectionPayment(item){
+        let selectedItem =$(item);
+       if( $(selectedItem).hasClass('selected')){
+           $(selectedItem).removeClass('selected');
+       }
+       else {
+           $(selectedItem).addClass('selected');
+       }
+
+    }
+    function validation(){
+        let input = $('.selected');
+        let nextbtn =$('.nextBtn');
+        if (input.length ===0) {
+            $(nextbtn).addClass('valid');
+            $(nextbtn).attr('disabled' ,'');
+            $('#window').removeClass('hidden');
+            $('#window').addClass('show');
+        }
+        else{
+            $('.nextBtn').prop('disabled' ,false);
+            $('#window').removeClass('show');
+            $('#window').addClass('hidden');
+        }
+
+    }
+    function exit(){
+        $('#window').removeClass('show');
+        $('#window').addClass('hidden');
+        $('.nextBtn').prop('disabled' ,false);
+    }
     $(document).ready(function () {
         let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
         //$('.price').text('You Pay' +finalCart.cartTotalPrice);
@@ -87,3 +118,27 @@
     })
 </script>
 </html>
+<div class="hidden" id="window" style="position: absolute;
+        border: 1px solid;
+        width:270px;
+       /* left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);*/
+        background: #fff;
+          left: 10%;
+         top: 50%;
+        right: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 58px;">
+    <div>
+        <p style="display: inline-block;width: 100%;
+    margin: 0;">Select One Payment Type</p>
+    </div>
+    <div style=" position: absolute;
+     bottom: 0;
+     width: 100%;">
+        <button onclick="exit()" style="padding:0;width:100%;
+    bottom: 0;">OK</button>
+    </div>
+</div>

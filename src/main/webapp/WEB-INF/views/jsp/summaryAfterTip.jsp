@@ -79,8 +79,9 @@
     }
 
     $(document).ready(function () {
-        let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));
-        $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("customerPayPrice"));
+        let price = JSON.parse(sessionStorage.getItem("finalPrice"));
+
+        $('.personalinfo-cartPrice').text('You Pay  :'+sessionStorage.getItem("finalPrice"));
 
 
     });

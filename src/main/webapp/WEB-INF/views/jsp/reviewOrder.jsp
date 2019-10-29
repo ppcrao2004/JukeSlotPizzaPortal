@@ -205,7 +205,7 @@ margin-bottom: 30px;"></div>
         getPrice();
 
     }
-    function decreaseCount() {
+    function decreaseCount(item) {
 
         let selectedItem =$(item).parent();
         let count =parseInt($(selectedItem).find('.quantity').text());

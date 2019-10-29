@@ -73,7 +73,7 @@ font-weight: 600;">TIP</button>
 </div>
 <div class ='tip-content' style="width:100% ;display: none;">
     <h4 style="text-align: center;">Select a tip amount</h4>
-    <div class ='' style="width:100%;">
+    <div class ='' style="width:100%;text-align:center;">
     <button class ='tipPercentage' onclick="percentageCal(this)">1%</button>
     <button class ='tipPercentage' onclick="percentageCal(this)">2%</button>
     <button class ='tipPercentage' onclick="percentageCal(this)">3%</button>
@@ -136,14 +136,21 @@ font-weight: 600;">TIP</button>
     }
     function percentageCal(item){
 
-        let selectedItem = $('item');
-        if($(selectedItem).hasClass('selected')){
+        let selectedItem = $(item);
+        if($('.tipPercentage').hasClass('selected')){
 
-            $(selectedItem).removeClass('selected');
+            $('.tipPercentage').removeClass('selected');
         }
-        else {
             $(selectedItem).addClass('selected');
-        }
+           let perc= $(selectedItem).text();
+             let price= sessionStorage.getItem("customerPayPrice");
+           let tipvalue=currency(price).multiply(parseFloat(perc)/100.0);
+            console.log("tipvalue tipvalue",tipvalue);
+            let finalTip= currency(tipvalue, { formatWithSymbol: true }).format();
+             $('input').attr('value' , finalTip);
+             let finalCustomerPayPrice =currency(price).add(finalTip);
+        sessionStorage.setItem("finalTip" ,finalTip);
+        sessionStorage.setItem("finalPrice" ,finalCustomerPayPrice);
     }
     $(document).ready(function () {
 

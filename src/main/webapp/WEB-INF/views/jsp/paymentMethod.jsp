@@ -26,7 +26,7 @@
     padding-top: 100px;">
         <h1 style="font-size: 30px!important; text-align: center; margin: 0; margin-top: 20px;">Your Order</h1>
         <form>
-            <ul class="stepper parallel horizontal" style="min-height: unset;">
+            <ul class="stepper parallel horizontal" style="min-height: unset;overflow-y: hidden;">
                 <li class="step">
                     <div class="step-title waves-effect waves-dark">View Order</div>
                 </li>
@@ -46,16 +46,16 @@
     <div style="padding:0 20px;">
 <button class ='backBtn' onclick="previousStep()">BACK</button>
 <div class ='personalinfo-cartPrice' style="float: right"></div>
-        <h1 style="font-size: 20px!important; text-align: center; margin: 0; margin-top: 20px;">Please select a payment method</h1>
+        <h1 style="font-size: 20px!important; text-align: center; margin: 0;">Please select a payment method</h1>
 
 <div class="checkout-inner" style="padding-top: 0;">
-    <div class="left zoom" style="width:50%;padding: 20px;" onclick="selectionPayment(this)">
+    <div class="left zoom" style="width:50%;padding: 20px;margin-top: 30px;" onclick="selectionPayment(this)">
         <a href="#"  style="text-decoration: none;">
             <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/cash.png" alt="CASH">
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Cash payment</p>
         </a>
     </div>
-    <div class="right zoom" style="width:50%;padding: 20px;"  onclick="selectionPayment(this)">
+    <div class="right zoom" style="width:50%;padding: 20px;margin-top: 30px;"  onclick="selectionPayment(this)">
         <a href="#" style="text-decoration: none;" >
             <img style="height: 150px;width: 150px;" src="${pageContext.request.contextPath}/resources/core/images/mipmap-port-1800x1030/credit.png" alt="CREDITCARD"  />
             <p style="color: #C53131; font-size: 20px ; font-style: oblique ; margin: 6px">Card Payment</p>

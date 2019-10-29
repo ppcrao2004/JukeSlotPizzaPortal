@@ -35,7 +35,7 @@
                 </div>
             </nav>
         </div>
-        <body  style="overflow-y: hidden;width:100%;" class ="starter-template"  onclick="window.location.href='${pageContext.request.contextPath}/checkout;';" >
+        <body  style="overflow-y: hidden;width:100%;left: 0;right: 0;" class ="starter-template"  onclick="window.location.href='${pageContext.request.contextPath}/checkout;';" >
              <div class="maincontainer" style="scroll-behavior: unset;">
                  <!--<div class="imageText" id ="imageText" style="text-align: center">
                  </div> -->

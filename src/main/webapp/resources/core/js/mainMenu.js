@@ -125,7 +125,7 @@ function mainMenuLoad() {
 function categoryList(menuID) {
     $("#subMenuItems").empty();
     $("#subMenuItems").css('display' ,'flex');
-    $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-top' ,'180px');
     $("#subMenuItems").css('margin-bottom' ,'160px');
     let menuItemId =$(menuID).find('img').attr('id');
     $("#row").css('flex-wrap' ,'nowrap');
@@ -191,7 +191,7 @@ function itemListMenu(menuID) {
     $(".navbar").append($('#row'));
     $(".header").find('h1').css('display' ,'none');
     $("#subMenuItems").css('display' ,'flex');
-    $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-top' ,'180px');
     $("#subMenuItems").css('margin-bottom' ,'160px');
     $(menuID).removeAttr('id');
     $('.mainMenuItems').css('opacity' ,'0.5');
@@ -906,7 +906,7 @@ function removeItemConfirm(){
     // let removedItem = $(item).parent();
     $('#row').css('display' , 'flex' );
     $('#subMenuItems').css('display' , 'flex');
-    $("#subMenuItems").css('margin-top' ,'150px');
+    $("#subMenuItems").css('margin-top' ,'180px');
     $("#subMenuItems").css('margin-bottom' ,'160px');
     $('#modalPopup').css('display' ,'none');
     let finalCart = JSON.parse(sessionStorage.getItem("finalCart"));

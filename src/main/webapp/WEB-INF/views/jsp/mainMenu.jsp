@@ -71,7 +71,7 @@
            // homePageLoad();
            // removeItemConfirm();
             let tb1 =$("<div/>").attr("id" ,"row");
-            let menuItems ="<div id ='subMenuItems'>"+ "</div>";
+            let menuItems ="<div id ='subMenuItems' style='overflow-x: hidden;'>"+ "</div>";
             $("body").append(menuItems);
             $("body").css("background",sessionStorage.getItem("backGroundColor"));
             $("#checkout-inner").append(tb1);
